@@ -12,9 +12,11 @@ public class TestController {
 	@RequestMapping("/{name}/{message}")
 	public Test test(@PathVariable String name,
 					   @PathVariable String message) {
-		Test test = new Test();
-		test.setName(name);
+		Test test = new Test(); // �ʱ�ȭ
+		test.setName(name);     // 12123
 		test.setMessage(message);
 		return test;
+		
+		//test 주석
 	}
 }
