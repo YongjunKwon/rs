@@ -1,23 +1,25 @@
 package com.kmk.controller;
 
-import org.springframework.web.bind.annotation.PathVariable;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kmk.domain.Test;
+import com.kmk.service.TestService;
 
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
+@CrossOrigin
 @RestController
 public class TestController {
+	@Autowired TestService testService;
 	
-	@RequestMapping("/{name}/{message}")
-	public Test test(@PathVariable String name,
-					   @PathVariable String message) {
-		Test test = new Test(); // �ʱ�ȭ
-		test.setName(name);     // 12123
-		test.setMessage(message);
-		return test;
-		
-		//test 주석
-		//또수정
+	@RequestMapping("list")
+	public List<Test> test() {
+		log.info("test====");		
+		return testService.getList();
 	}
 }

@@ -4,6 +4,7 @@ buildscript {
 	}
 	repositories {
 		mavenCentral()
+		jcenter()
 		maven { url "https://repo.spring.io/snapshot" }
 		maven { url "https://repo.spring.io/milestone" }
 	}
@@ -11,6 +12,7 @@ buildscript {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
 	}
 }
+
 
 apply plugin: 'java'
 apply plugin: 'eclipse-wtp'
@@ -31,7 +33,7 @@ configurations {
 	providedRuntime
 }
 
-[compileJava, compileTestJava]*.options*.encoding = 'UTF-8' // ÀÎÄÚµù UTF-8·Î ÅëÀÏÇÕ´Ï´Ù.
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8' // ï¿½ï¿½ï¿½Úµï¿½ UTF-8ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
 
 
 dependencies {
@@ -47,6 +49,5 @@ dependencies {
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	compile('org.apache.tomcat.embed:tomcat-embed-jasper')
 	compile('javax.servlet:jstl:1.2')
-
-
+	compile('org.springframework.boot:spring-boot-devtools')
 }

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener" /> 
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<!-- <Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern> -->
+			<Pattern>[%d{yy-MM-dd HH:mm:ss.SSS}] [%thread] %-5level %logger{36} - %msg%n
+			</Pattern>
+		</layout>
+	</appender>
+
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>logs/uiplat.log.%d{yyyyMMdd}.gz</fileNamePattern>
+			<maxHistory>185</maxHistory>
+			<cleanHistoryOnStart>true</cleanHistoryOnStart>
+		</rollingPolicy>
+
+		<encoder>
+			<charset>utf-8</charset>
+			<pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] %-5level %logger{36} - %msg%n
+			</pattern>
+		</encoder>
+	</appender> 
+  
+  	<!-- Application Loggers -->
+	<!-- <logger name="com.kmk.security" level="INFO"/> -->
+	
+	
+	<logger name="org.apache.tiles" level="INFO"/>
+	<logger name="org.quartz" level="INFO"/>
+	<logger name="org.springframework.scheduling.quartz" level="INFO"/>
+	
+	<logger name="org.mybatis.spring.SqlSessionUtils" level="INFO" />
+	
+	<logger name="jdbc" level="ERROR" />
+	<logger name="jdbc.sqlonly" level="DEBUG" />
+	<logger name="jdbc.resultsettable" level="INFO" />
+	
+	<logger name="org.apache.http.headers" level="INFO" />
+
+	<root level="DEBUG">
+		<appender-ref ref="STDOUT" />
+<!-- 		<appender-ref ref="FILE" /> -->
+	</root>
+</configuration>
+
