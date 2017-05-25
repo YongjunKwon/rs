@@ -14,7 +14,7 @@ import com.kmk.mapper.TestMapper;
 @Service
 @Transactional
 public class TestService {
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	//private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired TestMapper testMapper;
 	
