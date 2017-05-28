@@ -7,9 +7,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Hello Millky</title>
+<title></title>
 <link rel="stylesheet" href="/webjars/bootstrap/4.0.0-alpha.6-1/css/bootstrap.min.css">
-</head>
+</head>rs
 <body>
 	<div class="container">
 		<c:out value="<xmp>" escapeXml="true"></c:out>

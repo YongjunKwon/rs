@@ -12,13 +12,16 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @CrossOrigin
 @Controller
-@RequestMapping("test")
 public class TestController {
 	@Autowired TestService testService;
 	
+	@RequestMapping("/")
+	public String index(Model model) {
+		return "index";
+	}
+	
 	@RequestMapping("list")
 	public String test(Model model) {
-		model.addAttribute("name", "Test Bootstrap!");
 		return "hello";
 	}
 	
