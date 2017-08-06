@@ -20,13 +20,5 @@ public class TestController {
 		return "index";
 	}
 	
-	@RequestMapping("list")
-	public String test(Model model) {
-		return "hello";
-	}
-	
-	@RequestMapping("admin")
-	public String admin(Model model) {
-		return "adminLTE";
-	}
+
 }

@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar">
 
@@ -7,7 +8,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="/webjars/AdminLTE/2.3.8/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="/AdminLTE-2.3.11/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>Alexander Pierce</p>
@@ -30,22 +31,49 @@
 
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu">
-        <li class="header">HEADER</li>
+        <li class="header">게시판목록</li>
         <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Link</span></a></li>
-        <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
+        
         <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
+          <a href="#">
+            <i class="fa fa-share"></i> <span>업소정보</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#">Link in level 2</a></li>
-            <li><a href="#">Link in level 2</a></li>
+            <li class="active"><a href="/board/chicken/list"><i class="fa fa-circle-o"></i>치킨집</a></li>
+            <li>
+              <a href="#"><i class="fa fa-circle-o"></i> Level One
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="#"><i class="fa fa-circle-o"></i> Level Two</a></li>
+                <li>
+                  <a href="#"><i class="fa fa-circle-o"></i> Level Two
+                    <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                  </a>
+                  <ul class="treeview-menu">
+                    <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
+                    <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
           </ul>
         </li>
+	    
+	    <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Link</span></a></li>
+	    <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
       </ul>
+      
+      
+        
       <!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->
@@ -128,3 +156,30 @@
   <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
   <div class="control-sidebar-bg"></div>
+
+<script type="text/javascript"> 
+  $(document).ready(function() {
+    var pathName = $(location).attr('pathname');
+//    alert("a[href='"+pathName+"']");
+	$("a[href='"+pathName+"']").parent().addClass("active");    
+  });
+  
+  
+  $('.sidebar-menu > li').click(function(e) {
+    var $this = $(this);
+    
+    if($this.has('li')){
+    	
+      
+    }else{
+      $('.sidebar-menu > li.active').removeClass('active');
+      if (!$this.hasClass('active')) {
+          $this.addClass('active');
+      }
+    
+    }
+
+	});
+  
+</script>
+
