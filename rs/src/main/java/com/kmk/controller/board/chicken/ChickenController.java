@@ -18,6 +18,7 @@ public class ChickenController {
 	
 	@RequestMapping("list")
 	public String list(Model model) {
+		
 	    model.addAttribute("classActiveSettings","active");
 	    return "board/chicken/list";
 	}
