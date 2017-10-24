@@ -26,7 +26,7 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
   
-  <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	<script src="/AdminLTE-2.3.11/plugins/jQuery/jquery-2.2.3.min.js"></script>
 	<script src="/AdminLTE-2.3.11/bootstrap/js/bootstrap.min.js"></script>
 	<!-- FastClick -->

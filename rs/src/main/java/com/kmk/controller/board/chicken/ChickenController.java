@@ -6,7 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.kmk.service.TestService;
+import com.kmk.domain.Test;
+import com.kmk.service.board.chicken.ChickenService;
 
 import lombok.extern.slf4j.Slf4j;
 @Slf4j
@@ -14,11 +15,16 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("board/chicken/")
 @Controller
 public class ChickenController {
-	@Autowired TestService testService;
+	@Autowired ChickenService chickenService;
 	
 	@RequestMapping("list")
 	public String list(Model model) {
+		Test test = new Test();
+		test.setName("testName");
 		
+//		log.info("test : {}", chickenService.getList());
+		
+		model.addAttribute("list", chickenService.getList());
 	    model.addAttribute("classActiveSettings","active");
 	    return "board/chicken/list";
 	}
