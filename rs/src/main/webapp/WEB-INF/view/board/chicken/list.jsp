@@ -29,16 +29,14 @@
         <div class="col-md-12">
           <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">Bordered Table ${classActiveSettings}</h3>
+              <h3 class="box-title">${classActiveSettings}</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
               <table class="table table-bordered">
                 <tr>
                   <th style="width: 10px">#</th>
-                  <th>Task</th>
-                  <th>Progress</th>
-                  <th style="width: 40px">Label</th>
+                  <th>제목</th>
                 </tr>
                 <c:forEach items="${list}" var= "list" varStatus="status">
 	
@@ -47,7 +45,7 @@
 				   ${status.count}
 				</td>
 				<td>
-				${list.name}
+				<a href="/board/chicken/sample_detail_index">${list.title}</a>
 				</td>
 				</tr>
 				</c:forEach>                
@@ -55,22 +53,25 @@
             </div>
             <!-- /.box-body -->
             <div class="box-footer clearfix">
-            	
-	            <button type="button" class="btn btn-default btn-xs pull-right">
-				  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> 글쓰기
+	            <button type="button" id="btn_write" name="btn_write" class="btn btn-default btn-xs pull-right">
+	              <a href="/board/chicken/sample_w_index">
+				  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> 글쓰기</a>
 				</button>
 				<!-- <span class="glyphicon glyphicon-pencil pull-right" aria-hidden="true"></span> -->
-              <ul class="pagination pagination-sm no-margin pull-right">
-                <li><a href="#">&laquo;</a></li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">&raquo;</a></li>
-              </ul>
-              </div>
+				<div class="text-center">
+	              <ul class="pagination pagination-sm no-margin">
+	                <li><a href="#">&laquo;</a></li>
+	                <li><a href="#">1</a></li>
+	                <li><a href="#">2</a></li>
+	                <li><a href="#">3</a></li>
+	                <li><a href="#">&raquo;</a></li>
+	              </ul>
+              	</div>
             </div>
+         </div>
           <!-- /.box -->
-		</div></div>
+		</div>
+	  </div>
     </section>
     <!-- /.content -->
   </div>
@@ -82,6 +83,10 @@
 
 <script type="text/javascript"> 
   $(document).ready(function() {
+	  $("#btn_write").on("click",function(){
+		  console.log("---- 글쓰기 클릭 @@@@@ ");
+		  
+	  });
   }); 
 </script>
 

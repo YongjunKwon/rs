@@ -50,7 +50,7 @@
                 </span>
               </a>
               <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle-o"></i> Level Two</a></li>
+                <li><a href="/board/chicken/sampleList"><i class="fa fa-circle-o"></i>샘플리스트</a></li>
                 <li>
                   <a href="#"><i class="fa fa-circle-o"></i> Level Two
                     <span class="pull-right-container">
@@ -64,7 +64,7 @@
                 </li>
               </ul>
             </li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> 중국집</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i></a></li>
           </ul>
         </li>
       
