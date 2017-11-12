@@ -44,7 +44,7 @@
           <ul class="treeview-menu">
             <li class="active"><a href="/board/chicken/list"><i class="fa fa-circle-o"></i>치킨집</a></li>
             <li>
-              <a href="#"><i class="fa fa-circle-o"></i> Level One
+              <a href="#"><i class="fa fa-circle-o"></i> 피자집
                 <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
                 </span>
@@ -64,13 +64,13 @@
                 </li>
               </ul>
             </li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> 중국집</a></li>
           </ul>
         </li>
       
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-share"></i> <span>업소정보</span>
+            <i class="fa fa-share"></i> <span>후기정보</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -78,7 +78,7 @@
           <ul class="treeview-menu">
             <li class="active"><a href="/board/chicken/list"><i class="fa fa-circle-o"></i>치킨집</a></li>
             <li>
-              <a href="#"><i class="fa fa-circle-o"></i> Level One
+              <a href="#"><i class="fa fa-circle-o"></i> 피자집
                 <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
                 </span>
@@ -98,7 +98,7 @@
                 </li>
               </ul>
             </li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> 중국집</a></li>
           </ul>
         </li>
         

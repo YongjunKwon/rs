@@ -15,6 +15,8 @@
   <link rel="stylesheet" href="/AdminLTE-2.3.11/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="/AdminLTE-2.3.11/dist/css/AdminLTE.min.css">
+    <!-- iCheck -->
+  <link rel="stylesheet" href="/AdminLTE-2.3.11/plugins/iCheck/square/blue.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="/AdminLTE-2.3.11/dist/css/skins/_all-skins.min.css">
@@ -40,7 +42,10 @@
 	<script src="/AdminLTE-2.3.11/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
 	<!-- SlimScroll 1.3.0 -->
 	<script src="/AdminLTE-2.3.11/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+	<!-- iCheck -->
+	<script src="/AdminLTE-2.3.11/plugins/iCheck/icheck.min.js"></script>
 	<!-- AdminLTE for demo purposes -->
 	<!-- <script src="/AdminLTE-2.3.11/dist/js/demo.js"></script> -->
+	
 </head>
 
