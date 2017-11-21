@@ -15,10 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.kmk.domain.SampleBoard;
 import com.kmk.domain.Test;
 import com.kmk.service.board.chicken.ChickenService;
 
@@ -37,18 +35,18 @@ public class ChickenController {
 		
 //		log.info("test : {}", chickenService.getList());
 		
-		model.addAttribute("list", chickenService.getList());
+//		model.addAttribute("list", chickenService.getList());
 	    model.addAttribute("classActiveSettings","active");
 	    return "board/chicken/list";
 	}
 	
 	@RequestMapping("sampleList")
 	public String sampleList(Model model) {
-		SampleBoard sampleBoard = new SampleBoard();
-		
-		model.addAttribute("list", chickenService.selectSampleBoard());
+//		SampleBoard sampleBoard = new SampleBoard();
+//		
+//		model.addAttribute("list", chickenService.selectSampleBoard());
 		model.addAttribute("classActiveSettings","샘플 게시판");
-		return "board/chicken/list";
+		return "board/chicken/sampleList";
 	}
 	
 	@RequestMapping("sample_w_index")
@@ -56,12 +54,12 @@ public class ChickenController {
 		return "page/test/index";
 	}
 	
-	@RequestMapping("sample_write_insert")
-	//public String sample_write_insert(@ModelAttribute("SampleBoard") SampleBoard sampleBoard) {
-	public String sample_write_insert(SampleBoard sampleBoard) {
-		chickenService.insertBoard(sampleBoard);
-		return "redirect:sampleList";
-	}
+//	@RequestMapping("sample_write_insert")
+//	//public String sample_write_insert(@ModelAttribute("SampleBoard") SampleBoard sampleBoard) {
+//	public String sample_write_insert(SampleBoard sampleBoard) {
+//		chickenService.insertBoard(sampleBoard);
+//		return "redirect:sampleList";
+//	}
     
 	@RequestMapping("/file_uploader_html5")
 	public void file_uploader_html5(HttpServletRequest request, HttpServletResponse response){
