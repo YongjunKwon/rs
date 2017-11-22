@@ -25,6 +25,7 @@ public class ExampleHandlerArgumentResolver implements HandlerMethodArgumentReso
         if (authentication != null && authentication.getPrincipal() instanceof LoginUser) {
             return authentication.getPrincipal();
         }
+        
         return null;
     }
 }
