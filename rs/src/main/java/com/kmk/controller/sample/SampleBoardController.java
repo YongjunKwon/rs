@@ -12,7 +12,7 @@ import com.kmk.domain.common.CommCode;
 import com.kmk.domain.common.CommCodeSearch;
 import com.kmk.domain.sample.SampleBoard;
 import com.kmk.service.common.CommonService;
-import com.kmk.serviece.sample.SampleBoardService;
+import com.kmk.service.sample.SampleBoardService;
 
 import lombok.extern.slf4j.Slf4j;
 @Slf4j
@@ -68,7 +68,16 @@ public class SampleBoardController {
 //	public String sample_w_index(Model model) {
 //		return "page/test/index";
 //	}
-//	
+	
+//    @RequestMapping("replyWrite")
+//    public String findLecSubjList(CslmSearch cslmSearch, Model model) {
+//    	UserDetails userDetails = SecurityContextHelper.getUserDetails();              // 로그인 사용자 정보
+//    	cslmSearch.setEmpid(userDetails.getIntgUid());                                 // 교번
+//    	model.addAttribute("replyList", cslmService.findLecSubjList(cslmSearch));    // [탭] 수강학생 > 강의교과목 콤보리스트
+//    	return "board/sample/sampleDetail";
+//    }
+
+	
 //	@RequestMapping("sample_write_insert")
 //	//public String sample_write_insert(@ModelAttribute("SampleBoard") SampleBoard sampleBoard) {
 //	public String sample_write_insert(SampleBoard sampleBoard) {

@@ -1,4 +1,4 @@
-package com.kmk.serviece.sample;
+package com.kmk.service.sample;
 
 import java.util.List;
 
