@@ -1,5 +1,9 @@
 package com.kmk.config;
 
+
+
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -15,6 +19,9 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.kmk.service.user.UserDetailService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @ComponentScan("com.kmk")
 @EnableWebSecurity  //웹보안 설정
 @EnableGlobalMethodSecurity(prePostEnabled=true)
@@ -24,6 +31,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
     private LoginSuccessHandler loginSuccessHandler;
 
+	@Autowired
+	private LoginFailureHandler loginFailureHandler;
+	
     @Autowired
     private UserDetailService userDetailService;
     
@@ -36,18 +46,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	public void configure(WebSecurity web) throws Exception
 	{
 		//메인페이지, css, script 인증 해제
-		web.ignoring().antMatchers("/WEB-INF/css/**", "/WEB-INF/script/**","/AdminLTE-2.3.11/**", "/");
+		web.ignoring().antMatchers("/WEB-INF/css/**", "/WEB-INF/script/**","/AdminLTE-2.3.11/**");
 	}
 	
     @Override
     protected void configure(HttpSecurity http) throws  Exception {
-        http.authorizeRequests().anyRequest().authenticated().and().formLogin().loginPage("/login")
-                .loginProcessingUrl("/login").failureUrl("/login?error=true").successHandler(loginSuccessHandler)
-                .usernameParameter("username").passwordParameter("password").permitAll().and().logout().deleteCookies("remove")
+        http.authorizeRequests().antMatchers("/").permitAll().antMatchers("/login").permitAll()
+        		.antMatchers("/logoutSuccess").permitAll().antMatchers("/admin/**").hasAnyAuthority("ROLE_ADMIN").anyRequest()
+        		.authenticated().and().formLogin().loginPage("/login")
+                .loginProcessingUrl("/login").successHandler(loginSuccessHandler).failureHandler(loginFailureHandler)
+                .usernameParameter("user_id").passwordParameter("pwd").permitAll().and().logout().deleteCookies("remove")
                 .invalidateHttpSession(true).logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/").and().csrf().disable();
+                .logoutSuccessUrl("/logoutSuccess").and().csrf().disable();
     }
 	
+    
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
