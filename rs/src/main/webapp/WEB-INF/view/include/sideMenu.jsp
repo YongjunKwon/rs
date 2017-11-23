@@ -135,10 +135,9 @@
                 </span>
               </a>
               <ul class="treeview-menu">
-                <li>
-                  <a href="/board/chicken/sampleList">
-                    <i class="fa fa-circle-o"></i>샘플리스트</a>
-                </li>
+
+                <li><a href="/board/sample/sampleList"><i class="fa fa-circle-o"></i>샘플리스트</a></li>
+                
                 <li>
                   <a href="#">
                     <i class="fa fa-circle-o"></i> Level Two
