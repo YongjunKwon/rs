@@ -13,7 +13,23 @@
 
 <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-<br>
+  
+<!--
+	<section class="content-header">
+      <h1>
+        [Page Header]
+        <small> [Optional description] </small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i>Level</a></li>
+        <li class="active">Here</li>
+      </ol>
+    </section>
+ -->
+    <!-- Main content -->
+    <section class="content">
+    
+    
     <!-- Content Header (Page header) -->
     <!-- <form action="/page/test/send.jsp" method="post" id="frm"> -->
     <form action="/board/chicken/sample_write_insert" method="post" id="frm">
@@ -32,8 +48,10 @@
 	</form>
 	<input type="button" id="savebutton" value="서버전송" />
     <!-- Main content -->
-  </div>
   <!-- /.content-wrapper -->
+  </section>
+    <!-- /.content -->
+  </div>
 <%@include file="../../include/bottom.jsp"%>
 </div>
 <!-- ./wrapper -->

@@ -13,15 +13,15 @@ public interface UserMapper {
 			
 	@Select({
 		 " SELECT *		 "
-		,"	 FROM user    "
-		,"  WHERE name = #{user_id} "
+		,"	 FROM USER    "
+		,"  WHERE user_id= #{user_id} "
 	})
 	User getUser(@Param("user_id") String user_id);
 	
 	@Select({
 		 " SELECT *		 "
-		,"	 FROM user_role    "
-		,"  WHERE name = #{user_id} "
+		,"	 FROM USER_ROLE    "
+		,"  WHERE user_id = #{user_id} "
 	})
 	List<String> getUserRole(@Param("user_id") String user_id);
 }

@@ -16,8 +16,9 @@ public class LoginUser implements UserDetails {
     private static final long serialVersionUID = -1286609632181552601L;
 
     private String user_id;
-    private String nickname;
+    private String nick_nm;
     private String pwd;
+    private String mem_type;
     private List<String> roles;
 
 
@@ -26,8 +27,9 @@ public class LoginUser implements UserDetails {
 
     public LoginUser(User user) {
         this.user_id = user.getUser_id();
-        this.nickname = user.getNick_nm();
-        this.pwd = user.getPwd();        
+        this.nick_nm = user.getNick_nm();
+        this.pwd = user.getPwd();
+        this.mem_type = user.getMem_type();
         
     }
     @Override
@@ -37,7 +39,7 @@ public class LoginUser implements UserDetails {
 
 	@Override
 	public String getUsername() {
-		return this.nickname;
+		return this.user_id;
 	}
 	
     @Override
