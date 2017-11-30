@@ -2,8 +2,6 @@ package com.kmk.config;
 
 
 
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -51,7 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
     @Override
     protected void configure(HttpSecurity http) throws  Exception {
-        http.authorizeRequests().antMatchers("/").permitAll().antMatchers("/login").permitAll()
+        http.authorizeRequests().antMatchers("/", "/register/**", "/login/**").permitAll()
         		.antMatchers("/logoutSuccess").permitAll().antMatchers("/admin/**").hasAnyAuthority("ROLE_ADMIN").anyRequest()
         		.authenticated().and().formLogin().loginPage("/login")
                 .loginProcessingUrl("/login").successHandler(loginSuccessHandler).failureHandler(loginFailureHandler)

@@ -56,8 +56,8 @@
     </form>
 
     <div>
-    <a href="#" class="pull-right">비밀번호 찾기</a>
-    <a href="#" class="text-center pull-left">회원가입</a>
+    <a href="findPassword" class="pull-right">비밀번호 찾기</a>
+    <a href="/register" class="text-center pull-left">회원가입</a>
     </div>
   </div>
   <!-- /.login-box-body -->
