@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kmk.domain.sample.Reply;
 import com.kmk.domain.sample.SampleBoard;
 import com.kmk.mapper.sample.SampleBoardMapper;
 
@@ -25,6 +26,16 @@ public class SampleBoardService {
 		//logger.info("query test: {}", testMapper.getList());
 		return sampleBoardMapper.selectDetailSampleBoard(seq);
 	}
+	
+	public int saveReply(Reply reply){
+		return sampleBoardMapper.insertReply(reply);
+	}
+	
+	public List<Reply> selectReplyList(int seq){
+		return sampleBoardMapper.selectReplyList(seq);
+	}
+	
+	
 	
 //	public void insertBoard(SampleBoard sampleBoard){	
 //		//logger.info("query test: {}", testMapper.getList());

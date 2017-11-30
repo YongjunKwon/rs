@@ -1,5 +1,7 @@
 package com.kmk.controller.sample;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,9 +9,11 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kmk.domain.common.CommCode;
 import com.kmk.domain.common.CommCodeSearch;
+import com.kmk.domain.sample.Reply;
 import com.kmk.domain.sample.SampleBoard;
 import com.kmk.service.common.CommonService;
 import com.kmk.service.sample.SampleBoardService;
@@ -21,8 +25,10 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class SampleBoardController {
 	
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+		
 	@Autowired SampleBoardService sampleBoardService;
-	
+		
 	@Autowired CommonService commonService;
 	
 	
@@ -56,33 +62,29 @@ public class SampleBoardController {
 	}
 	
 	@RequestMapping("sampleDetail")
-	public String sampleDetail(@RequestParam int seq, Model model) {
+	public String sampleDetail(@RequestParam int seq, @RequestParam(defaultValue="0") int success, Model model) {
 		
 		model.addAttribute("contents", sampleBoardService.selectDetailSampleBoard(seq));
-		model.addAttribute("classActiveSettings","게시판 상세내용");
+		model.addAttribute("replyList", sampleBoardService.selectReplyList(seq));
+		model.addAttribute("success",success);
 		
 		return "board/sample/sampleDetail";
 	}
 	
-//	@RequestMapping("sample_w_index")
-//	public String sample_w_index(Model model) {
-//		return "page/test/index";
-//	}
-	
-//    @RequestMapping("replyWrite")
-//    public String findLecSubjList(CslmSearch cslmSearch, Model model) {
-//    	UserDetails userDetails = SecurityContextHelper.getUserDetails();              // 로그인 사용자 정보
-//    	cslmSearch.setEmpid(userDetails.getIntgUid());                                 // 교번
-//    	model.addAttribute("replyList", cslmService.findLecSubjList(cslmSearch));    // [탭] 수강학생 > 강의교과목 콤보리스트
-//    	return "board/sample/sampleDetail";
-//    }
-
-	
-//	@RequestMapping("sample_write_insert")
-//	//public String sample_write_insert(@ModelAttribute("SampleBoard") SampleBoard sampleBoard) {
-//	public String sample_write_insert(SampleBoard sampleBoard) {
-//		chickenService.insertBoard(sampleBoard);
-//		return "redirect:sampleList";
-//	}
+    @RequestMapping("saveReply")
+    public String saveReply(Reply reply, RedirectAttributes redirectAttributes, Model model) {
+    	logger.info(" @@@@@@@@@@@@@ saveReply @@@@@ " + reply.toString());
+        redirectAttributes.addAttribute("success", sampleBoardService.saveReply(reply));
+        redirectAttributes.addAttribute("seq", reply.getSeq());
+        return "redirect:sampleDetail";
+    	
+    }
     
+    @RequestMapping("selectReplyList")
+    public String selectReplyList(@RequestParam int seq, Model model) {
+    	
+    	model.addAttribute("replyList", sampleBoardService.selectReplyList(seq));
+    	return "board/sample/sampleDetail";
+    }
+
  }
