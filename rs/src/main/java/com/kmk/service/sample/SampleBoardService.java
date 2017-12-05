@@ -31,9 +31,18 @@ public class SampleBoardService {
 		return sampleBoardMapper.insertReply(reply);
 	}
 	
+	public int delFalgUpadaeReply(int reply_seq){
+		return sampleBoardMapper.delFalgUpadaeReply(reply_seq);
+	}
+	
 	public List<Reply> selectReplyList(int seq){
 		return sampleBoardMapper.selectReplyList(seq);
 	}
+	public String selectReplyUserId(int reply_seq){
+		return sampleBoardMapper.selectReplyUserId(reply_seq);
+	}
+	
+	
 	
 	
 	

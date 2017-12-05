@@ -49,6 +49,11 @@
 	<script src="/AdminLTE-2.3.11/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 	<!-- iCheck -->
 	<script src="/AdminLTE-2.3.11/plugins/iCheck/icheck.min.js"></script>
+	<!-- message include -->
+	<script src="/js/lang/kr/message.js"></script>
+	<script src="/js/common.js"></script>
+	
+	
 	<!-- AdminLTE for demo purposes -->
 	<!-- <script src="/AdminLTE-2.3.11/dist/js/demo.js"></script> -->
 	

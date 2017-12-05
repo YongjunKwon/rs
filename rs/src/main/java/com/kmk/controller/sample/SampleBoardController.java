@@ -1,20 +1,32 @@
 package com.kmk.controller.sample;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kmk.controller.TestController;
 import com.kmk.domain.common.CommCode;
 import com.kmk.domain.common.CommCodeSearch;
 import com.kmk.domain.sample.Reply;
 import com.kmk.domain.sample.SampleBoard;
+import com.kmk.domain.user.LoginUser;
 import com.kmk.service.common.CommonService;
 import com.kmk.service.sample.SampleBoardService;
 
@@ -72,12 +84,75 @@ public class SampleBoardController {
 	}
 	
     @RequestMapping("saveReply")
-    public String saveReply(Reply reply, RedirectAttributes redirectAttributes, Model model) {
-    	logger.info(" @@@@@@@@@@@@@ saveReply @@@@@ " + reply.toString());
+    public String saveReply(Reply reply, RedirectAttributes redirectAttributes, Model model, HttpSession session) {
+    	LoginUser loginUser = (LoginUser)session.getAttribute("loginUser");
+    	reply.setUser_id(loginUser.getUser_id());
         redirectAttributes.addAttribute("success", sampleBoardService.saveReply(reply));
         redirectAttributes.addAttribute("seq", reply.getSeq());
         return "redirect:sampleDetail";
     	
+    }
+
+    
+    @RequestMapping(value="delFalgUpadaeReply", method=RequestMethod.POST)
+    //@ResponseBody
+    //public int delFalgUpadaeReply(Reply reply, Model model, HttpSession session) {
+	public ModelAndView delFalgUpadaeReply(Reply reply, Model model, HttpSession session) {
+    	
+    	ModelAndView mav = new ModelAndView("jsonView");
+    	Map modelMap = new HashMap();
+    		
+    	int resultCode = 0;
+    	logger.info(" @@@@@@@@@@@@@ deleteReply @@@@@ " + reply.toString());
+    	logger.debug("TestForm : {}", reply);
+    	
+    	LoginUser loginUser = (LoginUser)session.getAttribute("loginUser");
+    	
+    	logger.info(" @@@@@@@@@@@@@ deleteReply @@@@@ LoginUser.user_id  " + loginUser.getUser_id());
+    	logger.info(" @@@@@@@@@@@@@ deleteReply @@@@@ LoginUser.pwd  " + loginUser.getPwd());
+    	
+    	String replyUserId = sampleBoardService.selectReplyUserId(reply.getReply_seq());
+    	if(!replyUserId.equals(loginUser.getUser_id())) {
+    	  	//redirectAttributes.addAttribute("seq", reply.getSeq());
+    	  	//redirectAttributes.addAttribute("success", -99); // not access
+    		model.addAttribute("seq", reply.getSeq());
+    		model.addAttribute("success", -99); // not access
+    		
+    		modelMap.put("seq", reply.getSeq());
+    		modelMap.put("success", -99);
+    		resultCode = -99;
+    		
+    		mav.addObject("seq", reply.getSeq());
+    	} else {
+    		// check password
+    		if(!reply.getPwd().equals(loginUser.getPwd())){
+    			//redirectAttributes.addAttribute("seq", reply.getSeq());
+    			//redirectAttributes.addAttribute("success", -98); // not access
+    			model.addAttribute("seq", reply.getSeq());
+    			model.addAttribute("success", -98); // not access
+        		modelMap.put("seq", reply.getSeq());
+        		modelMap.put("success", -98);
+        		resultCode = -98;
+        		logger.info(" password fail!!!!!!!!!! ");
+        		mav.addObject("seq", reply.getSeq());
+        		mav.addObject("success", -98);
+        		
+    		} else {
+//    			redirectAttributes.addAttribute("seq", reply.getSeq());
+//    			redirectAttributes.addAttribute("success", sampleBoardService.delFalgUpadaeReply(reply.getReply_seq())); // not access
+    			model.addAttribute("seq", reply.getSeq());
+    			model.addAttribute("success", sampleBoardService.delFalgUpadaeReply(reply.getReply_seq())); // not access
+        		modelMap.put("seq", reply.getSeq());
+        		resultCode = sampleBoardService.delFalgUpadaeReply(reply.getReply_seq());
+    		}
+    		
+    	}
+    	
+    	//mav.setView(view);();
+    	//mav.addObject("obj", modelMap);
+    	//mav.addObject("key", "12");
+        //return resultCode;
+        return mav;
     }
     
     @RequestMapping("selectReplyList")

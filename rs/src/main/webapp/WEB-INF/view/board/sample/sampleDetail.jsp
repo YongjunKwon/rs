@@ -27,6 +27,7 @@
                             <!-- Main content -->
                             <section class="content">
 
+
                                 <div itemprop="description" class="view-content">${contents.content}</div>
 
                                 <br/>
@@ -44,11 +45,22 @@
                                                     <div class="media-object"><i class="fa fa-user"></i></div>
                                                 </div>
                                                 <div class="media-body">
-                                                    <div class="media-heading">
+                                                    <div class="media-heading" id="div_del" name="div_del">
                                                         <b><span class="member">${reply.nick_nm}</span></b>
                                                         <span class="font-11 text-muted">
-															<span class="media-info"><i class="fa fa-clock-o"></i>${reply.yyyymmdd}</span>
+														                                <span class="media-info"><i class="fa fa-clock-o"></i>${reply.yyyymmdd}</span>
                                                         </span>
+
+
+                                                        <input type="button" id="deleteBtn" name="deleteBtn" value="삭제" data-values='{ "reply_seq" : "${reply.reply_seq}" }'></input>
+                                                        <input type="password" id="pwd" name="pwd" value="" />
+
+                                                        <!--<a role="button" href="#" class="btn btn-black btn-sm" title="삭제" data-values='{ "reply_seq" : "${reply.reply_seq}" }'>
+                                                            <i class="fa fa-times"></i><span class="hidden-xs"> 삭제</span>
+                                                        </a>
+                            -->
+
+
                                                     </div>
                                                     <div class="media-content">${reply.content}</div>
                                                 </div>
@@ -56,7 +68,6 @@
                                         </c:forEach>
                                     </c:if>
                                     <!-- Loop end -->
-
                                 </section>
 
                                 <br/>
@@ -152,9 +163,17 @@
                             <!-- /.content -->
                         </div>
                         <!-- /.content-wrapper -->
+                        <form id="commDelFrm" name="commDelFrm" action="">
+                            <input type="hidden" id="seq" name="seq" value="${contents.seq}">
+                            <input type="hidden" id="reply_seq" name="reply_seq" value="" />
+                            <input type="hidden" id="pwd" name="pwd" value="" />
+
+                        </form>
+
                         <%@include file="../../include/bottom.jsp"%>
             </div>
             <!-- ./wrapper -->
+        </body>
 
 
 
@@ -163,26 +182,126 @@
 
 
 
+        <script type="text/javascript">
+            // 삭제 검사 확인
+            function comment_del(href) {
+                if (confirm(aslang[19])) { //한번 삭제한 자료는 복구할 방법이 없습니다.\n\n정말 삭제하시겠습니까?
+                    var iev = -1;
+                    if (navigator.appName == 'Microsoft Internet Explorer') {
+                        var ua = navigator.userAgent;
+                        var re = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
+                        if (re.exec(ua) != null)
+                            iev = parseFloat(RegExp.$1);
+                    }
 
-            <script type="text/javascript">
-                $(document).ready(function() {
+                    // IE6 이하에서 한글깨짐 방지
+                    if (iev != -1 && iev < 7) {
+                        document.location.href = encodeURI(href);
+                    } else {
+                        document.location.href = href;
+                    }
+                }
+            }
 
-                    console.log("----------------- " + $("success"));
+            $(document).ready(function() {
+
+                console.log("----------------- " + "${success}");
+
+                if ("${success}" == -99) {
+                    alert(aslang[2]);
+                }
+
+                if ("${success}" == -98) {
+                    alert(aslang[3]);
+                }
+
+                if ("${success}" == 1) {
+                    alert(aslang[4]);
+                }
+
+                $("#area_cd").val("${sampleBoard.area_cd}");
+                console.log("${contents.seq}");
+                var $seq = "${contents.seq}";
 
 
-                    $("#area_cd").val("${sampleBoard.area_cd}");
-                    console.log("${contents.seq}");
-                    var $seq = "${contents.seq}";
 
-                    $("#btnReplyReg").on("click", function() {
-                        console.log("---- 게시글 댓글 쓰기 @@@@@ ");
+                $("#div_del #deleteBtn").on("click", function() {
 
-                        $("#user_id").val("test@naver.com");
-                        $("#commFrm").attr("action", "/board/sample/saveReply");
-                        $("#commFrm").attr("method", "post");
-                        $("#commFrm").submit();
+                    var $dataTag = $(this).data('values');
+                    console.log("---- 게시글 댓글 삭제 @@@@@ " + $dataTag.reply_seq);
+                    console.log("---- 게시글 댓글 삭제 비밀번호 @@@@@ " + $(this).next().val());
 
-                        /*
+
+                    if (trim($(this).next().val()) == "") {
+                        alert(aslang[1]);
+                        return false;
+                    }
+
+                    var params = {
+                        "reply_seq": $dataTag.reply_seq,
+                        "seq": $seq,
+                        "pwd": $(this).next().val()
+                    };
+
+                    var formData = new FormData();
+                    formData.append("reply_seq", $dataTag.reply_seq);
+                    formData.append("seq", $seq);
+                    formData.append("pwd", $(this).next().val());
+
+                    $.ajax({
+                        url: "/board/sample/delFalgUpadaeReply",
+                        method: "post",
+                        type: "json",
+                        //type: "text",
+                        //contentType: "application/json",
+                        data: params,
+                        success: function(data) {
+
+                            console.log("::::::: data :::: " + data.seq);
+                            console.log("::::::: data :::: " + data.success);
+
+
+
+                        },
+                        error: function(error) {
+                            alert("error : " + eval(error));
+                        }
+                    });
+                });
+
+                // 댓글삭제
+                $("#div_del > a").on("click", function() {
+                    var $dataTag = $(this).data('values');
+                    console.log("---- 게시글 댓글 삭제 @@@@@ " + $dataTag.reply_seq);
+
+                    //$(".tr_on").find("td").eq(0).find("[name$=h_cuslSeq]").val()
+                    console.log(" //// " + $(this));
+                    console.log("비밀번호 ::: " + $(this).next().val());
+
+                    if (trim($(this).next().val()) == "") {
+                        alert(aslang[1]);
+                        return false;
+                    }
+
+                    $("#commDelFrm #pwd").val($(this).next().val());
+                    $("#commDelFrm #reply_seq").val($dataTag.reply_seq);
+
+                    $("#commDelFrm").attr("action", "/board/sample/delFalgUpadaeReply");
+                    $("#commDelFrm").attr("method", "post");
+                    $("#commDelFrm").submit();
+
+                });
+
+
+                // 댓글등록
+                $("#btnReplyReg").on("click", function() {
+                    console.log("---- 게시글 댓글 쓰기 @@@@@ ");
+
+                    $("#commFrm").attr("action", "/board/sample/saveReply");
+                    $("#commFrm").attr("method", "post");
+                    $("#commFrm").submit();
+
+                    /*
 	    var params  = {
              "seq" : $seq
 			 , "content" : $("#wr_content").val()
@@ -220,10 +339,10 @@
 
 
 
-                    });
-
-
                 });
-            </script>
+
+
+            });
+        </script>
 
     </html>

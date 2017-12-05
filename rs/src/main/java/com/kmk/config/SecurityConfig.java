@@ -2,8 +2,6 @@ package com.kmk.config;
 
 
 
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -16,6 +14,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import com.kmk.service.user.UserDetailService;
 
@@ -51,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
     @Override
     protected void configure(HttpSecurity http) throws  Exception {
-        http.authorizeRequests().antMatchers("/").permitAll().antMatchers("/login").permitAll()
+        http.authorizeRequests().antMatchers("/", "/register/**", "/login/**").permitAll()
         		.antMatchers("/logoutSuccess").permitAll().antMatchers("/admin/**").hasAnyAuthority("ROLE_ADMIN").anyRequest()
         		.authenticated().and().formLogin().loginPage("/login")
                 .loginProcessingUrl("/login").successHandler(loginSuccessHandler).failureHandler(loginFailureHandler)
@@ -68,4 +67,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
        // authenticationProvider.setPasswordEncoder(passwordEncoder()); //패스워드를 암호활 경우 사용한다
         return authenticationProvider;
     }
+    
+	@Bean
+	public MappingJackson2JsonView jsonView(){
+		return new MappingJackson2JsonView();
+	}
 }

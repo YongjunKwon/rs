@@ -19,4 +19,5 @@ public class Reply {
 	private String yyyymmdd;
 	
 	private String nick_nm;
+	private String pwd;
 }

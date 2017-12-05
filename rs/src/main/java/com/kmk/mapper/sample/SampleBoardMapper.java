@@ -2,6 +2,7 @@ package com.kmk.mapper.sample;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -50,6 +51,19 @@ public interface SampleBoardMapper {
 	})
 	SampleBoard selectDetailSampleBoard(int seq);
 	
+	@Select({
+		"<script>"
+		+ " SELECT USER_ID		 "
+		+ "	  FROM REPLY "
+		+ "  WHERE 1=1 "
+		+ "    AND REPLY_SEQ=#{reply_seq} "
+		+ "</script>"
+	})
+	String selectReplyUserId(int reply_seq);
+	
+	
+	
+	
 	// 게시판등록
 	@Insert("INSERT INTO BOARD "
 			+ "(TITLE, CONTENT, CNT, CATEGORY, AREA_CD, BIZ_NM, RECOMM_CNT, DEL_FLAG, IMG_URL, USER_ID, REG_DTIME)"
@@ -61,6 +75,11 @@ public interface SampleBoardMapper {
 			+ "(SEQ, CONTENT, DEL_FLAG, USER_ID, REG_DTIME)"
 			+ " VALUES(#{seq}, #{content}, 'N', #{user_id}, NOW())")
 	int insertReply(Reply reply);
+	
+	// 리플등록
+	@Delete("UPDATE REPLY SET DEL_FLAG = 'Y' WHERE REPLY_SEQ =#{reply_seq} ")
+	int delFalgUpadaeReply(int reply_seq);
+	
 	
 	// 리플조회
 	@Select({
