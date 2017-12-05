@@ -207,17 +207,17 @@
 
                 console.log("----------------- " + "${success}");
 
-                if ("${success}" == -99) {
-                    alert(aslang[2]);
-                }
+                // if ("${success}" == -99) {
+                //     alert(aslang[2]);
+                // }
 
-                if ("${success}" == -98) {
-                    alert(aslang[3]);
-                }
+                // if ("${success}" == -98) {
+                //     alert(aslang[3]);
+                // }
 
-                if ("${success}" == 1) {
-                    alert(aslang[4]);
-                }
+                // if ("${success}" == 1) {
+                //     alert(aslang[4]);
+                // }
 
                 $("#area_cd").val("${sampleBoard.area_cd}");
                 console.log("${contents.seq}");
@@ -243,25 +243,31 @@
                         "pwd": $(this).next().val()
                     };
 
-                    var formData = new FormData();
-                    formData.append("reply_seq", $dataTag.reply_seq);
-                    formData.append("seq", $seq);
-                    formData.append("pwd", $(this).next().val());
-
                     $.ajax({
                         url: "/board/sample/delFalgUpadaeReply",
                         method: "post",
                         type: "json",
-                        //type: "text",
-                        //contentType: "application/json",
                         data: params,
                         success: function(data) {
+                            if (data.success == -99) {
+                                alert(aslang[2]);
+                                return;
+                            }
 
+                            if (data.success == -98) {
+                                alert(aslang[3]);
+                                return;
+                            }
+
+                            if (data.success == 1) {
+                                alert(aslang[4]);
+                                // $('#list').load(href);
+                                location.reload();
+
+                            }
+                            console.log("::::::: data :::: " + data);
                             console.log("::::::: data :::: " + data.seq);
                             console.log("::::::: data :::: " + data.success);
-
-
-
                         },
                         error: function(error) {
                             alert("error : " + eval(error));
@@ -300,44 +306,6 @@
                     $("#commFrm").attr("action", "/board/sample/saveReply");
                     $("#commFrm").attr("method", "post");
                     $("#commFrm").submit();
-
-                    /*
-	    var params  = {
-             "seq" : $seq
-			 , "content" : $("#wr_content").val()
-			 , "user_id" : "test@naver.com"
-        };
-
-		
-		$.ajax({
-            type:"post",
-            url:"/board/sample/saveReply",
-            async:false,
-            dataType:"json",
-            data:params,
-            success: function( json ) {
-				alert("댓글성공");
-               //  $.each(json.lecSubjList, function(i, value) {
-				// 		var html = "";
-				// 		html += "<ol id=list2 data-role=listview data-inset=true>";
-				// 		html +=   "<li data-role=list-divider>Dynamic list</li>";
-				// 		html +=   "<li data-icon=delete>";
-				// 		html +=      "<a href=#>Element 2.1</a>";
-				// 		html +=   "</li>";
-				// 		html +=   "<li data-icon=delete>";
-				// 		html +=      "<a href=#>Element 2.2</a>";
-				// 		html +=   "</li>";
-				// 		html +=   "<li data-icon=delete>";
-				// 		html +=      "<a href=#>Element 2.3</a>";
-				// 		html +=   "</li>";
-				// 		html += "</ol>";
-				// 		$("#home div:jqmData(role=content)").append (html);
-                //  });
-            }
-        });
-		*/
-
-
 
                 });
 

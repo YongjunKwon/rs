@@ -95,14 +95,10 @@ public class SampleBoardController {
 
     
     @RequestMapping(value="delFalgUpadaeReply", method=RequestMethod.POST)
-    //@ResponseBody
-    //public int delFalgUpadaeReply(Reply reply, Model model, HttpSession session) {
-	public ModelAndView delFalgUpadaeReply(Reply reply, Model model, HttpSession session) {
+	public ModelAndView delFalgUpadaeReply(Reply reply, HttpSession session) {
     	
     	ModelAndView mav = new ModelAndView("jsonView");
-    	Map modelMap = new HashMap();
-    		
-    	int resultCode = 0;
+    	
     	logger.info(" @@@@@@@@@@@@@ deleteReply @@@@@ " + reply.toString());
     	logger.debug("TestForm : {}", reply);
     	
@@ -113,45 +109,18 @@ public class SampleBoardController {
     	
     	String replyUserId = sampleBoardService.selectReplyUserId(reply.getReply_seq());
     	if(!replyUserId.equals(loginUser.getUser_id())) {
-    	  	//redirectAttributes.addAttribute("seq", reply.getSeq());
-    	  	//redirectAttributes.addAttribute("success", -99); // not access
-    		model.addAttribute("seq", reply.getSeq());
-    		model.addAttribute("success", -99); // not access
-    		
-    		modelMap.put("seq", reply.getSeq());
-    		modelMap.put("success", -99);
-    		resultCode = -99;
-    		
     		mav.addObject("seq", reply.getSeq());
+    		mav.addObject("success", -99);
     	} else {
     		// check password
     		if(!reply.getPwd().equals(loginUser.getPwd())){
-    			//redirectAttributes.addAttribute("seq", reply.getSeq());
-    			//redirectAttributes.addAttribute("success", -98); // not access
-    			model.addAttribute("seq", reply.getSeq());
-    			model.addAttribute("success", -98); // not access
-        		modelMap.put("seq", reply.getSeq());
-        		modelMap.put("success", -98);
-        		resultCode = -98;
-        		logger.info(" password fail!!!!!!!!!! ");
         		mav.addObject("seq", reply.getSeq());
         		mav.addObject("success", -98);
-        		
     		} else {
-//    			redirectAttributes.addAttribute("seq", reply.getSeq());
-//    			redirectAttributes.addAttribute("success", sampleBoardService.delFalgUpadaeReply(reply.getReply_seq())); // not access
-    			model.addAttribute("seq", reply.getSeq());
-    			model.addAttribute("success", sampleBoardService.delFalgUpadaeReply(reply.getReply_seq())); // not access
-        		modelMap.put("seq", reply.getSeq());
-        		resultCode = sampleBoardService.delFalgUpadaeReply(reply.getReply_seq());
+    			mav.addObject("seq", reply.getSeq());
+    			mav.addObject("success", sampleBoardService.delFalgUpadaeReply(reply.getReply_seq())); // not access
     		}
-    		
     	}
-    	
-    	//mav.setView(view);();
-    	//mav.addObject("obj", modelMap);
-    	//mav.addObject("key", "12");
-        //return resultCode;
         return mav;
     }
     
@@ -161,5 +130,4 @@ public class SampleBoardController {
     	model.addAttribute("replyList", sampleBoardService.selectReplyList(seq));
     	return "board/sample/sampleDetail";
     }
-
  }
