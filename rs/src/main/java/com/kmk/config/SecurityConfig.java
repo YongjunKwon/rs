@@ -14,7 +14,6 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import com.kmk.service.user.UserDetailService;
 
@@ -67,9 +66,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
        // authenticationProvider.setPasswordEncoder(passwordEncoder()); //패스워드를 암호활 경우 사용한다
         return authenticationProvider;
     }
-    
-	@Bean
-	public MappingJackson2JsonView jsonView(){
-		return new MappingJackson2JsonView();
-	}
 }
