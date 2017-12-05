@@ -1,5 +1,10 @@
 package com.kmk.controller.user;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -7,9 +12,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kmk.domain.user.LoginUser;
+import com.kmk.domain.user.User;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -50,4 +57,19 @@ public class Usercontroller {
         return model;
     }
 
+    @RequestMapping(value = "/register")
+    public String register(Model model) {
+        return "/login/register";
+    }
+    
+    @RequestMapping(value = "/register/emailCheck")
+    @ResponseBody
+    public Map<String, String> emailCheck(User user) {
+    	Map<String, String> map = new HashMap<String, String>();
+    	map.put("result", "success!");
+    	map.put("test", "test!");
+    	
+    	
+        return map;
+    }
 }
