@@ -2,8 +2,6 @@ package com.kmk.config;
 
 
 
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -46,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	public void configure(WebSecurity web) throws Exception
 	{
 		//메인페이지, css, script 인증 해제
-		web.ignoring().antMatchers("/WEB-INF/css/**", "/WEB-INF/script/**","/AdminLTE-2.3.11/**");
+		web.ignoring().antMatchers("/WEB-INF/css/**", "/WEB-INF/script/**","/AdminLTE-2.3.11/**","/se2/**");
 	}
 	
     @Override
