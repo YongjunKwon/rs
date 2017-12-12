@@ -51,16 +51,10 @@
 														                                <span class="media-info"><i class="fa fa-clock-o"></i>${reply.yyyymmdd}</span>
                                                         </span>
 
-
-                                                        <input type="button" id="deleteBtn" name="deleteBtn" value="삭제" data-values='{ "reply_seq" : "${reply.reply_seq}" }'></input>
-                                                        <input type="password" id="pwd" name="pwd" value="" />
-
-                                                        <!--<a role="button" href="#" class="btn btn-black btn-sm" title="삭제" data-values='{ "reply_seq" : "${reply.reply_seq}" }'>
-                                                            <i class="fa fa-times"></i><span class="hidden-xs"> 삭제</span>
-                                                        </a>
-                            -->
-
-
+                                                        <c:if test="${reply.check_del_flag eq 'true' }">
+                                                            <input type="button" id="deleteBtn" name="deleteBtn" value="삭제" data-values='{ "reply_seq" : "${reply.reply_seq}", "check_del_flag" : "${reply.check_del_flag}" }'></input>
+                                                            <input type="password" id="pwd" name="pwd" value="" />
+                                                        </c:if>
                                                     </div>
                                                     <div class="media-content">${reply.content}</div>
                                                 </div>
@@ -101,6 +95,13 @@
 
 
                                         </div>
+                                        <!--<a role="button" href="./board.php?bo_table=oph&amp;page=" class="btn btn-black btn-sm">-->
+                                        <a role="button" href="/board/sample/sampleList" class="btn btn-black btn-sm">
+
+                                            <i class="fa fa-bars"></i><span class="hidden-xs"> 목록</span>
+                                        </a>
+
+
 
                                         <div class="comment-btn">
                                             <div class="form-group pull-right">
@@ -145,9 +146,7 @@
                                         <a role="button" href="./password.php?w=u&amp;bo_table=oph&amp;wr_id=346&amp;page=" class="btn btn-black btn-sm" title="수정">
                                             <i class="fa fa-plus"></i><span class="hidden-xs"> 수정</span>
                                         </a>
-                                        <a role="button" href="./board.php?bo_table=oph&amp;page=" class="btn btn-black btn-sm">
-                                            <i class="fa fa-bars"></i><span class="hidden-xs"> 목록</span>
-                                        </a>
+
                                         <a role="button" href="./write.php?w=r&amp;bo_table=oph&amp;wr_id=346" class="btn btn-black btn-sm">
                                             <i class="fa fa-commenting"></i><span class="hidden-xs"> 답변</span>
                                         </a>
@@ -183,29 +182,8 @@
 
 
         <script type="text/javascript">
-            // 삭제 검사 확인
-            function comment_del(href) {
-                if (confirm(aslang[19])) { //한번 삭제한 자료는 복구할 방법이 없습니다.\n\n정말 삭제하시겠습니까?
-                    var iev = -1;
-                    if (navigator.appName == 'Microsoft Internet Explorer') {
-                        var ua = navigator.userAgent;
-                        var re = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
-                        if (re.exec(ua) != null)
-                            iev = parseFloat(RegExp.$1);
-                    }
-
-                    // IE6 이하에서 한글깨짐 방지
-                    if (iev != -1 && iev < 7) {
-                        document.location.href = encodeURI(href);
-                    } else {
-                        document.location.href = href;
-                    }
-                }
-            }
-
             $(document).ready(function() {
 
-                console.log("----------------- " + "${success}");
 
                 // if ("${success}" == -99) {
                 //     alert(aslang[2]);
@@ -219,6 +197,8 @@
                 //     alert(aslang[4]);
                 // }
 
+
+
                 $("#area_cd").val("${sampleBoard.area_cd}");
                 console.log("${contents.seq}");
                 var $seq = "${contents.seq}";
@@ -228,10 +208,7 @@
                 $("#div_del #deleteBtn").on("click", function() {
 
                     var $dataTag = $(this).data('values');
-                    console.log("---- 게시글 댓글 삭제 @@@@@ " + $dataTag.reply_seq);
-                    console.log("---- 게시글 댓글 삭제 비밀번호 @@@@@ " + $(this).next().val());
-
-
+                    console.log($dataTag.reply_seq);
                     if (trim($(this).next().val()) == "") {
                         alert(aslang[1]);
                         return false;
@@ -242,6 +219,8 @@
                         "seq": $seq,
                         "pwd": $(this).next().val()
                     };
+
+
 
                     $.ajax({
                         url: "/board/sample/delFalgUpadaeReply",
@@ -261,13 +240,8 @@
 
                             if (data.success == 1) {
                                 alert(aslang[4]);
-                                // $('#list').load(href);
                                 location.reload();
-
                             }
-                            console.log("::::::: data :::: " + data);
-                            console.log("::::::: data :::: " + data.seq);
-                            console.log("::::::: data :::: " + data.success);
                         },
                         error: function(error) {
                             alert("error : " + eval(error));
@@ -301,12 +275,9 @@
 
                 // 댓글등록
                 $("#btnReplyReg").on("click", function() {
-                    console.log("---- 게시글 댓글 쓰기 @@@@@ ");
-
                     $("#commFrm").attr("action", "/board/sample/saveReply");
                     $("#commFrm").attr("method", "post");
                     $("#commFrm").submit();
-
                 });
 
 

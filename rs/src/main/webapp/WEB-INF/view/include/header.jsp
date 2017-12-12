@@ -52,7 +52,13 @@
 	<!-- message include -->
 	<script src="/js/lang/kr/message.js"></script>
 	<script src="/js/common.js"></script>
+	<!-- validate include -->
+	<script src="/js/validate/jquery.validate.js"></script>
+	<script src="/js/validate/jquery.validate.min.js"></script>
+	<script src="/js/validate/i18n/messages_ko.js"></script>
 	
+	<script src="/js/hashmap.js"></script>
+ 	<script src="/js/validation.js"></script>
 	
 	<!-- AdminLTE for demo purposes -->
 	<!-- <script src="/AdminLTE-2.3.11/dist/js/demo.js"></script> -->

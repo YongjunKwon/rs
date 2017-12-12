@@ -35,21 +35,19 @@ public class SampleBoardService {
 		return sampleBoardMapper.delFalgUpadaeReply(reply_seq);
 	}
 	
-	public List<Reply> selectReplyList(int seq){
-		return sampleBoardMapper.selectReplyList(seq);
+	public List<Reply> selectReplyList(String user_id, int seq){
+		return sampleBoardMapper.selectReplyList(user_id, seq);
 	}
+	
 	public String selectReplyUserId(int reply_seq){
 		return sampleBoardMapper.selectReplyUserId(reply_seq);
 	}
 	
+	public void insertBoard(SampleBoard sampleBoard){	
+		//logger.info("query test: {}", testMapper.getList());
+		sampleBoardMapper.insertBoard(sampleBoard);
+	}
 	
-	
-	
-	
-//	public void insertBoard(SampleBoard sampleBoard){	
-//		//logger.info("query test: {}", testMapper.getList());
-//		chickenMapper.insertBoard(sampleBoard);
-//	}
 //	
 //	public List<SampleBoard> selectSampleBoard(){
 //		//logger.info("query test: {}", testMapper.getList());

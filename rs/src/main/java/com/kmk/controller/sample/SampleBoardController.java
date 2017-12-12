@@ -74,10 +74,14 @@ public class SampleBoardController {
 	}
 	
 	@RequestMapping("sampleDetail")
-	public String sampleDetail(@RequestParam int seq, @RequestParam(defaultValue="0") int success, Model model) {
+	public String sampleDetail(@RequestParam int seq, @RequestParam(defaultValue="0") int success, Model model, HttpSession session) {
 		
-		model.addAttribute("contents", sampleBoardService.selectDetailSampleBoard(seq));
-		model.addAttribute("replyList", sampleBoardService.selectReplyList(seq));
+		LoginUser loginUser = (LoginUser)session.getAttribute("loginUser");
+
+		logger.info(" @@@@@@@@@@@@@ sampleDetail >>>>> loginUser @@@@@ " + loginUser.getUser_id());
+		
+    	model.addAttribute("contents", sampleBoardService.selectDetailSampleBoard(seq));
+		model.addAttribute("replyList", sampleBoardService.selectReplyList(loginUser.getUser_id(), seq));
 		model.addAttribute("success",success);
 		
 		return "board/sample/sampleDetail";
@@ -124,10 +128,17 @@ public class SampleBoardController {
         return mav;
     }
     
-    @RequestMapping("selectReplyList")
-    public String selectReplyList(@RequestParam int seq, Model model) {
-    	
-    	model.addAttribute("replyList", sampleBoardService.selectReplyList(seq));
-    	return "board/sample/sampleDetail";
-    }
+	
+   @RequestMapping("write")
+   public String write(String tname, Model model) {
+	  logger.info(" write :::: >>>> tname ::: " + tname);
+      return "board/sample/write";
+   }
+   
+   @RequestMapping("saveBoard")
+   public String saveBoard(SampleBoard sampleBoard) {
+	  sampleBoardService.insertBoard(sampleBoard);
+      return "redirect:sampleList";
+   }
+	
  }

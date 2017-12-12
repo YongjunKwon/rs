@@ -1,140 +1,132 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<%@include file="../../include/header.jsp"%>
+    <!DOCTYPE html>
+    <html>
+    <%@include file="../../include/header.jsp"%>
 
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
-<%@include file="../../include/top.jsp"%>
-<%@include file="../../include/sideMenu.jsp"%>
+        <body class="hold-transition skin-blue sidebar-mini">
+            <div class="wrapper">
+                <%@include file="../../include/top.jsp"%>
+                    <%@include file="../../include/sideMenu.jsp"%>
 
-<!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        치킨집
-        <small> 리스트 </small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-        <li class="active">치킨집</li>
-      </ol>
-    </section>
+                        <!-- Content Wrapper. Contains page content -->
+                        <div class="content-wrapper">
+                            <!-- Content Header (Page header) -->
+                            <section class="content-header">
+                                <h1>
+                                    치킨집
+                                    <small> 리스트 </small>
+                                </h1>
+                                <ol class="breadcrumb">
+                                    <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+                                    <li class="active">치킨집</li>
+                                </ol>
+                            </section>
 
-    <!-- Main content -->
+                            <!-- Main content -->
 
-<section class="board-list"> 
-<!-- select box 공통코드 구현 -->
-			<div class="list-tsearch">
-			<form:form modelAttribute="commCodeSearch" method="post" action="/board/sample/sampleList">
-				<input type="hidden" name="bo_table" value="gunma">
-				<input type="hidden" name="sca" value="">
-				<div class="row row-15">
-					<div class="col-sm-2 col-xs-5 col-15">
-						<div class="form-group">
-						  <label for="sfl" class="sound_only">지역</label>
-			              <form:select path="area_cd" class="chosen-select" data-placeholder="지역" disabled="false" >
-			                <option value="">선택</option>
-			                <form:options items="${comboAreaCdList}" itemValue="cd" itemLabel="cd_nm" />
-			              </form:select>
-						</div>
-					</div>
-					<div class="col-sm-6 col-xs-7 col-15">
-						<div class="form-group">
-							<div class="form-group">
-								<label for="stx" class="sound_only">제목</label>
-								<input type="text" name="title" value="${sampleBoard.title}" id="title" class="form-control input-sm" maxlength="20" placeholder="제목">
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-6 col-xs-7 col-15">
-						<div class="form-group">
-							<div class="form-group">
-								<label for="stx" class="sound_only">내용</label>
-								<input type="text" name="stx" value="" id="stx" class="form-control input-sm" maxlength="20" placeholder="내용">
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-2 col-xs-7 col-15">
-						<div class="form-group">
-							<button type="submit" id="btnSearch" name="btnSearch" class="btn btn-red btn-sm btn-block"><i class="fa fa-search"></i> 검색</button>
-						</div>
-					</div>
-				</div>
-			</form:form>
-		</div>
-	
-	
-      <div class="row">
-        <div class="col-md-12">
-          <div class="box">
-            <div class="box-header with-border">
-              <h3 class="box-title">${classActiveSettings}</h3>
+                            <section class="board-list">
+                                <!-- select box 공통코드 구현 -->
+                                <div class="list-tsearch">
+                                    <form:form modelAttribute="commCodeSearch" method="post" action="/board/sample/sampleList">
+                                        <input type="hidden" name="bo_table" value="gunma">
+                                        <input type="hidden" name="sca" value="">
+                                        <div class="row row-15">
+                                            <div class="col-sm-2 col-xs-5 col-15">
+                                                <div class="form-group">
+                                                    <label for="sfl" class="sound_only">지역</label>
+                                                    <form:select path="area_cd" class="chosen-select" data-placeholder="지역" disabled="false">
+                                                        <option value="">선택</option>
+                                                        <form:options items="${comboAreaCdList}" itemValue="cd" itemLabel="cd_nm" />
+                                                    </form:select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-xs-7 col-15">
+                                                <div class="form-group">
+                                                    <div class="form-group">
+                                                        <label for="stx" class="sound_only">제목</label>
+                                                        <input type="text" name="title" value="${sampleBoard.title}" id="title" class="form-control input-sm" maxlength="20" placeholder="제목">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-xs-7 col-15">
+                                                <div class="form-group">
+                                                    <div class="form-group">
+                                                        <label for="stx" class="sound_only">내용</label>
+                                                        <input type="text" name="stx" value="" id="stx" class="form-control input-sm" maxlength="20" placeholder="내용">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-2 col-xs-7 col-15">
+                                                <div class="form-group">
+                                                    <button type="submit" id="btnSearch" name="btnSearch" class="btn btn-red btn-sm btn-block"><i class="fa fa-search"></i> 검색</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form:form>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="box">
+                                            <div class="box-header with-border">
+                                                <h3 class="box-title">${classActiveSettings}</h3>
+                                            </div>
+                                            <!-- /.box-header -->
+                                            <div class="box-body">
+                                                <table class="table table-bordered">
+                                                    <tr>
+                                                        <th style="width: 10px">#</th>
+                                                        <th>제목</th>
+                                                    </tr>
+                                                    <c:forEach items="${list}" var="list" varStatus="status">
+
+                                                        <tr>
+                                                            <td align="center">
+                                                                ${status.count}
+                                                            </td>
+                                                            <td>
+                                                                <a href="/board/sample/sampleDetail?seq=${list.seq}">${list.title}</a>
+                                                            </td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                </table>
+                                            </div>
+                                            <!-- /.box-body -->
+                                            <div class="box-footer clearfix">
+                                                <a href="/board/sample/write?tname=sample">
+                                                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> 글쓰기</a>
+                                                </button>
+                                                <!-- <span class="glyphicon glyphicon-pencil pull-right" aria-hidden="true"></span> -->
+                                                <div class="text-center">
+                                                    <ul class="pagination pagination-sm no-margin">
+                                                        <li><a href="#">&laquo;</a></li>
+                                                        <li><a href="#">1</a></li>
+                                                        <li><a href="#">2</a></li>
+                                                        <li><a href="#">3</a></li>
+                                                        <li><a href="#">&raquo;</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /.box -->
+                                    </div>
+                                </div>
+                            </section>
+                            <!-- /.content -->
+                        </div>
+                        <!-- /.content-wrapper -->
+                        <%@include file="../../include/bottom.jsp"%>
             </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <table class="table table-bordered">
-                <tr>
-                  <th style="width: 10px">#</th>
-                  <th>제목</th>
-                </tr>
-                <c:forEach items="${list}" var= "list" varStatus="status">
-	
-				<tr>
-				<td align="center">
-				   ${status.count}
-				</td>
-				<td>
-				<a href="/board/sample/sampleDetail?seq=${list.seq}">${list.title}</a>
-				</td>
-				</tr>
-				</c:forEach>                
-              </table>
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer clearfix">
-	            <button type="button" id="btn_write" name="btn_write" class="btn btn-default btn-xs pull-right">
-	              <a href="/board/chicken/sample_w_index">
-				  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> 글쓰기</a>
-				</button>
-				<!-- <span class="glyphicon glyphicon-pencil pull-right" aria-hidden="true"></span> -->
-				<div class="text-center">
-	              <ul class="pagination pagination-sm no-margin">
-	                <li><a href="#">&laquo;</a></li>
-	                <li><a href="#">1</a></li>
-	                <li><a href="#">2</a></li>
-	                <li><a href="#">3</a></li>
-	                <li><a href="#">&raquo;</a></li>
-	              </ul>
-              	</div>
-            </div>
-         </div>
-          <!-- /.box -->
-		</div>
-	  </div>
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-<%@include file="../../include/bottom.jsp"%>
-</div>
-<!-- ./wrapper -->
-</body>
+            <!-- ./wrapper -->
+        </body>
 
-<script type="text/javascript"> 
-  $(document).ready(function() {
+        <script type="text/javascript">
+            $(document).ready(function() {
 
-		$("#area_cd").val("${sampleBoard.area_cd}");
-		console.log($("#area_cd").val());
+                $("#area_cd").val("${sampleBoard.area_cd}");
 
-	  $("#btn_write").on("click",function(){
-		  console.log("---- 글쓰기 클릭 @@@@@ ");
-		  
-	  });
-  }); 
-</script>
+            });
+        </script>
 
-</html>
-
-
+    </html>
