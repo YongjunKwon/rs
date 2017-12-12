@@ -47,7 +47,7 @@
                   <span class="sidebar-text">회원가입</span>
                 </a>
                 &nbsp;|&nbsp;
-                <a href="findPassword" class="win_password_lost">
+                <a href="/findPassword" class="win_password_lost">
                   <span class="sidebar-text">비번찾기</span>
                 </a>
               </span>
@@ -60,52 +60,53 @@
 
       <!-- 로그인성공시 //시작 -->
       <c:if test="${isLogin eq true}">
-      <div class="user-panel">
+        <div class="user-panel">
           <div class="pull-left image">
-             <img src="http://www.bk0011.com/thema/Miso-LTE/assets/img/photo.png" class="img-circle cursor" alt="" onclick="win_memo('http://www.bk0011.com/bbs/myphoto.php');" title="내사진등록">
+            <img src="http://www.bk0011.com/thema/Miso-LTE/assets/img/photo.png" class="img-circle cursor" alt="">
           </div>
           <div class="pull-left info">
-             <p>칵슈</p>
-             <span class="font-12 ko-11">
-                <a>실버</a>
-                &nbsp;
-                <a href="/logout">
-                   <i class="fa fa-circle text-primary"></i> &nbsp;로그아웃
-                </a>
-             </span>
-          </div>  
- 
-          <div class="clearfix"></div>
-          
-          <div class="progress progress-striped xs cursor" style="margin:10px 0px 0px;" data-original-title="레벨업까지 800점 남았습니다." data-toggle="tooltip" data-placement="bottom" data-html="true">
-             <div class="progress-bar progress-bar-blue" style="width: 20%;"></div>
+            <p>칵슈</p>
+            <span class="font-12 ko-11">
+              <a>실버</a>
+              &nbsp;
+              <a href="/logout">
+                <i class="fa fa-circle text-primary"></i> &nbsp;로그아웃
+              </a>
+            </span>
           </div>
- 
+
+          <div class="clearfix"></div>
+
+          <div class="progress progress-striped xs cursor" style="margin:10px 0px 0px;" data-original-title="레벨업까지 800점 남았습니다." data-toggle="tooltip"
+            data-placement="bottom" data-html="true">
+            <div class="progress-bar progress-bar-blue" style="width: 20%;"></div>
+          </div>
+
           <ul class="sidebar-list no-margin" style="padding:10px 5px 0px;">
-             <li>
+            <li>
+              <span class="pull-right">
+                Exp 200 (20%)
+              </span>
+              레벨 1
+            </li>
+            <li>
+              <a href="#" target="_blank" class="win_point">
                 <span class="pull-right">
-                   Exp 200 (20%)
+                  1,200 점
                 </span>
-                레벨 1 
-             </li>
-             <li>
-                <a href="#" target="_blank" class="win_point">
-                   <span class="pull-right">
-                      1,200 점
-                   </span>
-                   MP 
-                </a>
-             </li>
-             <li class="msgLabel" style="display:none;">
-                <a class="cursor" data-toggle="control-sidebar" onclick="miso_msg();">
-                   <span class="pull-right">
-                      <b class="orangered msgCount">0</b> 개
-                   </span>
-                   알림
-                </a>
-             </li>
+                MP
+              </a>
+            </li>
+            <li class="msgLabel" style="display:none;">
+              <a class="cursor" data-toggle="control-sidebar" onclick="miso_msg();">
+                <span class="pull-right">
+                  <b class="orangered msgCount">0</b> 개
+                </span>
+                알림
+              </a>
+            </li>
           </ul>
-       </div>
+        </div>
       </c:if>
       <!-- 로그인성공시 //종료 -->
 
@@ -123,7 +124,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active">
+            <li>
               <a href="/board/chicken/list">
                 <i class="fa fa-circle-o"></i>치킨집</a>
             </li>
@@ -136,8 +137,11 @@
               </a>
               <ul class="treeview-menu">
 
-                <li><a href="/board/sample/sampleList"><i class="fa fa-circle-o"></i>샘플리스트</a></li>
-                
+                <li>
+                  <a href="/board/sample/sampleList">
+                    <i class="fa fa-circle-o"></i>샘플리스트</a>
+                </li>
+
                 <li>
                   <a href="#">
                     <i class="fa fa-circle-o"></i> Level Two
@@ -175,7 +179,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active">
+            <li>
               <a href="/board/chicken/list">
                 <i class="fa fa-circle-o"></i>치킨집</a>
             </li>
@@ -218,7 +222,7 @@
           </ul>
         </li>
 
-        <li class="active">
+        <li>
           <a href="#">
             <i class="fa fa-link"></i>
             <span>Link</span>
@@ -327,25 +331,31 @@
 
   <script type="text/javascript">
     $(document).ready(function () {
-      //     var pathName = $(location).attr('pathname');
-      // //    alert("a[href='"+pathName+"']");
-      // 	$("a[href='"+pathName+"']").parent().addClass("active");    
-      //   });
+
+      $('li .active').removeClass("active");
+
+      var pathName = $(location).attr('pathname');
+      
+      console.log("a[href='" + pathName + "']");
+
+      //$("a[href='" + pathName + "']").addClass("active");
+      console.log("select a tag:", $("a[href='" + pathName + "']").text());
+
+    });
 
 
-      //   $('.sidebar-menu > li').click(function(e) {
-      //     var $this = $(this);
+    $('.sidebar-menu > li').click(function (e) {
+      var $this = $(this);
 
-      //     if($this.has('li')){
+      if ($this.has('li')) {
 
 
-      //     }else{
-      //       $('.sidebar-menu > li.active').removeClass('active');
-      //       if (!$this.hasClass('active')) {
-      //           $this.addClass('active');
-      //       }
+      } else {
+        $('.sidebar-menu > li.active').removeClass('active');
+        if (!$this.hasClass('active')) {
+          $this.addClass('active');
+        }
+      }
 
-      //     }
-      console.log("isLogin:", '${isLogin}');
     });
   </script>

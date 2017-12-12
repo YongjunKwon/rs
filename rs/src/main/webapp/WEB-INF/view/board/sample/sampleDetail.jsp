@@ -27,6 +27,7 @@
                             <!-- Main content -->
                             <section class="content">
 
+
                                 <div itemprop="description" class="view-content">${contents.content}</div>
 
                                 <br/>
@@ -44,11 +45,16 @@
                                                     <div class="media-object"><i class="fa fa-user"></i></div>
                                                 </div>
                                                 <div class="media-body">
-                                                    <div class="media-heading">
+                                                    <div class="media-heading" id="div_del" name="div_del">
                                                         <b><span class="member">${reply.nick_nm}</span></b>
                                                         <span class="font-11 text-muted">
-															<span class="media-info"><i class="fa fa-clock-o"></i>${reply.yyyymmdd}</span>
+														                                <span class="media-info"><i class="fa fa-clock-o"></i>${reply.yyyymmdd}</span>
                                                         </span>
+
+                                                        <c:if test="${reply.check_del_flag eq 'true' }">
+                                                            <input type="button" id="deleteBtn" name="deleteBtn" value="삭제" data-values='{ "reply_seq" : "${reply.reply_seq}", "check_del_flag" : "${reply.check_del_flag}" }'></input>
+                                                            <input type="password" id="pwd" name="pwd" value="" />
+                                                        </c:if>
                                                     </div>
                                                     <div class="media-content">${reply.content}</div>
                                                 </div>
@@ -56,7 +62,6 @@
                                         </c:forEach>
                                     </c:if>
                                     <!-- Loop end -->
-
                                 </section>
 
                                 <br/>
@@ -90,6 +95,13 @@
 
 
                                         </div>
+                                        <!--<a role="button" href="./board.php?bo_table=oph&amp;page=" class="btn btn-black btn-sm">-->
+                                        <a role="button" href="/board/sample/sampleList" class="btn btn-black btn-sm">
+
+                                            <i class="fa fa-bars"></i><span class="hidden-xs"> 목록</span>
+                                        </a>
+
+
 
                                         <div class="comment-btn">
                                             <div class="form-group pull-right">
@@ -134,9 +146,7 @@
                                         <a role="button" href="./password.php?w=u&amp;bo_table=oph&amp;wr_id=346&amp;page=" class="btn btn-black btn-sm" title="수정">
                                             <i class="fa fa-plus"></i><span class="hidden-xs"> 수정</span>
                                         </a>
-                                        <a role="button" href="./board.php?bo_table=oph&amp;page=" class="btn btn-black btn-sm">
-                                            <i class="fa fa-bars"></i><span class="hidden-xs"> 목록</span>
-                                        </a>
+
                                         <a role="button" href="./write.php?w=r&amp;bo_table=oph&amp;wr_id=346" class="btn btn-black btn-sm">
                                             <i class="fa fa-commenting"></i><span class="hidden-xs"> 답변</span>
                                         </a>
@@ -152,9 +162,17 @@
                             <!-- /.content -->
                         </div>
                         <!-- /.content-wrapper -->
+                        <form id="commDelFrm" name="commDelFrm" action="">
+                            <input type="hidden" id="seq" name="seq" value="${contents.seq}">
+                            <input type="hidden" id="reply_seq" name="reply_seq" value="" />
+                            <input type="hidden" id="pwd" name="pwd" value="" />
+
+                        </form>
+
                         <%@include file="../../include/bottom.jsp"%>
             </div>
             <!-- ./wrapper -->
+        </body>
 
 
 
@@ -163,67 +181,107 @@
 
 
 
-
-            <script type="text/javascript">
-                $(document).ready(function() {
-
-                    console.log("----------------- " + $("success"));
+        <script type="text/javascript">
+            $(document).ready(function() {
 
 
-                    $("#area_cd").val("${sampleBoard.area_cd}");
-                    console.log("${contents.seq}");
-                    var $seq = "${contents.seq}";
+                // if ("${success}" == -99) {
+                //     alert(aslang[2]);
+                // }
 
-                    $("#btnReplyReg").on("click", function() {
-                        console.log("---- 게시글 댓글 쓰기 @@@@@ ");
+                // if ("${success}" == -98) {
+                //     alert(aslang[3]);
+                // }
 
-                        $("#user_id").val("test@naver.com");
-                        $("#commFrm").attr("action", "/board/sample/saveReply");
-                        $("#commFrm").attr("method", "post");
-                        $("#commFrm").submit();
-
-                        /*
-	    var params  = {
-             "seq" : $seq
-			 , "content" : $("#wr_content").val()
-			 , "user_id" : "test@naver.com"
-        };
-
-		
-		$.ajax({
-            type:"post",
-            url:"/board/sample/saveReply",
-            async:false,
-            dataType:"json",
-            data:params,
-            success: function( json ) {
-				alert("댓글성공");
-               //  $.each(json.lecSubjList, function(i, value) {
-				// 		var html = "";
-				// 		html += "<ol id=list2 data-role=listview data-inset=true>";
-				// 		html +=   "<li data-role=list-divider>Dynamic list</li>";
-				// 		html +=   "<li data-icon=delete>";
-				// 		html +=      "<a href=#>Element 2.1</a>";
-				// 		html +=   "</li>";
-				// 		html +=   "<li data-icon=delete>";
-				// 		html +=      "<a href=#>Element 2.2</a>";
-				// 		html +=   "</li>";
-				// 		html +=   "<li data-icon=delete>";
-				// 		html +=      "<a href=#>Element 2.3</a>";
-				// 		html +=   "</li>";
-				// 		html += "</ol>";
-				// 		$("#home div:jqmData(role=content)").append (html);
-                //  });
-            }
-        });
-		*/
+                // if ("${success}" == 1) {
+                //     alert(aslang[4]);
+                // }
 
 
 
+                $("#area_cd").val("${sampleBoard.area_cd}");
+                console.log("${contents.seq}");
+                var $seq = "${contents.seq}";
+
+
+
+                $("#div_del #deleteBtn").on("click", function() {
+
+                    var $dataTag = $(this).data('values');
+                    console.log($dataTag.reply_seq);
+                    if (trim($(this).next().val()) == "") {
+                        alert(aslang[1]);
+                        return false;
+                    }
+
+                    var params = {
+                        "reply_seq": $dataTag.reply_seq,
+                        "seq": $seq,
+                        "pwd": $(this).next().val()
+                    };
+
+
+
+                    $.ajax({
+                        url: "/board/sample/delFalgUpadaeReply",
+                        method: "post",
+                        type: "json",
+                        data: params,
+                        success: function(data) {
+                            if (data.success == -99) {
+                                alert(aslang[2]);
+                                return;
+                            }
+
+                            if (data.success == -98) {
+                                alert(aslang[3]);
+                                return;
+                            }
+
+                            if (data.success == 1) {
+                                alert(aslang[4]);
+                                location.reload();
+                            }
+                        },
+                        error: function(error) {
+                            alert("error : " + eval(error));
+                        }
                     });
+                });
 
+                // 댓글삭제
+                $("#div_del > a").on("click", function() {
+                    var $dataTag = $(this).data('values');
+                    console.log("---- 게시글 댓글 삭제 @@@@@ " + $dataTag.reply_seq);
+
+                    //$(".tr_on").find("td").eq(0).find("[name$=h_cuslSeq]").val()
+                    console.log(" //// " + $(this));
+                    console.log("비밀번호 ::: " + $(this).next().val());
+
+                    if (trim($(this).next().val()) == "") {
+                        alert(aslang[1]);
+                        return false;
+                    }
+
+                    $("#commDelFrm #pwd").val($(this).next().val());
+                    $("#commDelFrm #reply_seq").val($dataTag.reply_seq);
+
+                    $("#commDelFrm").attr("action", "/board/sample/delFalgUpadaeReply");
+                    $("#commDelFrm").attr("method", "post");
+                    $("#commDelFrm").submit();
 
                 });
-            </script>
+
+
+                // 댓글등록
+                $("#btnReplyReg").on("click", function() {
+                    $("#commFrm").attr("action", "/board/sample/saveReply");
+                    $("#commFrm").attr("method", "post");
+                    $("#commFrm").submit();
+                });
+
+
+            });
+        </script>
 
     </html>

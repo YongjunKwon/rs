@@ -127,6 +127,8 @@
 			              				</ul>
 			              			</div>
 		              			</div>
+		              			 <a href="/board/sample/write?tname=sample">
+                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> 글쓰기</a>
               				</div>
               			</div>
 		            </div>
