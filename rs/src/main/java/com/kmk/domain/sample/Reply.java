@@ -20,4 +20,5 @@ public class Reply {
 	
 	private String nick_nm;
 	private String pwd;
+	private String check_del_flag;
 }
