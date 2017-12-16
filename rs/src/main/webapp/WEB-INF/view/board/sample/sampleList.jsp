@@ -26,38 +26,39 @@
         	<div class="col-xs-12">          
           		<div class="box">
             		<div class="box-header">
-              			<h3 class="box-title">****회원가 적용 받으시려면 밤길보고 전화했다고 말씀해주세요!****</h3>
+              			<div class="row">
+              				<div class="col-sm-12">
+              					<div class="row form_control_h3">
+              						<h3 class="form_control_h3">****회원가 적용 받으시려면 밤길보고 전화했다고 말씀해주세요!****</h3>
+              					</div>              					              				 
+	       						<div class="row">
+		       						<form:form modelAttribute="commCodeSearch" method="post" action="/board/sample/sampleList">
+										<input type="hidden" name="bo_table" value="gunma">
+										<input type="hidden" name="sca" value="">		              						              				
+			              				<div class="col-sm-4 pull-left">
+			              					<div class="form_control" id="example1_length">
+			              						<form:select path="area_cd" class="form_control_selete" data-placeholder="지역" disabled="false">
+													<option value="">지역선택</option>
+													<form:options items="${comboAreaCdList}" itemValue="cd" itemLabel="cd_nm" />
+												</form:select>
+											</div>
+										</div>
+										<div class="col-sm-8 ">
+			              					<div id="example1_filter" class="pull-right">
+												<button type="submit" id="btnSearch" name="btnSearch" class="form_control_button"><i class="fa fa-search"></i> 검색</button>
+			              					</div>
+											<div id="example1_filter" class="pull-right form_control_edit">
+												<input type="text" name="stx" value="" id="stx" class="form_control_edit" maxlength="20" placeholder="검색내용 입력">
+			              					</div>
+			              				</div>		              				
+			              			</form:form>
+		              			</div>
+		              		</div>
+		              	</div>
             		</div>
             		<!-- /.box-header -->
             		<div class="box-body">
-              			<div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-              				<div class="row">
-              					<form:form modelAttribute="commCodeSearch" method="post" action="/board/sample/sampleList">
-									<input type="hidden" name="bo_table" value="gunma">
-									<input type="hidden" name="sca" value="">
-		              				<div class="col-sm-4">
-		              					<div class="dataTables_length" id="example1_length">
-		              						<label>지역
-		              							<form:select path="area_cd" class="form-control input-sm" data-placeholder="지역" disabled="false">
-													<option value="">선택</option>
-													<form:options items="${comboAreaCdList}" itemValue="cd" itemLabel="cd_nm" />
-												</form:select>
-		              							
-											</label>
-										</div>
-									</div>
-									<div class="col-sm-6">
-										<div id="example1_filter" class="dataTables_filter">
-											<input type="text" name="stx" value="" id="stx" class="form-control input-sm" maxlength="20" placeholder="내용">
-		              					</div>
-		              				</div>
-		              				<div class="col-sm-2">
-										<div id="example1_filter" class="dataTables_button">
-											<button type="submit" id="btnSearch" name="btnSearch" class="btn btn-red btn-sm btn-block"><i class="fa fa-search"></i> 검색</button>
-		              					</div>
-		              				</div>
-		              			</form:form>
-			              	</div>
+              			<div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">              				
               				<div class="row">
               					<div class="col-sm-12">
               						<table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
@@ -98,13 +99,9 @@
               						</table>
               					</div>
               				</div>
-              				<div class="row">
-              					<div class="col-sm-5">
-              						<div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries
-              						</div>
-              					</div>
-              					<div class="col-sm-7">
-		              				<div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+              				<div class="row">              						
+              					<div class="col-sm-12">
+		              				<div class="dataTables_paginate paging_simple_numbers pull-left" id="example1_paginate">
 			              				<ul class="pagination">
 			              					<li class="paginate_button previous disabled" id="example1_previous">
 				              					<a href="#" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a>
@@ -125,10 +122,14 @@
 			              						<a href="#" aria-controls="example1" data-dt-idx="7" tabindex="0">Next</a>
 			              					</li>
 			              				</ul>
-			              			</div>
-		              			</div>
-		              			 <a href="/board/sample/write?tname=sample">
-                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> 글쓰기</a>
+			              			</div>		              			
+              						<div class="dataTables_info pull-right" id="example1_info" role="status" aria-live="polite">
+              							<button class="form_control_button">
+	           								<a class="form-button" href="/board/sample/write?tname=sample">
+	                              			<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>글쓰기</a>
+                              			</button>                                 			
+              						</div>
+              					</div>	
               				</div>
               			</div>
 		            </div>
