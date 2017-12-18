@@ -27,10 +27,12 @@
                             <section class="board-list">
                                 <!-- select box 공통코드 구현 -->
                                 <div class="list-tsearch">
-                                    <form:form modelAttribute="commCodeSearch" method="post" action="/board/sample/sampleList">
+                                    <form:form modelAttribute="sampleBoard" method="post" action="/board/sample/sampleList">
                                         <input type="hidden" name="bo_table" value="gunma">
                                         <input type="hidden" name="sca" value="">
+                                        <input type="hidden" id="pagination" name="pagination.currentPageNo" value="1">
                                         <div class="row row-15">
+
                                             <div class="col-sm-2 col-xs-5 col-15">
                                                 <div class="form-group">
                                                     <label for="sfl" class="sound_only">지역</label>
@@ -83,7 +85,7 @@
 
                                                         <tr>
                                                             <td align="center">
-                                                                ${status.count}
+                                                                ${list.seq}
                                                             </td>
                                                             <td>
                                                                 <a href="/board/sample/sampleDetail?seq=${list.seq}">${list.title}</a>
@@ -97,16 +99,9 @@
                                                 <a href="/board/sample/write?tname=sample">
                                                     <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> 글쓰기</a>
                                                 </button>
-                                                <!-- <span class="glyphicon glyphicon-pencil pull-right" aria-hidden="true"></span> -->
-                                                <div class="text-center">
-                                                    <ul class="pagination pagination-sm no-margin">
-                                                        <li><a href="#">&laquo;</a></li>
-                                                        <li><a href="#">1</a></li>
-                                                        <li><a href="#">2</a></li>
-                                                        <li><a href="#">3</a></li>
-                                                        <li><a href="#">&raquo;</a></li>
-                                                    </ul>
-                                                </div>
+                                                <!-- //페이징 -->
+                                                <div class="text-center" id="page_area"></div>
+                                                <!-- //페이징 -->
                                             </div>
                                         </div>
                                         <!-- /.box -->
@@ -122,11 +117,39 @@
         </body>
 
         <script type="text/javascript">
+            var $gbPageMap = new Map();
             $(document).ready(function() {
+                //console.log("${sampleBoard.pagination.getFirstPageNoOnPageList()}");
+                //console.log("${sampleBoard.pagination.getLastPageNo()}");
+                //console.log("${sampleBoard.pagination.getTotalPageCount()}"); // 페이지수
 
-                $("#area_cd").val("${sampleBoard.area_cd}");
+                $gbPageMap.put("TOTPAGE", "${sampleBoard.pagination.getTotalPageCount()}");
+                $gbPageMap.put("CURRPAGE", "${sampleBoard.pagination.getCurrentPageNo()}");
+                $gbPageMap.put("PERPAGE", "${sampleBoard.pagination.getRecordCountPerPage()}");
+                $gbPageMap.put("PAGESIZE", "${sampleBoard.pagination.getPageSize()}");
+
+                console.log("페이지 수" + $gbPageMap.get("TOTPAGE"));
+                console.log("현재페이지번호" + $gbPageMap.get("CURRPAGE"));
+                console.log("페이지사이즈" + $gbPageMap.get("PAGESIZE"));
+                console.log("한페이지에 게시될 게시글수" + $gbPageMap.get("PERPAGE"));
+
+                if ($gbPageMap.get("TOTPAGE") != "0") {
+                    util.page.set($gbPageMap, 'page_area', 'goPage');
+                }
 
             });
+
+            function goPage(pageNo) {
+                console.log("버튼클릭시 번호 ::::" + pageNo);
+                $("#pagination").val(pageNo);
+
+                console.log($("#pagination.currentPageNo").val());
+                //return false;
+                $("#sampleBoard").submit();
+            }
         </script>
+
+
+
 
     </html>

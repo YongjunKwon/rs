@@ -59,7 +59,7 @@
 	
 	<script src="/js/hashmap.js"></script>
  	<script src="/js/validation.js"></script>
-	
+	<script src="/js/paging/util.js"></script>
 	<!-- AdminLTE for demo purposes -->
 	<!-- <script src="/AdminLTE-2.3.11/dist/js/demo.js"></script> -->
 	
