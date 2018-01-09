@@ -20,8 +20,6 @@
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="/AdminLTE-2.3.11/dist/css/skins/_all-skins.min.css">
-  
-  <link rel="stylesheet" href="/css/rs.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -61,10 +59,9 @@
 	
 	<script src="/js/hashmap.js"></script>
  	<script src="/js/validation.js"></script>
-	
+	<script src="/js/paging/util.js"></script>
 	<!-- AdminLTE for demo purposes -->
 	<!-- <script src="/AdminLTE-2.3.11/dist/js/demo.js"></script> -->
-	<!-- Smart Editor -->
-	<script src="/se2/js/HuskyEZCreator.js"></script>	
+	
 </head>
 
