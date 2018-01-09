@@ -59,6 +59,29 @@
 	
 }
 
+.for_control_title{
+	border-radius: 0px;
+	    padding: 10px 15px;
+    border-bottom: 1px solid transparent;
+}
+
+.form_control_h1{
+	font-size: 22px;
+    font-weight: bold;
+    margin: 0px;
+    line-height: 50px;
+    display: block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: normal;
+    overflow: hidden;
+    margin: 0px;
+    padding: 0px 10px;
+    color: rgb(59, 62, 67);
+    letter-spacing: -1px;
+	
+}
+
 
 .form_control_selete {
 	width: 200px;
@@ -102,4 +125,224 @@
 }
 .ht-150 {
 	height: 150px;
+}
+
+.panel-heading {
+    color: #333;
+    background-color: #f5f5f5;
+    border-color: #ddd;
+}
+
+.view-head .sp {
+    display: inline-block;
+    width: 20px;
+    text-align: center;
+    font-size: 11px;
+    color: #888;
+}
+
+.ellipsis {
+    display: block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: normal;
+    overflow: hidden;
+}
+
+.view-wrap .no-attach {
+    border-bottom: 0px;
+}
+
+.view-head {
+    border-left: 0px;
+    border-right: 0px;
+}
+
+.panel {
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    border-radius: 0px;
+}
+
+.panel-default {
+    border-color: #ddd;
+}
+
+.panel {
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+
+.text-muted {
+    color: #777;
+}
+
+.font-12, i.font-12 {
+    font-size: 12px;
+}
+
+.red, i.red {
+    color: rgb(233, 27, 35);
+}
+
+.view-author-none {
+    height: 1px;
+    border-top: 1px solid #eee;
+    margin: 12px 0px 20px;
+}
+
+.view-comment {
+    margin: 0px;
+    padding: 0px 0px 5px;
+    text-transform: capitalize;
+    overflow: hidden;
+    border-bottom: 1px solid rgb(51, 51, 51);
+    display: inline-block;
+    position: relative;
+}
+
+.en {
+    font-family: "Source Sans Pro", sans-serif;
+}
+
+.font-18, i.font-18 {
+    font-size: 18px;
+}
+
+.orangered, i.orangered {
+    color: orangered;
+}
+
+.fa {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.comment-media {
+    margin: 10px 0px;
+}
+
+.media, .media-body {
+    overflow: hidden;
+    zoom: 1;
+}
+
+.media-heading {
+    margin: 0 0 5px;
+}
+
+.text-muted {
+    color: #777;
+}
+
+.font-11, i.font-11 {
+    font-size: 11px;
+}
+
+.comment-media .media .media-info {
+    margin-left: 10px;
+}
+
+.comment-media .media .media-content {
+    margin-top: 8px;
+}
+
+.media>.pull-left {
+    margin-right: 10px;
+}
+
+.member, .guest {
+    color: rgb(51, 51, 51);
+}
+
+.font-11, i.font-11 {
+    font-size: 11px;
+}
+
+.media-object {
+    display: block;
+}
+
+.comment-media .photo i {
+    background: rgb(245, 245, 245);
+    padding: 15px;
+    border-radius: 50%;
+    width: 64px;
+    height: 64px;
+    text-align: center;
+    color: rgb(143, 143, 143);
+    font-size: 30px;
+    display: inline-block;
+}
+
+.comment-media .media .media-body {
+    padding-left: 0px;
+}
+bootstrap.min.css:5
+.media, .media-body {
+    overflow: hidden;
+    zoom: 1;
+}
+
+.comment-box {
+    border: 1px solid #ddd;
+    padding: 12px 12px 0px;
+    margin-bottom: 15px;
+    background: #fbfbfb;
+}
+
+.comment-content .comment-cell {
+    display: table-cell;
+    padding: 0px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.comment-content .comment-cell.comment-submit {
+    width: 80px;
+    height: 100%;
+    background: #fafafa;
+    border: 1px solid #ccc;
+    border-left: 0px;
+    cursor: pointer;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.comment-content {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.pull-right {
+    float: right!important;
+}
+bootstrap.min.css:5
+.form-group {
+    margin-bottom: 15px;
+}
+
+.comment-btn .cursor {
+    margin-left: 12px;
+    color: #787878;
+}
+
+.radio-inline, .checkbox-inline {
+    display: inline-block;
+    padding-left: 20px;
+    margin-bottom: 0;
+    font-weight: 400;
+    vertical-align: middle;
+    cursor: pointer;
 }

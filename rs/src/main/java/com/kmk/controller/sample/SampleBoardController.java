@@ -117,13 +117,17 @@ public class SampleBoardController {
     		mav.addObject("success", -99);
     	} else {
     		// check password
+    		/*
     		if(!reply.getPwd().equals(loginUser.getPwd())){
         		mav.addObject("seq", reply.getSeq());
         		mav.addObject("success", -98);
     		} else {
-    			mav.addObject("seq", reply.getSeq());
-    			mav.addObject("success", sampleBoardService.delFalgUpadaeReply(reply.getReply_seq())); // not access
+    			
+    			
     		}
+    		*/
+    		mav.addObject("seq", reply.getSeq());
+    		mav.addObject("success", sampleBoardService.delFalgUpadaeReply(reply.getReply_seq())); // not access
     	}
         return mav;
     }
