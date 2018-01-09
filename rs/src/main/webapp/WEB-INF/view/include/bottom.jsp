@@ -3,7 +3,7 @@
   <footer class="main-footer">
     <!-- To the right -->
     <div class="pull-right hidden-xs">
-      i love u
+      Welcome.
     </div>
     <!-- Default to the left -->
     <strong>Copyright &copy; 2017 <a href="#">KMK Company</a>.</strong> All rights reserved.

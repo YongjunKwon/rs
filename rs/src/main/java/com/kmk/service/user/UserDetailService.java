@@ -40,10 +40,27 @@ public class UserDetailService implements UserDetailsService {
         if (loginUser.getMem_type().equals("0")) {
             loginUser.setRoles(Arrays.asList("ROLE_ADMIN"));
         } else if(loginUser.getMem_type().equals("1")) {
-            loginUser.setRoles(Arrays.asList("ROLE_CUSOMER"));
+            loginUser.setRoles(Arrays.asList("ROLE_CUSTOMER"));
         } else {
         	loginUser.setRoles(Arrays.asList("ROLE_USER"));
         }
         return loginUser;
     }
+    
+    public int checkEmail(String user_id){
+    	return userMapper.checkEmail(user_id);
+    }
+
+	public int checkNickNm(String nick_nm) {
+		return userMapper.checkNickNm(nick_nm);
+	}
+
+	public void addUser(User user) {
+		user.setMem_type("2"); //회원구분(0;ADMIN, 1;업소회원, 2;일반회원) 기본 0
+		userMapper.addUser(user);
+	}
+	
+	public void setUser(User user) {
+		userMapper.setUser(user);
+	}
 }

@@ -103,3 +103,27 @@
 .ht-150 {
 	height: 150px;
 }
+
+
+/* sideMenu 사용자 그림 layout */
+.user_picture {
+	padding-left: 8px;
+	padding-top: 10px;
+	cursor: pointer;
+}
+
+
+/* Modal */
+.example-modal .modal {
+	position: relative;
+	top: auto;
+	bottom: auto;
+	right: auto;
+	left: auto;
+	display: block;
+	z-index: 1;
+  }
+
+  .example-modal .modal {
+	background: transparent !important;
+  }

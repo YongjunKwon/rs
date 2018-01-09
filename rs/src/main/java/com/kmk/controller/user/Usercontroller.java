@@ -1,22 +1,22 @@
 package com.kmk.controller.user;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.IOException;
+import java.io.PrintWriter;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kmk.domain.user.LoginUser;
 import com.kmk.domain.user.User;
+import com.kmk.service.user.UserDetailService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,7 +24,10 @@ import lombok.extern.slf4j.Slf4j;
 @CrossOrigin
 @Controller
 public class Usercontroller {
-
+	
+	@Autowired
+	UserDetailService userDetailService = new UserDetailService(); 
+	
     @RequestMapping(value = "/login")
     public ModelAndView login(@RequestParam(value="error", defaultValue="false") Boolean error) {
     	log.info("==============login controller{}", error);
@@ -62,14 +65,57 @@ public class Usercontroller {
         return "/login/register";
     }
     
-    @RequestMapping(value = "/register/emailCheck")
-    @ResponseBody
-    public Map<String, String> emailCheck(User user) {
-    	Map<String, String> map = new HashMap<String, String>();
-    	map.put("result", "success!");
-    	map.put("test", "test!");
+    @RequestMapping(value = "/register/checkEmail")
+    public ModelAndView checkEmail(User user) {
     	
+    	ModelAndView mav = new ModelAndView("jsonView");
+    	if(userDetailService.checkEmail(user.getUser_id()) > 0)
+    		mav.addObject("isDuplicated", true);
+    	else
+    		mav.addObject("isDuplicated", false);
     	
-        return map;
+        return mav;
+    }
+    
+    @RequestMapping(value = "/register/checkNickNm")
+    public ModelAndView checkNickNm(User user) {
+    	
+    	ModelAndView mav = new ModelAndView("jsonView");
+    	if(userDetailService.checkNickNm(user.getNick_nm()) > 0)
+    		mav.addObject("isDuplicated", true);
+    	else
+    		mav.addObject("isDuplicated", false);
+    	
+    	return mav;
+    }
+    
+    @RequestMapping(value = "/register/add")
+    public void addUser(User user, HttpServletResponse response) throws IOException {
+    	log.info("========kwon user:{}", user);
+    	userDetailService.addUser(user);
+    	
+    	response.setContentType("text/html; charset=UTF-8");
+    	PrintWriter out = response.getWriter();
+    	out.println("<script>alert('회원가입이 정상적으로 처리되었습니다.'); location.href='/';</script>");
+    	out.flush();
+
+    }
+    
+    @RequestMapping(value = "/register/changeLoginUser")
+    public ModelAndView changeLoginUser(User user, HttpSession session) {
+    	LoginUser loginUser = (LoginUser)session.getAttribute("loginUser");
+    	ModelAndView mav = new ModelAndView("jsonView");
+    	log.info("======kwon user:{}", user);
+    	log.info("======kwon loginUser:{}", loginUser);
+    	
+    	if(!loginUser.getPwd().equals(user.getBefore_pwd())){
+    		mav.addObject("isCheckPassword", false);
+    		return mav;
+    	}
+    	
+    	userDetailService.setUser(user);
+    	mav.addObject("isSuccesses", true);
+    	
+        return mav;
     }
 }
