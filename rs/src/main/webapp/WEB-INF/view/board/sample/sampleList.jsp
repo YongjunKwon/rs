@@ -101,7 +101,7 @@
               				</div>
               				<div class="row">              						
               					<div class="col-sm-12">
-		              				<div class="dataTables_paginate paging_simple_numbers pull-left" id="example1_paginate">
+		              				<div class="dataTables_paginate paging_simple_numbers  pull-left" id="example1_paginate">
 			              				<ul class="pagination">
 			              					<li class="paginate_button previous disabled" id="example1_previous">
 				              					<a href="#" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a>

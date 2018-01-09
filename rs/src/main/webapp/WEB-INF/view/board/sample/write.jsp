@@ -63,6 +63,7 @@
 			<!-- /.col -->
 		</div>
 		<!-- /.row -->
+	</section>
 </div>
   <!-- /.content-wrapper -->
 <%@include file="../../include/bottom.jsp"%>
