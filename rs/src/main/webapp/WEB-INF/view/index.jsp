@@ -13,8 +13,8 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        [Page Header]
-        <small> [Optional description] </small>
+        Welcome!!
+        <small> 환영합니다. </small>
       </h1>
 <!--       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -26,7 +26,7 @@
     <section class="content">
 
       <!-- Your Page Content Here -->
-      
+      <img src="/images/main.png" />
     </section>
     <!-- /.content -->
   </div>
