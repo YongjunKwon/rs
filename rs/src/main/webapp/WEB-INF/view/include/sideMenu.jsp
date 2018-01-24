@@ -9,7 +9,7 @@
         <form id="login" name="login" method="POST" action="login" autocomplete="off" class="form">
           <div class="media no-margin en">
             <div class="sidebar-form pull-right" style="width:60px; margin:10px 10px 0px 0px; padding-left: 0px;">
-              <button type="submit" class="btn btn-flat btn-block" tabindex="43" style="height:83px;">
+              <button type="submit" class="btn btn-flat btn-block" tabindex="43" style="height:81px;">
                 <i class="fa fa-power-off fa-2x"></i>
               </button>
             </div>
@@ -18,7 +18,7 @@
                 <div class="input-group">
                   <input type="email" name="user_id" id="user_id" class="form-control sidebar-input" placeholder="Email" tabindex="41">
                   <span class="input-group-btn">
-                    <button type="button" class="btn btn-flat sidebar-input-text text-white" style="height: 34px; width:35px;">
+                    <button type="button" class="btn btn-flat sidebar-input-text text-white pull-right" style="height: 34px; width:35px;">
                       <i class="fa fa-user"></i>
                     </button>
                   </span>
@@ -61,15 +61,14 @@
       <!-- 로그인성공시 //시작 -->
       <c:if test="${isLogin eq true}">
         <div class="user-panel">
-          <div class="pull-left image">
-            <img src="http://www.bk0011.com/thema/Miso-LTE/assets/img/photo.png" class="img-circle cursor" alt="">
+          <div class="pull-left image user_picture" data-toggle="tooltip" title="사용자 정보 수정">
+            <img src="/AdminLTE-2.3.11/dist/img/welcome_category_icon_privacy.png" class="img-circle cursor" alt="">
           </div>
           <div class="pull-left info">
-            <p>칵슈</p>
+            <p>${loginUser.nick_nm}</p>
             <span class="font-12 ko-11">
-              <a>실버</a>
-              &nbsp;
-              <a href="/logout">
+              <a></a>
+              <a href="/logout" data-toggle="tooltip" title="로그아웃">
                 <i class="fa fa-circle text-primary"></i> &nbsp;로그아웃
               </a>
             </span>
@@ -77,19 +76,19 @@
 
           <div class="clearfix"></div>
 
-          <div class="progress progress-striped xs cursor" style="margin:10px 0px 0px;" data-original-title="레벨업까지 800점 남았습니다." data-toggle="tooltip"
+          <!-- <div class="progress progress-striped xs cursor" style="margin:10px 0px 0px;" data-original-title="레벨업까지 800점 남았습니다." data-toggle="tooltip"
             data-placement="bottom" data-html="true">
             <div class="progress-bar progress-bar-blue" style="width: 20%;"></div>
-          </div>
+          </div> -->
 
           <ul class="sidebar-list no-margin" style="padding:10px 5px 0px;">
             <li>
               <span class="pull-right">
-                Exp 200 (20%)
+                <!-- Exp 200 (20%) -->
               </span>
-              레벨 1
+              <!-- 레벨 1 -->
             </li>
-            <li>
+            <!-- <li>
               <a href="#" target="_blank" class="win_point">
                 <span class="pull-right">
                   1,200 점
@@ -104,7 +103,7 @@
                 </span>
                 알림
               </a>
-            </li>
+            </li> -->
           </ul>
         </div>
       </c:if>
@@ -125,48 +124,15 @@
           </a>
           <ul class="treeview-menu">
             <li>
-              <a href="/board/chicken/list">
-                <i class="fa fa-circle-o"></i>치킨집</a>
+              <a href="/board/sample/sampleList">
+                <i class="fa fa-circle-o"></i>오피스텔</a>
             </li>
             <li>
-              <a href="#">
-                <i class="fa fa-circle-o"></i> 피자집
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-              </a>
-              <ul class="treeview-menu">
-
-                <li>
-                  <a href="/board/sample/sampleList">
-                    <i class="fa fa-circle-o"></i>샘플리스트</a>
-                </li>
-
-                <li>
-                  <a href="#">
-                    <i class="fa fa-circle-o"></i> Level Two
-                    <span class="pull-right-container">
-                      <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                  </a>
-                  <ul class="treeview-menu">
-                    <li>
-                      <a href="#">
-                        <i class="fa fa-circle-o"></i> Level Three</a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i class="fa fa-circle-o"></i> Level Three</a>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
             <li>
-              <a href="#">
-                <i class="fa fa-circle-o"></i>
-              </a>
+              <a href="/board/sample/sampleList">
+                <i class="fa fa-circle-o"></i>안마방</a>
             </li>
+            
           </ul>
         </li>
 
@@ -329,33 +295,230 @@
        immediately after the control sidebar -->
   <div class="control-sidebar-bg"></div>
 
+  <!-- Modal -->
+  <div class="modal fade" id="pictureModal" tabindex="-1" role="dialog" data-backdrop="false" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title" id="myModalLabel">사용자 정보 수정</h4>
+        </div>
+        <div class="modal-body">
+          <form id="registerForm" action="/register/set" method="post">
+
+            <div class="form-group has-feedback">
+              <input type="email" id="user_id" name="user_id" value="${loginUser.user_id}" maxlength="50" class="form-control" disabled="true">
+            </div>
+
+            <div class="form-group has-feedback">
+              <div class="input-group">
+                <input type="text" class="form-control" id="nick_nm" value="${loginUser.nick_nm}" name="nick_nm" maxlength="10" placeholder="닉네임">
+                <div class="input-group-btn">
+                  <button type="button" id='checkNickNm' class="btn btn-primary">중복확인</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group has-feedback">
+              <input type="password" class="form-control" id="before_pwd" name="before_pwd" placeholder="현재 비밀번호" />
+            </div>
+
+            <div class="form-group has-feedback">
+              <input type="password" class="form-control" id="pwd" name="pwd" placeholder="변경 비밀번호" />
+              <font name="check2" size="2" color="red"></font>
+            </div>
+
+            <div class="form-group has-feedback">
+              <input type="password" class="form-control" id="pwd_again" name="pwd_again" placeholder="비밀번호 확인" />
+              <font name="check" size="2" color="red"></font>
+            </div>
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+          <button type="button" id='setUserInfo' class="btn btn-primary">저장</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script type="text/javascript">
-    $(document).ready(function () {
+    $(document).ready(function () {});
 
-      $('li .active').removeClass("active");
-
-      var pathName = $(location).attr('pathname');
-      
-      console.log("a[href='" + pathName + "']");
-
-      //$("a[href='" + pathName + "']").addClass("active");
-      console.log("select a tag:", $("a[href='" + pathName + "']").text());
-
+    /**
+     * Open Modal
+     *
+     * @author tmtwo
+     * @version 1.0, 2017.12.16 소스 수정
+     */
+    $('.user_picture').click((e) => {
+      $('#pictureModal').modal();
     });
 
 
-    $('.sidebar-menu > li').click(function (e) {
-      var $this = $(this);
+    //중복체크 및 약관 동의
+    var isCheckedEmailDupl = false;
+    var isCheckedNickNmDupl = true;
 
-      if ($this.has('li')) {
+    /**
+     * Email, 닉네임 수정시 중복체크 초기화
+     *
+     * @author tmtwo
+     * @version 1.0, 2017.12.16 소스 수정
+     */
+    $('#user_id').change(function (e) {
+      isCheckedEmailDupl = false;
+      e.preventDefault();
+    });
+
+    $('#nick_nm').change(function (e) {
+      isCheckedNickNmDupl = false;
+      e.preventDefault();
+    });
 
 
-      } else {
-        $('.sidebar-menu > li.active').removeClass('active');
-        if (!$this.hasClass('active')) {
-          $this.addClass('active');
-        }
+    /**
+     * 닉네임 중복 체크 버튼 클릭.
+     *
+     * @author tmtwo
+     * @version 1.0, 2017.12.16 소스 수정
+     * @see    None
+     */
+    $('#checkNickNm').click((e) => {
+      var trimNickNm = trim($('#nick_nm').val());
+
+      //nick_nm null check
+      if (trimNickNm == "") {
+        alert("닉네임을 입력해 주세요.");
+        $('#nick_nm').val(trimNickNm).focus();
+        return;
       }
+
+      //TODO: 특수기호 못쓰게 처리 추가
+      if (!regExp(trimNickNm)) {
+        $('#nick_nm').focus();
+        return;
+      }
+
+      $.ajax({
+        url: "/register/checkNickNm",
+        method: "post",
+        type: "json",
+        data: objectifyForm($('#registerForm').serializeArray()),
+        success: function (data) {
+          if (!data.isDuplicated) {
+            isCheckedNickNmDupl = true;
+            alert('"' + $('#nick_nm').val() + '" 사용 가능한 닉네임 입니다.');
+          } else {
+            isCheckedNickNmDupl = false;
+            alert('"' + $('#nick_nm').val() + '" 중복된 닉네임 입니다.');
+            $('#nick_nm').focus();
+          }
+        },
+        error: function (error) {
+          alert("error : " + eval(error));
+        }
+      });
+
+    })
+
+
+    /**
+     * 비밀번호 체크
+     */
+    $('#pwd').keyup(function () {
+      if ($('#before_pwd').val() != $('#pwd').val()) {
+        $('font[name=check2]').text('');
+      } else {
+        $('font[name=check2]').text('');
+        $('font[name=check2]').html("현재 비밀번호와 변경 비밀번호가 동일합니다.");
+      }
+    }); //#pwd.keyup
+
+    $('#pwd_again').keyup(function () {
+      if ($('#pwd').val() != $('#pwd_again').val()) {
+        $('font[name=check]').text('');
+        $('font[name=check]').html("비밀번호가 다릅니다.");
+      } else {
+        $('font[name=check]').text('');
+        $('font[name=check]').html("비밀번호가 일치합니다.");
+      }
+    }); //#pwd_again.keyup
+
+
+    /**
+     * 삭제
+     *
+     * @author tmtwo
+     * @version 1.0, 2017.12.16 소스 수정
+     */
+
+    function removeCancleValue(){
+      $('#nick_nm').val("${loginUser.nick_nm}");
+      $('#before_pwd').val("");
+      $('#pwd').val("");
+      $('#pwd_again').val("");
+      isCheckedEmailDupl = false;
+      isCheckedNickNmDupl = false;
+    }
+
+    $('#pictureModal').on('hidden.bs.modal', function (e) {
+      removeCancleValue();
+    })
+
+    /**
+     * Save LoginUser
+     *
+     * @author tmtwo
+     * @version 1.0, 2017.12.16 소스 수정
+     */
+    $('#setUserInfo').click((e) => {
+
+      var trimPwd = trim($('#pwd').val());
+
+      if (!isCheckedNickNmDupl) {
+        alert("닉네임 중복확인을 해주세요.");
+        $('#nick_nm').focus();
+        return;
+      } else if ($('#pwd').val() != $('#pwd_again').val() || trimPwd == "") {
+        alert("비밀번호를 확인해주세요.");
+        $('#pwd').focus();
+        return;
+      }
+
+      if ($('#pwd').val() == $('#before_pwd').val()) {
+        alert('현재 비밀번호와 변경 비밀번호가 동일합니다.');
+        return;
+      }
+
+
+      $.ajax({
+        url: "/register/changeLoginUser",
+        method: "post",
+        type: "json",
+        data: objectifyForm($('#registerForm').serializeArray()),
+        success: function (data) {
+          if (!data.isCheckPassword){
+            alert("비밀번호가 맞지 않습니다.");
+            return;
+          }
+          
+          if (data.isSuccesses) {
+            alert("성공적으로 변경되었습니다.");
+            removeCancleValue();  //항목삭제
+            $('#pictureModal').modal('hide');
+          } else {
+            alert("변경에 실패했습니다..");
+          }
+        },
+        error: function (error) {
+          alert("error : " + eval(error));
+        }
+      });
+
 
     });
   </script>

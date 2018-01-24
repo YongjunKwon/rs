@@ -10,6 +10,7 @@ import lombok.Data;
 public class User {
 	private String user_id;
 	private String pwd;
+	private String before_pwd;
 	private String nick_nm;
 	private String mgr_nm;
 	private String sex;
