@@ -26,7 +26,7 @@
     <section class="content">
 
       <!-- Your Page Content Here -->
-      <img src="/images/main.png" />
+      <!--  --><img src="/images/main.png" />
     </section>
     <!-- /.content -->
   </div>
