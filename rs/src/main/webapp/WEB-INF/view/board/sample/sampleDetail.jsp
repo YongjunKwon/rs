@@ -53,6 +53,7 @@
 
                                                         <c:if test="${reply.check_del_flag eq 'true' }">
                                                             <input type="button" id="deleteBtn" name="deleteBtn" value="삭제" data-values='{ "reply_seq" : "${reply.reply_seq}", "check_del_flag" : "${reply.check_del_flag}" }'></input>
+                                                            <a herf ="#" data-values='{ "reply_seq" : "${reply.reply_seq}", "check_del_flag" : "${reply.check_del_flag}" }'><span>삭제</span></a>
                                                             <input type="password" id="pwd" name="pwd" value="" />
                                                         </c:if>
                                                     </div>
@@ -205,7 +206,7 @@
 
 
 
-                $("#div_del #deleteBtn").on("click", function() {
+                $("#div_del > a").on("click", function() {
 
                     var $dataTag = $(this).data('values');
                     console.log($dataTag.reply_seq);
@@ -250,7 +251,7 @@
                 });
 
                 // 댓글삭제
-                $("#div_del > a").on("click", function() {
+                $("#div_del111 > a").on("click", function() {
                     var $dataTag = $(this).data('values');
                     console.log("---- 게시글 댓글 삭제 @@@@@ " + $dataTag.reply_seq);
 

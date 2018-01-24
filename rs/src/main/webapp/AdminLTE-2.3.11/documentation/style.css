@@ -19,6 +19,9 @@
   z-index: 500;
 }
 
+/* Top Search */
+.list-tsearch {border:1px solid #ddd;background:#fafafa;padding:20px 15px 3px;margin-bottom:15px;}
+
 #components > h3 {
   font-size: 25px;
   color: #000;
@@ -259,3 +262,4 @@ li.L7,
 li.L9 {
   /* */
 }
+

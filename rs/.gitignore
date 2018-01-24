@@ -1,6 +1,7 @@
 .gradle
 /build/
 !gradle/wrapper/gradle-wrapper.jar
+*/se2/*
 
 ### STS ###
 .apt_generated
@@ -9,7 +10,7 @@
 .project
 .settings
 .springBeans
-*.class
+.class
 
 ### IntelliJ IDEA ###
 .idea
