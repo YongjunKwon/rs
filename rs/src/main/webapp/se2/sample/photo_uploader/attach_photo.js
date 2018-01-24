@@ -58,7 +58,7 @@
      function goStartMode(){
     	 var sSrc = welBtnConfirm.attr("src")|| "";
     	 if(sSrc.indexOf("btn_confirm2.png") < 0 ){
-    		 welBtnConfirm.attr("src","../../img/photoQuickPopup/btn_confirm2.png");
+    		 welBtnConfirm.attr("src","./img/btn_confirm2.png");
     		 fnUploadImage.attach(welBtnConfirm.$value(), "click");
     	 }
      } 
@@ -70,7 +70,7 @@
     	 var sSrc = welBtnConfirm.attr("src")|| "";
     	 if(sSrc.indexOf("btn_confirm2.png") >= 0 ){
     		 fnUploadImage.detach(welBtnConfirm.$value(), "click");
-	    	 welBtnConfirm.attr("src","../../img/photoQuickPopup/btn_confirm.png");
+	    	 welBtnConfirm.attr("src","./img/btn_confirm.png");
     	 }
      }   
 	
@@ -317,7 +317,7 @@
     		//List 마크업 생성하기
 			aFileList.push('	<li id="img'+nImageInfoCnt+'" class="imgLi"><span>'+ sFileName +'</span>');
 			aFileList.push('	<em>'+ sFileSize +'</em>');
-	        aFileList.push('	<a onclick="delImage(\'img'+nImageInfoCnt+'\')"><img class="del_button" src="../../img/photoQuickPopup/btn_del.png"  width="14" height="13" alt="첨부 사진 삭제"></a>');
+	        aFileList.push('	<a onclick="delImage(\'img'+nImageInfoCnt+'\')"><img class="del_button" src="./img/btn_del.png"  width="14" height="13" alt="첨부 사진 삭제"></a>');
 			aFileList.push('	</li> ');   
 			
 			sLiTag = aFileList.join(" ");
@@ -330,12 +330,13 @@
      * HTML5 DragAndDrop으로 사진을 추가하고, 확인버튼을 누른 경우에 동작한다.
      * @return
      */
-    function html5Upload() {
+    function html5Upload() {	
     	var tempFile,
     		sUploadURL;
     	
-//    	sUploadURL= 'file_uploader_html5.php'; 	//upload URL
-    	sUploadURL= 'file_uploader.jsp'; 	//upload URL
+    	//sUploadURL= 'file_uploader_html5.php'; 	//upload URL
+    	//sUploadURL= 'file_uploader_html5.jsp'; 	//upload URL
+    	sUploadURL= '/board/chicken/file_uploader_html5'; 	//upload URL
     	
     	//파일을 하나씩 보내고, 결과를 받음.
     	for(var j=0, k=0; j < nImageInfoCnt; j++) {
@@ -352,29 +353,30 @@
 	}
     
     function callAjaxForHTML5 (tempFile, sUploadURL){
-    	
     	var oAjax = jindo.$Ajax(sUploadURL, {
 			type: 'xhr',
 			method : "post",
 			onload : function(res){ // 요청이 완료되면 실행될 콜백 함수
+				var sResString = res._response.responseText;
 				if (res.readyState() == 4) {
-					//성공 시에  responseText를 가지고 array로 만드는 부분.
-					
-					makeArrayFromString(res._response.responseText);
+					if(sResString.indexOf("NOTALLOW_") > -1){
+						var sFileName = sResString.replace("NOTALLOW_", "");
+						alert("이미지 파일(jpg,gif,png,bmp)만 업로드 하실 수 있습니다. ("+sFileName+")");
+					}else{
+						//성공 시에  responseText를 가지고 array로 만드는 부분.
+						makeArrayFromString(res._response.responseText);
+					}
 				}
 			},
 			timeout : 3,
 			onerror :  jindo.$Fn(onAjaxError, this).bind()
 		});
-    	
 		oAjax.header("contentType","multipart/form-data");
 		oAjax.header("file-name",encodeURIComponent(tempFile.name));
 		oAjax.header("file-size",tempFile.size);
-		
 		oAjax.header("file-Type",tempFile.type);
-		
+		oAjax.header("file-binary-data",tempFile);
 		oAjax.request(tempFile);
-		
     }
     
     function makeArrayFromString(sResString){
@@ -451,7 +453,7 @@
 		elDropArea.removeEventListener("dragenter", dragEnter, false);
 	    elDropArea.removeEventListener("dragexit", dragExit, false);
 	    elDropArea.removeEventListener("dragover", dragOver, false);
-	    elDropArea.removeEventListener("drop", drop, false);
+	    elDropArea.removeEventListener("drop", drop, false);	
 	}
  	
 	/**
@@ -480,8 +482,9 @@
  	function callFileUploader (){
  		oFileUploader = new jindo.FileUploader(jindo.$("uploadInputBox"),{
 // 			sUrl  : location.href.replace(/\/[^\/]*$/, '') + '/file_uploader.php',	//샘플 URL입니다.
- 			sUrl  : location.href.replace(/\/[^\/]*$/, '') + '/file_uploader.jsp',	//샘플 URL입니다.
- 	        sCallback : location.href.replace(/\/[^\/]*$/, '') + '/callback.html',	//업로드 이후에 iframe이 redirect될 콜백페이지의 주소
+// 			sCallback : location.href.replace(/\/[^\/]*$/, '') + '/callback.html',	//업로드 이후에 iframe이 redirect될 콜백페이지의 주소
+ 			sUrl : 'file_uploader.jsp',								//파일업로드를 처리하는 페이지
+ 			sCallback : '/SE2/sample/photo_uploader/callback.html',		//업로드 이후에 iframe이 redirect될 콜백페이지의 주소
  	    	sFiletype : "*.jpg;*.png;*.bmp;*.gif",						//허용할 파일의 형식. ex) "*", "*.*", "*.jpg", 구분자(;)	
  	    	sMsgNotAllowedExt : 'JPG, GIF, PNG, BMP 확장자만 가능합니다',	//허용할 파일의 형식이 아닌경우에 띄워주는 경고창의 문구
  	    	bAutoUpload : false,									 	//파일이 선택됨과 동시에 자동으로 업로드를 수행할지 여부 (upload 메소드 수행)
@@ -545,19 +548,19 @@
 	window.onload = function(){
   		checkDragAndDropAPI();
   		
-//  		if(bSupportDragAndDropAPI){
-//  			$Element("pop_container2").hide();
-//  			$Element("pop_container").show();
-//  			
-//  			welTextGuide.removeClass("nobg");
-//  			welTextGuide.className("bg");
-//  			
-//  			addEvent();
-//  		} else {
-			$Element("pop_container").hide();
-			$Element("pop_container2").show();
-			callFileUploader();
-  //		}
+  		if(bSupportDragAndDropAPI){
+  			$Element("pop_container2").hide();
+  			$Element("pop_container").show();
+  			
+  			welTextGuide.removeClass("nobg");
+  			welTextGuide.className("bg");
+  			
+  			addEvent();
+  		} else {
+  			$Element("pop_container").hide();
+  			$Element("pop_container2").show();
+  			callFileUploader();
+  		}
   		fnUploadImage = $Fn(uploadImage,this);
   		$Fn(closeWindow,this).attach(welBtnCancel.$value(), "click");
 	};

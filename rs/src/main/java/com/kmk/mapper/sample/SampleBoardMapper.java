@@ -15,12 +15,14 @@ import com.kmk.domain.sample.SampleBoard;
 public interface SampleBoardMapper {
 	static final String BASE_QUERY = ""; 
 	
-	
 	// 게시판 리스트 조회
 	@Select({
 		"<script>"
-		+ " SELECT *		 "
-		+ "	 FROM BOARD WHERE 1=1  "
+		+ "SELECT B.* FROM ( SELECT ROWNUM AS RNUM, A.*FROM ( "
+		+ " SELECT @ROWNUM:=@ROWNUM+1 AS ROWNUM"
+		+ "       , B.*"
+		+ "		  , (SELECT COUNT(*) FROM BOARD) AS TOT_CNT "
+		+ "	 FROM BOARD B WHERE 1=1 AND (@ROWNUM:=0)=0  "
 		
 		+ " <if test=\"title != null and title !='' \"> "
 		+ "  AND TITLE LIKE CONCAT('%',#{title},'%') "
@@ -38,6 +40,7 @@ public interface SampleBoardMapper {
 		+ "  AND CONTENT LIKE CONCAT('%',#{content},'%') "
 		+ " </if>"
 		+ " ORDER BY SEQ DESC"
+		+ ") A WHERE ROWNUM &lt;= #{pagination.lastRecordIndex} ) B WHERE B.RNUM &gt; #{pagination.firstRecordIndex} "
 		+ "</script>"
 	})
 	List<SampleBoard> selectSampleBoard(SampleBoard sampleBoard);

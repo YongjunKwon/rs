@@ -107,54 +107,8 @@ $(document).ready(function() {
     // });
 });
 
-nhn.husky.EZCreator.createInIFrame({
-	oAppRef : oEditors, // 전역변수 명과 동일해야 함.
-	elPlaceHolder : "content", // 에디터가 그려질 textarea ID 값과 동일 해야 함.
-	sSkinURI : "/se2/SmartEditor2Skin.html", // Editor HTML
-	fCreator : "createSEditor2", // SE2BasicCreator.js 메소드명이니 변경 금지 X
-	htParams : {
-					// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
-					bUseToolbar : true,
-					// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
-					bUseVerticalResizer : true,
-					// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
-					bUseModeChanger : true, 
-				}
-});
+      
 
-//‘저장’ 버튼을 누르는 등 저장을 위한 액션을 했을 때 submitContents가 호출된다고 가정한다.
-function submitContents(elClickedObj) {
-    // 에디터의 내용이 textarea에 적용된다.
-    oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", [ ]);
- 
-    // 에디터의 내용에 대한 값 검증은 이곳에서
-    // document.getElementById("textAreaContent").value를 이용해서 처리한다.
-  
-    try {
-        elClickedObj.form.submit();
-    } catch(e) {
-     
-    }
-}
-
-
-//textArea에 이미지 첨부
-function pasteHTML(filepath){
-    var sHTML = '<img src="/se2/upload/'+filepath+'">';
-    oEditors.getById["content"].exec("PASTE_HTML", [sHTML]);
-}
-
-// 필수값 Check
-function validation(){
-	var contents = $.trim(oEditors[0].getContents());
-	if(contents === '<p>&nbsp;</p>' || contents === ''){ // 기본적으로 아무것도 입력하지 않아도 <p>&nbsp;</p> 값이 입력되어 있음. 
-		alert("내용을 입력하세요.");
-		oEditors.getById['content'].exec('FOCUS');
-		return false;
-	}
-
-	return true;
-}
+        
 </script>
-
-    </html>
+</html>

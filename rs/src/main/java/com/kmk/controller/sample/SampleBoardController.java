@@ -1,7 +1,7 @@
 package com.kmk.controller.sample;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -10,18 +10,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.kmk.controller.TestController;
+import com.kmk.base.PaginationUtils;
 import com.kmk.domain.common.CommCode;
 import com.kmk.domain.common.CommCodeSearch;
 import com.kmk.domain.sample.Reply;
@@ -64,9 +61,18 @@ public class SampleBoardController {
 		CommCode commCode = new CommCode();
 		commCode.setCd_grp("AA");
 		commCode.setCd(null); 
+		logger.info(" @@@@@@@@@@@@@ sampleList start @@@@@@@@@@@@@@@ ");
+		//List<CamelCaseMap> recvList = vocmService.findRecvList(vocmWebSearch);
+		List<SampleBoard> samList = new ArrayList<SampleBoard>();
+		samList = sampleBoardService.selectSampleBoard(sampleBoard);
+		PaginationUtils.bindTotalRecordCount(sampleBoard.getPagination(), samList, "tot_cnt");
+		logger.info(" @@@@@@@@@@@@@ sampleBoard.getPagination(): {} ", sampleBoard.getPagination().getCurrentPageNo());
+		logger.info(" @@@@@@@@@@@@@ sampleBoard.getPagination(): {} ", sampleBoard.getPagination().toString());
+		logger.info(" @@@@@@@@@@@@@ sampleBoard.getPagination(): {} ", sampleBoard.getPagination().getPageSize());
+		logger.info(" @@@@@@@@@@@@@ sampleBoard.getPagination(): {} ", sampleBoard.getPagination().getTotalRecordCount());
 		
 		model.addAttribute("comboAreaCdList", commonService.findComboAreaCdList(commCode));
-		model.addAttribute("list", sampleBoardService.selectSampleBoard(sampleBoard));
+		model.addAttribute("list", samList);
 		model.addAttribute("sampleBoard", sampleBoard);
 		model.addAttribute("classActiveSettings","샘플 게시판");
 		
