@@ -21,7 +21,20 @@ public interface SampleBoardMapper {
 		+ "SELECT B.* FROM ( SELECT ROWNUM AS RNUM, A.*FROM ( "
 		+ " SELECT @ROWNUM:=@ROWNUM+1 AS ROWNUM"
 		+ "       , B.*"
-		+ "		  , (SELECT COUNT(*) FROM BOARD) AS TOT_CNT "
+		+ "		  , ("
+		+ "				SELECT COUNT(*) FROM BOARD "
+		+ "             WHERE 1=1 "
+		
+		+ " 			<if test=\"title != null and title !='' \"> "
+		+ "  				AND TITLE LIKE CONCAT('%',#{title},'%') "
+		+ " 			</if> "
+		
+		
+		+ " 			<if test=\"area_cd != null and area_cd !='' \"> "
+		+ "  				AND AREA_CD = #{area_cd} "
+		+ " 				</if> "
+		
+		+ "          ) AS TOT_CNT "
 		+ "	 FROM BOARD B WHERE 1=1 AND (@ROWNUM:=0)=0  "
 		
 		+ " <if test=\"title != null and title !='' \"> "
