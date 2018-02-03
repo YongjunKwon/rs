@@ -66,10 +66,9 @@ public class SampleBoardController {
 		List<SampleBoard> samList = new ArrayList<SampleBoard>();
 		samList = sampleBoardService.selectSampleBoard(sampleBoard);
 		PaginationUtils.bindTotalRecordCount(sampleBoard.getPagination(), samList, "tot_cnt");
-		logger.info(" @@@@@@@@@@@@@ sampleBoard.getPagination(): {} ", sampleBoard.getPagination().getCurrentPageNo());
-		logger.info(" @@@@@@@@@@@@@ sampleBoard.getPagination(): {} ", sampleBoard.getPagination().toString());
-		logger.info(" @@@@@@@@@@@@@ sampleBoard.getPagination(): {} ", sampleBoard.getPagination().getPageSize());
-		logger.info(" @@@@@@@@@@@@@ sampleBoard.getPagination(): {} ", sampleBoard.getPagination().getTotalRecordCount());
+		logger.info(" @@@@@@@@@@@@@ sampleBoard.getPagination(): getCurrentPageNo : {} ", sampleBoard.getPagination().getCurrentPageNo());
+		logger.info(" @@@@@@@@@@@@@ sampleBoard.getPagination(): getPageSize : {} ", sampleBoard.getPagination().getPageSize());
+		logger.info(" @@@@@@@@@@@@@ sampleBoard.getPagination(): getTotalRecordCount : {} ", sampleBoard.getPagination().getTotalRecordCount());
 		
 		model.addAttribute("comboAreaCdList", commonService.findComboAreaCdList(commCode));
 		model.addAttribute("list", samList);

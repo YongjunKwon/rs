@@ -26,6 +26,7 @@
     <section class="content">
 
       <!-- Your Page Content Here -->
+      <!-- <img src="/images/main.png" /> -->
       <div class="big-box"><h1>Page 1</h1></div>
       <div class="big-box"><h1>Page 2</h1></div>
      
