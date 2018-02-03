@@ -3,17 +3,6 @@
   <html>
   <%@include file="/WEB-INF/view/include/header.jsp"%>
 
-    <!-- <http auto-config="true">
-    <intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
-    <form-login
-        username-parameter="loginid"
-        password-parameter="loginpwd"
-        login-page="/login"
-        default-target-url="/"
-        authentication-failure-url="/login.do?fail=true"
-    />
-</http> -->
-
     <body class="hold-transition login-page">
       <div class="login-box">
         <div class="login-logo">
@@ -40,7 +29,7 @@
               <div class="col-xs-8">
                 <div class="checkbox icheck">
                   <label>
-                    <input type="checkbox"> Remember Me
+                    <input type="checkbox" id="idSaveCheck"> Remember Me
                   </label>
                 </div>
               </div>
@@ -80,7 +69,42 @@
           increaseArea: '20%' // optional
         });
 
+
+        /**
+         *  로그인 아이디 기억하기.
+         *
+         * @author tmtwo
+         * @version 1.0, 2017.1.24 소스 수정
+         * @see    None
+         */
+
+        // 저장된 쿠키값을 가져와서 ID 칸에 넣어준다. 없으면 공백으로 들어감.
+        var userInputId = getCookie("userInputId");
+        $("input[name='user_id']").val(userInputId);
+
+        if ($("input[name='user_id']").val() != "") { // 그 전에 ID를 저장해서 처음 페이지 로딩 시, 입력 칸에 저장된 ID가 표시된 상태라면,
+          $('input').iCheck('check'); // ID 저장하기를 체크 상태로 두기.
+        }
+
+        $('input').on('ifChecked', function (e) {
+          var userInputId = $("input[name='user_id']").val();
+          setCookie("userInputId", userInputId, 7); // 7일 동안 쿠키 보관
+        });
+
+        $('input').on('ifUnchecked', function (e) {
+          deleteCookie("userInputId");
+        });
+
+        // ID 저장하기를 체크한 상태에서 ID를 입력하는 경우, 이럴 때도 쿠키 저장.
+        $("input[name='user_id']").keyup(function () { // ID 입력 칸에 ID를 입력할 때,
+          if ($('#idSaveCheck').is(":checked")) {
+            var userInputId = $("input[name='user_id']").val();
+            setCookie("userInputId", userInputId, 7); // 7일 동안 쿠키 보관
+          }
+        });
       });
+
+     
     </script>
 
   </html>
