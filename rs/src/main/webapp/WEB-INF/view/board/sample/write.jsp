@@ -41,9 +41,9 @@
                                	제목
                             	</label>                         
                             	<div class="col-sm-11">
-                               		<input type="text" name="title" value="" id="title" class="form_control_edit2" maxlength="20" placeholder="제목을 입력하세요.">                               
+                               		<input type="text" class="form_control_edit2" placeholder=" 제목을 입력하세요.">                              
                             	</div>                                     
-                          	</div>
+                          	</div>                          	
                           	<div class="row">
                           		<label class="col-sm-1 form_control_lebel">
                                	내용
@@ -57,7 +57,7 @@
                      			<label class="col-sm-1 form_control_lebel">
                      			</label>
                         		<div id="example1_filter" class="col-sm-11 pull-left">                              
-                           			<input class="form_control_edit_" type="submit" value="저장" />
+                           			<input class="btn_ btn-block_ btn-success_" type="submit" value="저장" />
                         		</div>
                      		</div>                                                               
                   		</form>                     
