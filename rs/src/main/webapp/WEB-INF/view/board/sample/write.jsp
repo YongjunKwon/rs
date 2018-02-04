@@ -33,29 +33,34 @@
                          </div>
                       </div>
                    </div>
-                   <!-- /.box-header -->
-                  <div class="box-body">                      
-                      <form id="frm" name="frm" method="post" class="form-inline" action="/board/sample/saveBoard">                                                                                       
-                     <div class="row">
-                            <label class="col-sm-1 form_control_lebel">
+					<!-- /.box-header -->
+					<div class="box-body">                      
+						<form id="frm" name="frm" method="post" class="form-inline" action="/board/sample/saveBoard">                                                                                       
+							<div class="row">
+                            	<label class="col-sm-1 form_control_lebel">
                                	제목
-                            </label>                         
-                            <div class="col-sm-11" boder="2">
-                               <input type="text" name="title" value="" id="title" class="form_control_edit2" maxlength="20" placeholder="제목을 입력하세요.">
-                               
-                            </div>                                     
-                          </div>
-                          <div class="row">
-                             <div class="col-sm-12">                          
-                           <textarea class="form_control_textarea" name="content" id="content" rows="27" style="width:100%; hegith:595px"></textarea>
-                        </div>
-                     </div>                                                   
-                     <div class="row">
-                        <div id="example1_filter" class="col-sm-12 pull-left">                              
-                           <input class="form_control_edit" type="submit" value="저장" />
-                        </div>
-                     </div>                                                               
-                  </form>                     
+                            	</label>                         
+                            	<div class="col-sm-11">
+                               		<input type="text" name="title" value="" id="title" class="form_control_edit2" maxlength="20" placeholder="제목을 입력하세요.">                               
+                            	</div>                                     
+                          	</div>
+                          	<div class="row">
+                          		<label class="col-sm-1 form_control_lebel">
+                               	내용
+                            	</label>
+								<div class="col-sm-11">                          
+									<textarea class="form_control_textarea" name="content" id="content" rows="27" style="width:100%; hegith:595px">
+									</textarea>
+                        		</div>
+                     		</div>                                                   
+                     		<div class="row">
+                     			<label class="col-sm-1 form_control_lebel">
+                     			</label>
+                        		<div id="example1_filter" class="col-sm-11 pull-left">                              
+                           			<input class="form_control_edit_" type="submit" value="저장" />
+                        		</div>
+                     		</div>                                                               
+                  		</form>                     
                    </div>
                   <!-- /.box-body -->
                 </div>
