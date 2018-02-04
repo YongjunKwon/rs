@@ -38,10 +38,11 @@
                       <form id="frm" name="frm" method="post" class="form-inline" action="/board/sample/saveBoard">                                                                                       
                      <div class="row">
                             <label class="col-sm-1 form_control_lebel">
-                               제목
+                               	제목
                             </label>                         
-                            <div class="col-sm-11">
+                            <div class="col-sm-11" boder="2">
                                <input type="text" name="title" value="" id="title" class="form_control_edit2" maxlength="20" placeholder="제목을 입력하세요.">
+                               
                             </div>                                     
                           </div>
                           <div class="row">

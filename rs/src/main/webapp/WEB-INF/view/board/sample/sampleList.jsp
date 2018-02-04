@@ -36,21 +36,21 @@
                               <form:form modelAttribute="sampleBoard" method="post" action="/board/sample/sampleList">
                                 <input type="hidden" id="pagination" name="pagination.currentPageNo" value="1">
                                 <div class="col-sm-4 pull-left">
-                                  <div class="form_control" id="example1_length">
-                                    <form:select path="area_cd" class="form_control_selete" data-placeholder="지역" disabled="false">
+                                  <div class="form-group" id="example1_length">
+                                    <form:select path="area_cd" class="form-control__" data-placeholder="지역" disabled="false">
                                       <option value="">지역선택</option>
                                       <form:options items="${comboAreaCdList}" itemValue="cd" itemLabel="cd_nm" />
                                     </form:select>
                                   </div>
                                 </div>
-                                <div class="col-sm-8 ">
-                                  <div id="example1_filter" class="pull-right">
-                                    <button type="submit" id="btnSearch" name="btnSearch" class="form_control_button"><i class="fa fa-search"></i> 검색</button>
-                                  </div>
-                                  <div id="example1_filter" class="pull-right form_control_edit">
-                                    <input type="text" name="stx" value="" id="stx" class="form_control_edit" maxlength="20" placeholder="검색내용 입력">
-                                  </div>
-                                </div>
+								<div class="col-sm-8 ">                                
+									<div class="input-group input-group-sm">
+										<input type="text" class="form-control__" name="title" value="" id=""title"" placeholder="검색내용 입력">
+										<span class="input-group-btn">
+											<button type="submit" id="btnSearch" name="btnSearch" class="btn btn-info btn-flat">검색</button>
+										</span>
+									</div>
+								</div>
                               </form:form>
                             </div>
                           </div>
@@ -106,12 +106,10 @@
                               <div class="text-center" id="page_area"></div>
                               <!-- //페이징 -->
 
-                              <div class="dataTables_info pull-right" id="example1_info" role="status" aria-live="polite">
-                                <button class="form_control_button">
-<a class="form-button" href="/board/sample/write?tname=sample">
-<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>글쓰기</a>
-</button>
-
+                              <div class="pull-right" id="example1_info" role="status" aria-live="polite">
+                                <button class="btn bg-olive margin">
+									<a class="a-color" href="/board/sample/write?tname=sample">글쓰기</a>
+								</button>								
                               </div>
                             </div>
                           </div>
