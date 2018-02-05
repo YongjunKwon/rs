@@ -41,9 +41,9 @@
                                	제목
                             	</label>                         
                             	<div class="col-sm-11">
-                               		<input type="text" name="title" value="" id="title" class="form_control_edit2" maxlength="20" placeholder="제목을 입력하세요.">                               
+                               		<input type="text" id="title" name="title" class="form_control_edit2" placeholder=" 제목을 입력하세요.">                              
                             	</div>                                     
-                          	</div>
+                          	</div>                          	
                           	<div class="row">
                           		<label class="col-sm-1 form_control_lebel">
                                	내용
@@ -57,7 +57,7 @@
                      			<label class="col-sm-1 form_control_lebel">
                      			</label>
                         		<div id="example1_filter" class="col-sm-11 pull-left">                              
-                           			<input class="form_control_edit_" type="submit" value="저장" />
+                           			<input class="btn_ btn-block_ btn-success_" type="submit" value="저장" />
                         		</div>
                      		</div>                                                               
                   		</form>                     
@@ -78,6 +78,21 @@
 // Editor Setting
 var oEditors = []; // 개발되어 있는 소스에 맞추느라, 전역변수로 사용하였지만, 지역변수로 사용해도 전혀 무관 함.
 $(document).ready(function() {
+	nhn.husky.EZCreator.createInIFrame({
+	   oAppRef : oEditors, // 전역변수 명과 동일해야 함.
+	   elPlaceHolder : "content", // 에디터가 그려질 textarea ID 값과 동일 해야 함.
+	   sSkinURI : "/se2/SmartEditor2Skin.html", // Editor HTML
+	   fCreator : "createSEditor2", // SE2BasicCreator.js 메소드명이니 변경 금지 X
+	   htParams : {
+	               // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+	               bUseToolbar : true,
+	               // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+	               bUseVerticalResizer : true,
+	               // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+	               bUseModeChanger : true, 
+	            }
+	});
+	
     $("#frm").validate({
         rules: {
             category: {
@@ -102,7 +117,9 @@ $(document).ready(function() {
             }
         },
         submitHandler: function(form) {
+        		
             if (!confirm(aslang[4]))
+            	alert("confirm");
                 return false;
             else {
                 form.submit();
@@ -112,20 +129,7 @@ $(document).ready(function() {
     // });
 });
 
-nhn.husky.EZCreator.createInIFrame({
-   oAppRef : oEditors, // 전역변수 명과 동일해야 함.
-   elPlaceHolder : "content", // 에디터가 그려질 textarea ID 값과 동일 해야 함.
-   sSkinURI : "/se2/SmartEditor2Skin.html", // Editor HTML
-   fCreator : "createSEditor2", // SE2BasicCreator.js 메소드명이니 변경 금지 X
-   htParams : {
-               // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
-               bUseToolbar : true,
-               // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
-               bUseVerticalResizer : true,
-               // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
-               bUseModeChanger : true, 
-            }
-});
+
 
 //‘저장’ 버튼을 누르는 등 저장을 위한 액션을 했을 때 submitContents가 호출된다고 가정한다.
 function submitContents(elClickedObj) {
@@ -134,7 +138,7 @@ function submitContents(elClickedObj) {
  
     // 에디터의 내용에 대한 값 검증은 이곳에서
     // document.getElementById("textAreaContent").value를 이용해서 처리한다.
-  
+  	alert(document.getElementById("textAreaContent").value);
     try {
         elClickedObj.form.submit();
     } catch(e) {
