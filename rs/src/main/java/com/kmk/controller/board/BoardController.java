@@ -13,7 +13,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kmk.base.PaginationUtils;
@@ -186,6 +188,7 @@ public class BoardController {
 			case "op": 
 		    	logger.info(" op return page setting " + categorynm);
 		    	model.addAttribute("categorynm","op");
+		    	model.addAttribute("category_tiele","오피스텔");
 		    	returnPage = "board/bizInfo/bizBoardDetail";
 		    	break;
 		         
@@ -257,6 +260,9 @@ public class BoardController {
 
 		logger.info(" @@@@@@@@@@@@@ boardDetail >>>>> loginUser @@@@@ " + loginUser.getUser_id());
 		
+		
+		boardService.updateCnt(seq);
+		
     	model.addAttribute("contents", boardService.selectDetailBoard(seq));
 		model.addAttribute("replyList", boardService.selectReplyList(loginUser.getUser_id(), seq));
 		model.addAttribute("success",success);
@@ -269,54 +275,52 @@ public class BoardController {
     	
     	LoginUser loginUser = (LoginUser)session.getAttribute("loginUser");
     	reply.setUser_id(loginUser.getUser_id());
+    	
+    	logger.info(" @@@@@@@@@@@@@ bizBoardReplyReg @@@@@@@@@@@@@@");
+    	
+    	
         redirectAttributes.addAttribute("success", boardService.bizBoardReplyReg(reply));
         redirectAttributes.addAttribute("seq", reply.getSeq());
+        redirectAttributes.addAttribute("categorynm", reply.getCategorynm());
         return "redirect:bizBoardDetail";
     	
     }
 
     
-//    @RequestMapping(value="delFalgUpadaeReply", method=RequestMethod.POST)
-//	public ModelAndView delFalgUpadaeReply(Reply reply, HttpSession session) {
-//    	
-//    	ModelAndView mav = new ModelAndView("jsonView");
-//    	
-//    	logger.info(" @@@@@@@@@@@@@ deleteReply @@@@@ " + reply.toString());
-//    	logger.debug("TestForm : {}", reply);
-//    	
-//    	LoginUser loginUser = (LoginUser)session.getAttribute("loginUser");
-//    	
-//    	logger.info(" @@@@@@@@@@@@@ deleteReply @@@@@ LoginUser.user_id  " + loginUser.getUser_id());
-//    	logger.info(" @@@@@@@@@@@@@ deleteReply @@@@@ LoginUser.pwd  " + loginUser.getPwd());
-//    	
-//    	String replyUserId = boardService.selectReplyUserId(reply.getReply_seq());
-//    	if(!replyUserId.equals(loginUser.getUser_id())) {
-//    		mav.addObject("seq", reply.getSeq());
-//    		mav.addObject("success", -99);
-//    	} else {
-//    		// check password
-//    		/*
-//    		if(!reply.getPwd().equals(loginUser.getPwd())){
-//        		mav.addObject("seq", reply.getSeq());
-//        		mav.addObject("success", -98);
-//    		} else {
-//    			
-//    			
-//    		}
-//    		*/
-//    		mav.addObject("seq", reply.getSeq());
-//    		mav.addObject("success", boardService.delFalgUpadaeReply(reply.getReply_seq())); // not access
-//    	}
-//        return mav;
-//    }
-//    
-//	
-//   @RequestMapping("write")
-//   public String write(String tname, Model model) {
-//	  logger.info(" write :::: >>>> tname ::: " + tname);
-//      return "board/sample/write";
-//   }
-//   
+    @RequestMapping(value="delFalgUpadaeReply", method=RequestMethod.POST)
+	public String delFalgUpadaeReply(Reply reply, RedirectAttributes redirectAttributes, HttpSession session) {
+    	
+    	ModelAndView mav = new ModelAndView("jsonView");
+    	
+    	logger.info(" @@@@@@@@@@@@@ deleteReply @@@@@ " + reply.toString());
+    	logger.debug("TestForm : {}", reply);
+    	
+    	LoginUser loginUser = (LoginUser)session.getAttribute("loginUser");
+    	
+    	logger.info(" @@@@@@@@@@@@@ deleteReply @@@@@ LoginUser.user_id  " + loginUser.getUser_id());
+    	logger.info(" @@@@@@@@@@@@@ deleteReply @@@@@ LoginUser.pwd  " + loginUser.getPwd());
+    	
+    	String replyUserId = boardService.selectReplyUserId(reply.getReply_seq());
+    	if(!replyUserId.equals(loginUser.getUser_id())) {
+    		redirectAttributes.addAttribute("seq", reply.getSeq());
+    		redirectAttributes.addAttribute("success", -99);
+    		redirectAttributes.addAttribute("categorynm", reply.getCategorynm());
+    	} else {
+    		redirectAttributes.addAttribute("seq", reply.getSeq());
+    		redirectAttributes.addAttribute("success", boardService.delFalgUpadaeReply(reply.getReply_seq())); // not access
+    		redirectAttributes.addAttribute("categorynm", reply.getCategorynm());
+    	}
+    	
+    	return "redirect:bizBoardDetail";
+    }
+    
+	
+   @RequestMapping("bizBoardWrite")
+   public String write(String categorynm, Model model) {
+	  logger.info(" bizBoardWrite :::: >>>> categorynm ::: " + categorynm);
+      return "board/bizInfo/bizInfoWrite";
+   }
+   
 //   @RequestMapping("saveBoard")
 //   public String saveBoard(Board board) {
 //	  boardService.insertBoard(board);

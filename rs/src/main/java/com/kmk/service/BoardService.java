@@ -35,15 +35,18 @@ public class BoardService {
 		return boardMapper.insertReply(reply);
 	}
 	
-//	public int delFalgUpadaeReply(int reply_seq){
-//		return boardMapper.delFalgUpadaeReply(reply_seq);
-//	}
-//	
-//	
-//	public String selectReplyUserId(int reply_seq){
-//		return boardMapper.selectReplyUserId(reply_seq);
-//	}
-//	
+	public int delFalgUpadaeReply(int reply_seq){
+		return boardMapper.delFalgUpadaeReply(reply_seq);
+	}
+	
+	public int updateCnt(int seq){
+		return boardMapper.updateCnt(seq);
+	}
+
+	public String selectReplyUserId(int reply_seq){
+		return boardMapper.selectReplyUserId(reply_seq);
+	}
+	
 //	public void insertBoard(Board board){	
 //		//logger.info("query test: {}", testMapper.getList());
 //		boardMapper.insertBoard(board);

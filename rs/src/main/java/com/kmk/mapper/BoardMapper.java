@@ -92,16 +92,16 @@ public interface BoardMapper {
 	})
 	List<Reply> selectReplyList(@Param("user_id") String user_id,@Param("seq") int seq);
 	
-//	@Select({
-//		"<script>"
-//		+ " SELECT USER_ID		 "
-//		+ "	  FROM REPLY "
-//		+ "  WHERE 1=1 "
-//		+ "    AND REPLY_SEQ=#{reply_seq} "
-//		+ "</script>"
-//	})
-//	String selectReplyUserId(int reply_seq);
-//	
+	@Select({
+		"<script>"
+		+ " SELECT USER_ID		 "
+		+ "	  FROM REPLY "
+		+ "  WHERE 1=1 "
+		+ "    AND REPLY_SEQ=#{reply_seq} "
+		+ "</script>"
+	})
+	String selectReplyUserId(int reply_seq);
+	
 //	// 게시판등록
 //	@Insert("INSERT INTO BOARD "
 //			+ "(TITLE, CONTENT, CNT, CATEGORY, AREA_CD, BIZ_NM, RECOMM_CNT, DEL_FLAG, IMG_URL, USER_ID, REG_DTIME)"
@@ -113,13 +113,15 @@ public interface BoardMapper {
 			+ "(SEQ, CONTENT, DEL_FLAG, USER_ID, REG_DTIME)"
 			+ " VALUES(#{seq}, #{content}, 'N', #{user_id}, NOW())")
 	int insertReply(Reply reply);
-//	
-//	// 리플등록
-//	@Delete("UPDATE REPLY SET DEL_FLAG = 'Y' WHERE REPLY_SEQ =#{reply_seq} ")
-//	int delFalgUpadaeReply(int reply_seq);
-//	
-//	
-
+	
+	// 리플삭제(DEL_FLAG 업데이트)
+	@Delete("UPDATE REPLY SET DEL_FLAG = 'Y' WHERE REPLY_SEQ =#{reply_seq} ")
+	int delFalgUpadaeReply(int reply_seq);
+	
+	@Update("UPDATE BOARD B, (SELECT MAX(IFNULL(CNT, 0)) +1 AS CNT FROM BOARD WHERE SEQ=#{seq}) C SET B.CNT = C.CNT WHERE B.SEQ=#{seq}")
+	int updateCnt(int reply_seq);
+	
+	
 
 //	@Update("UPDATE BOARD SET name=#{villageName}, district =#{district} WHERE id =#{vid}")
 //	void updateBoard(Board board);

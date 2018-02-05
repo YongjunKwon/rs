@@ -10,8 +10,8 @@
 <div class="content-wrapper" style="min-height: 959.8px;">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
-		<h1>오피스텔
-        	<small>각 지역의 오피를 소개해 드립니다.${classActiveSettings}</small>
+		<h1>${category_tiele}
+        	<small>각 지역의 ${category_tiele}를 소개해 드립니다.</small>
       	</h1>
       	<ol class="breadcrumb">
         	<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -114,6 +114,7 @@
 							<form id="commFrm" name="commFrm" action="">
 								<input type="hidden" id="seq" name="seq" value="${contents.seq}">
 								<input type="hidden" id="user_id" name="user_id" value="">
+								<input type="hidden" id="categorynm" name="categorynm" value="${categorynm}">
 								<div class="comment-box">									
 									<div class="clearfix"></div>
 										<div class="form-group row">
@@ -187,10 +188,10 @@
 </div>
 <!-- /.content-wrapper -->
 <form id="commDelFrm" name="commDelFrm" action="">
-    <input type="hidden" id="seq" name="seq" value="${contents.seq}">
+    <input type="hidden" id="del_seq" name="seq" value="${contents.seq}">
     <input type="hidden" id="reply_seq" name="reply_seq" value="" />
-    <input type="hidden" id="pwd" name="pwd" value="" />
-
+	<input type="hidden" id="categorynm" name="categorynm" value="${categorynm}" />
+    <!-- <input type="hidden" id="pwd" name="pwd" value="" /> -->
 </form>
 <%@include file="../../include/bottom.jsp"%>
 </div>
@@ -201,54 +202,53 @@
         console.log("${contents.seq}");
         var $seq = "${contents.seq}";
 
-        $("#replyDelete > a").on("click", function() {
-        //$("#addBtn").on("click", function() {
-			//e.preventDefault();
+        // $("#replyDelete > a").on("click", function() {
+        // //$("#addBtn").on("click", function() {
+		// 	//e.preventDefault();
 			
-            var $dataTag = $(this).data('values');            
+        //     var $dataTag = $(this).data('values');            
 
-            var params = {
-                "reply_seq": $dataTag.reply_seq,
-                "seq": $seq
-            };
+        //     var params = {
+        //         "reply_seq": $dataTag.reply_seq,
+        //         "seq": $seq
+        //     };
             
-            if(!confirm(aslang[11]))return;;
+        //     if(!confirm(aslang[11]))return;;
             
-            $.ajax({
-                url: "/board/sample/delFalgUpadaeReply",
-                method: "post",
-                type: "json",
-                data: params,
-                success: function(data) {
-                    if (data.success == -99) {
-                        alert(aslang[1]);
-                        return;
-                    }
-                },
-                error: function(error) {
-                    alert("error : " + eval(error));
-                }
-            });
-        });
+        //     $.ajax({
+        //         url: "/board/sample/delFalgUpadaeReply",
+        //         method: "post",
+        //         type: "json",
+        //         data: params,
+        //         success: function(data) {
+        //             if (data.success == -99) {
+        //                 alert(aslang[1]);
+        //                 return;
+        //             }
+        //         },
+        //         error: function(error) {
+        //             alert("error : " + eval(error));
+        //         }
+        //     });
+        // });
 
         // 댓글삭제
-        $("#div_del1111 > a").on("click", function() {
+        $("#replyDelete > a").on("click", function() {
             var $dataTag = $(this).data('values');
             console.log("---- 게시글 댓글 삭제 @@@@@ " + $dataTag.reply_seq);
 
             //$(".tr_on").find("td").eq(0).find("[name$=h_cuslSeq]").val()
-            console.log(" //// " + $(this));
-            console.log("비밀번호 ::: " + $(this).next().val());
+            //console.log(" //// " + $(this));
+            //console.log("비밀번호 ::: " + $(this).next().val());
 
-            if (trim($(this).next().val()) == "") {
-                alert(aslang[1]);
-                return false;
-            }
 
-            $("#commDelFrm #pwd").val($(this).next().val());
+
+			if(!confirm(aslang[11]))return;
+
+            //$("#commDelFrm #pwd").val($(this).next().val());
             $("#commDelFrm #reply_seq").val($dataTag.reply_seq);
 
-            $("#commDelFrm").attr("action", "/board/sample/delFalgUpadaeReply");
+            $("#commDelFrm").attr("action", "/board/delFalgUpadaeReply");
             $("#commDelFrm").attr("method", "post");
             $("#commDelFrm").submit();
 

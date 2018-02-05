@@ -92,7 +92,7 @@
                                       </td>
                                       <td>${list.seq}
                                       </td>
-                                      <td>${list.recomm_cnt}
+                                      <td>${list.cnt}
                                       </td>
                                     </tr>
                                   </c:forEach>
@@ -109,7 +109,7 @@
 
                               <div class="pull-right" id="example1_info" role="status" aria-live="polite">
                                 <button class="btn bg-olive margin">
-									<a class="a-color" href="/board/sample/write?tname=sample">글쓰기</a>
+									<a class="a-color" href="/board/bizBoardWrite?categorynm=${board.categorynm}">글쓰기</a>
 								</button>								
                               </div>
                             </div>
