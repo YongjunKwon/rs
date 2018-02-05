@@ -139,27 +139,7 @@
                 //console.log("${board.pagination.getLastPageNo()}");
                 //console.log("${board.pagination.getTotalPageCount()}"); // 페이지수
 
-                $('#side_bizInfo').addClass('active');
-
-                if($("#categorynm").val() == "op") { 
-                  $('#menu_op').addClass('active');
-                } else if($("#categorynm").val() == "gunma") { 
-                  $('#menu_gunma').addClass('active');
-                } else if($("#categorynm").val() == "anma") { 
-                  $('#menu_anma').addClass('active');
-                } else if($("#categorynm").val() == "play") { 
-                  $('#menu_play').addClass('active');
-                } else if($("#categorynm").val() == "tel") {
-                  $('#menu_tel').addClass('active');
-                } else if($("#categorynm").val() == "lib") { 
-                  $('#menu_lib').addClass('active');
-                }
-
-
-                
-
-
-
+                //$('#side_bizInfo').addClass('active');
 
                 $gbPageMap.put("TOTPAGE", "${board.pagination.getTotalPageCount()}");
                 $gbPageMap.put("CURRPAGE", "${board.pagination.getCurrentPageNo()}");

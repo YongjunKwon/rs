@@ -4,7 +4,7 @@
 
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
-      <c:if test="${isLogin eq false}">
+      <c:if test="${loginUser.user_id eq '' || loginUser.user_id eq null}">
         <!-- 로그인//시작 -->
         <form id="login" name="login" method="POST" action="login" autocomplete="off" class="form">
           <div class="media no-margin en">
@@ -59,7 +59,7 @@
       <!-- 로그인//종료 -->
 
       <!-- 로그인성공시 //시작 -->
-      <c:if test="${isLogin eq true}">
+      <c:if test="${loginUser.user_id != '' || loginUser.user_id ne null}">
         <div class="user-panel">
           <div class="pull-left image user_picture" data-toggle="tooltip" title="사용자 정보 수정">
             <img src="/AdminLTE-2.3.11/dist/img/welcome_category_icon_privacy.png" class="img-circle cursor" alt="">
@@ -114,7 +114,7 @@
         <li class="header">좌측메뉴목록</li>
         <!-- Optionally, you can add icons to the links -->
 
-		<!-- 업소정보 //시작-->
+        <!-- 업소정보 //시작-->
         <li id="side_bizInfo" class="treeview">
           <a href="#">
             <i class="fa fa-share"></i>
@@ -129,84 +129,84 @@
                 <i class="fa fa-circle-o"></i>오피스텔</a>
             </li>
             <li>
-            <li id="menu_gunma">
-              <a href="/board/bizBoardList?categorynm=gunma">
-                <i class="fa fa-circle-o"></i>건마</a>
-            </li>
-            <li id="menu_anma">
-              <a href="/board/bizBoardList?categorynm=anma">
-                <i class="fa fa-circle-o"></i>안마방</a>
-            </li>
-            <li id="menu_play">
-              <a href="/board/bizBoardList?categorynm=play">
-                <i class="fa fa-circle-o"></i>유흥주점</a>
-            </li>
-            <li id="menu_tel">
-              <a href="/board/bizBoardList?categorynm=tel">
-                <i class="fa fa-circle-o"></i>휴게텔</a>
-            </li>
-            <li id="menu_lib">
-              <a href="/board/bizBoardList?categorynm=lib">
-                <i class="fa fa-circle-o"></i>립카페/핸플/키스</a>
-            </li>
+              <li id="menu_gunma">
+                <a href="/board/bizBoardList?categorynm=gunma">
+                  <i class="fa fa-circle-o"></i>건마</a>
+              </li>
+              <li id="menu_anma">
+                <a href="/board/bizBoardList?categorynm=anma">
+                  <i class="fa fa-circle-o"></i>안마방</a>
+              </li>
+              <li id="menu_play">
+                <a href="/board/bizBoardList?categorynm=play">
+                  <i class="fa fa-circle-o"></i>유흥주점</a>
+              </li>
+              <li id="menu_tel">
+                <a href="/board/bizBoardList?categorynm=tel">
+                  <i class="fa fa-circle-o"></i>휴게텔</a>
+              </li>
+              <li id="menu_lib">
+                <a href="/board/bizBoardList?categorynm=lib">
+                  <i class="fa fa-circle-o"></i>립카페/핸플/키스</a>
+              </li>
           </ul>
-        </li>
-        <!-- 업소정보 //끝-->
-        
-        <!-- 업소후기 //시작-->
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-share"></i>
-            <span>업소후기</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li>
-              <a href="/board/bizBoardList?categorynm=oph">
-                <i class="fa fa-circle-o"></i>오피스텔 후기</a>
+          </li>
+          <!-- 업소정보 //끝-->
+
+          <!-- 업소후기 //시작-->
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-share"></i>
+              <span>업소후기</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li>
+                <a href="/board/bizBoardList?categorynm=oph">
+                  <i class="fa fa-circle-o"></i>오피스텔 후기</a>
+              </li>
+              <li>
+                <li>
+                  <a href="/board/bizBoardList?categorynm=gunmah">
+                    <i class="fa fa-circle-o"></i>건마 후기</a>
+                </li>
+                <li>
+                  <a href="/board/bizBoardList?categorynm=anmah">
+                    <i class="fa fa-circle-o"></i>안마방 후기</a>
+                </li>
+                <li>
+                  <a href="/board/bizBoardList?categorynm=playh">
+                    <i class="fa fa-circle-o"></i>유흥주점 후기</a>
+                </li>
+                <li>
+                  <a href="/board/bizBoardList?categorynm=libh">
+                    <i class="fa fa-circle-o"></i>텔/립/핸플/키스 후기</a>
+                </li>
+            </ul>
             </li>
-            <li>
-            <li>
-              <a href="/board/bizBoardList?categorynm=gunmah">
-                <i class="fa fa-circle-o"></i>건마 후기</a>
+            <!-- 업소후기 //끝-->
+
+            <!-- 업소언니정보 //시작-->
+            <!-- 언니들 정보 올리는 게시판 -->
+            <li class="treeview">
+              <a href="/board/bizBoardList?categorynm=bizwm">
+                <i class="fa fa-share"></i>
+                <span>업소언니정보</span>
+              </a>
             </li>
-            <li>
-              <a href="/board/bizBoardList?categorynm=anmah">
-                <i class="fa fa-circle-o"></i>안마방 후기</a>
+            <!-- 업소언니정보 //끝-->
+
+            <!-- 파트너공유 //시작-->
+            <li class="treeview">
+              <a href="/board/bizBoardList?categorynm=partner">
+                <i class="fa fa-share"></i>
+                <span>파트너공유</span>
+              </a>
             </li>
-            <li>
-              <a href="/board/bizBoardList?categorynm=playh">
-                <i class="fa fa-circle-o"></i>유흥주점 후기</a>
-            </li>
-            <li>
-              <a href="/board/bizBoardList?categorynm=libh">
-                <i class="fa fa-circle-o"></i>텔/립/핸플/키스 후기</a>
-            </li>
-          </ul>
-        </li>
-		<!-- 업소후기 //끝-->
-		
-        <!-- 업소언니정보 //시작-->
-        <!-- 언니들 정보 올리는 게시판 -->
-        <li class="treeview">
-          <a href="/board/bizBoardList?categorynm=bizwm">
-            <i class="fa fa-share"></i>
-            <span>업소언니정보</span>
-          </a>
-        </li>
-		<!-- 업소언니정보 //끝-->
-		
-        <!-- 파트너공유 //시작-->
-        <li class="treeview">
-          <a href="/board/bizBoardList?categorynm=partner">
-            <i class="fa fa-share"></i>
-            <span>파트너공유</span>
-          </a>
-        </li>
-		<!-- 파트너정보 //끝-->
-        
+            <!-- 파트너정보 //끝-->
+
       </ul>
 
       <!-- /.sidebar-menu -->
@@ -314,12 +314,12 @@
           <form id="registerForm" action="/register/set" method="post">
 
             <div class="form-group has-feedback">
-              <input type="email" id="user_id" name="user_id" value="${loginUser.user_id}" maxlength="50" class="form-control" disabled="true">
+              <input type="email" id="m_user_id" name="user_id" value="${loginUser.user_id}" maxlength="50" class="form-control" disabled="true">
             </div>
 
             <div class="form-group has-feedback">
               <div class="input-group">
-                <input type="text" class="form-control" id="nick_nm" value="${loginUser.nick_nm}" name="nick_nm" maxlength="10" placeholder="닉네임">
+                <input type="text" class="form-control" id="m_nick_nm" value="${loginUser.nick_nm}" name="nick_nm" maxlength="10" placeholder="닉네임">
                 <div class="input-group-btn">
                   <button type="button" id='checkNickNm' class="btn btn-primary">중복확인</button>
                 </div>
@@ -327,16 +327,16 @@
             </div>
 
             <div class="form-group has-feedback">
-              <input type="password" class="form-control" id="before_pwd" name="before_pwd" placeholder="현재 비밀번호" />
+              <input type="password" class="form-control" id="m_before_pwd" name="before_pwd" placeholder="현재 비밀번호" />
             </div>
 
             <div class="form-group has-feedback">
-              <input type="password" class="form-control" id="pwd" name="pwd" placeholder="변경 비밀번호" />
+              <input type="password" class="form-control" id="m_pwd" name="pwd" placeholder="변경 비밀번호" />
               <font name="check2" size="2" color="red"></font>
             </div>
 
             <div class="form-group has-feedback">
-              <input type="password" class="form-control" id="pwd_again" name="pwd_again" placeholder="비밀번호 확인" />
+              <input type="password" class="form-control" id="m_pwd_again" name="pwd_again" placeholder="비밀번호 확인" />
               <font name="check" size="2" color="red"></font>
             </div>
 
@@ -354,6 +354,33 @@
     $(document).ready(function () {});
 
     /**
+     * sidemenu actiove
+     *
+     * @author tmtwo
+     * @version 1.0, 2018.2.5 소스 수정
+     */
+    $('.treeview').removeClass('active');
+    if ("${board.categorynm}" == "op") {
+      $('#menu_op').parents('li').addClass('active');
+      $('#menu_op').addClass('active');
+    } else if ("${board.categorynm}" == "gunma") {
+      $('#menu_gunma').parents('li').addClass('active');
+      $('#menu_gunma').addClass('active');
+    } else if ("${board.categorynm}" == "anma") {
+      $('#menu_anma').parents('li').addClass('active');
+      $('#menu_anma').addClass('active');
+    } else if ("${board.categorynm}" == "play") {
+      $('#menu_play').parents('li').addClass('active');
+      $('#menu_play').addClass('active');
+    } else if ("${board.categorynm}" == "tel") {
+      $('#menu_tel').parents('li').addClass('active');
+      $('#menu_tel').addClass('active');
+    } else if ("${board.categorynm}" == "lib") {
+      $('#menu_lib').parents('li').addClass('active');
+      $('#menu_lib').addClass('active');
+    }
+
+    /**
      * Open Modal
      *
      * @author tmtwo
@@ -369,23 +396,25 @@
     var isCheckedNickNmDupl = true;
 
     /**
+     * Modal
      * Email, 닉네임 수정시 중복체크 초기화
      *
      * @author tmtwo
      * @version 1.0, 2017.12.16 소스 수정
      */
-    $('#user_id').change(function (e) {
+    $('#m_user_id').change(function (e) {
       isCheckedEmailDupl = false;
       e.preventDefault();
     });
 
-    $('#nick_nm').change(function (e) {
+    $('#m_nick_nm').change(function (e) {
       isCheckedNickNmDupl = false;
       e.preventDefault();
     });
 
 
     /**
+     * Modal
      * 닉네임 중복 체크 버튼 클릭.
      *
      * @author tmtwo
@@ -393,18 +422,18 @@
      * @see    None
      */
     $('#checkNickNm').click((e) => {
-      var trimNickNm = trim($('#nick_nm').val());
+      var trimNickNm = trim($('#m_nick_nm').val());
 
       //nick_nm null check
       if (trimNickNm == "") {
         alert("닉네임을 입력해 주세요.");
-        $('#nick_nm').val(trimNickNm).focus();
+        $('#m_nick_nm').val(trimNickNm).focus();
         return;
       }
 
       //TODO: 특수기호 못쓰게 처리 추가
       if (!regExp(trimNickNm)) {
-        $('#nick_nm').focus();
+        $('#m_nick_nm').focus();
         return;
       }
 
@@ -416,11 +445,11 @@
         success: function (data) {
           if (!data.isDuplicated) {
             isCheckedNickNmDupl = true;
-            alert('"' + $('#nick_nm').val() + '" 사용 가능한 닉네임 입니다.');
+            alert('"' + $('#m_nick_nm').val() + '" 사용 가능한 닉네임 입니다.');
           } else {
             isCheckedNickNmDupl = false;
-            alert('"' + $('#nick_nm').val() + '" 중복된 닉네임 입니다.');
-            $('#nick_nm').focus();
+            alert('"' + $('#m_nick_nm').val() + '" 중복된 닉네임 입니다.');
+            $('#m_nick_nm').focus();
           }
         },
         error: function (error) {
@@ -434,38 +463,39 @@
     /**
      * 비밀번호 체크
      */
-    $('#pwd').keyup(function () {
-      if ($('#before_pwd').val() != $('#pwd').val()) {
+    $('#m_pwd').keyup(function () {
+      if ($('#m_before_pwd').val() != $('#m_pwd').val()) {
         $('font[name=check2]').text('');
       } else {
         $('font[name=check2]').text('');
         $('font[name=check2]').html("현재 비밀번호와 변경 비밀번호가 동일합니다.");
       }
-    }); //#pwd.keyup
+    }); //#m_pwd.keyup
 
-    $('#pwd_again').keyup(function () {
-      if ($('#pwd').val() != $('#pwd_again').val()) {
+    $('#m_pwd_again').keyup(function () {
+      if ($('#m_pwd').val() != $('#m_pwd_again').val()) {
         $('font[name=check]').text('');
         $('font[name=check]').html("비밀번호가 다릅니다.");
       } else {
         $('font[name=check]').text('');
         $('font[name=check]').html("비밀번호가 일치합니다.");
       }
-    }); //#pwd_again.keyup
+    }); //#m_pwd_again.keyup
 
 
     /**
+     * Modal
      * 삭제
      *
      * @author tmtwo
      * @version 1.0, 2017.12.16 소스 수정
      */
 
-    function removeCancleValue(){
-      $('#nick_nm').val("${loginUser.nick_nm}");
-      $('#before_pwd').val("");
-      $('#pwd').val("");
-      $('#pwd_again').val("");
+    function removeCancleValue() {
+      $('#m_nick_nm').val("${loginUser.nick_nm}");
+      $('#m_before_pwd').val("");
+      $('#m_pwd').val("");
+      $('#m_pwd_again').val("");
       isCheckedEmailDupl = false;
       isCheckedNickNmDupl = false;
     }
@@ -475,6 +505,7 @@
     })
 
     /**
+     * Modal
      * Save LoginUser
      *
      * @author tmtwo
@@ -482,19 +513,19 @@
      */
     $('#setUserInfo').click((e) => {
 
-      var trimPwd = trim($('#pwd').val());
+      var trimPwd = trim($('#m_pwd').val());
 
       if (!isCheckedNickNmDupl) {
         alert("닉네임 중복확인을 해주세요.");
-        $('#nick_nm').focus();
+        $('#m_nick_nm').focus();
         return;
-      } else if ($('#pwd').val() != $('#pwd_again').val() || trimPwd == "") {
+      } else if ($('#m_pwd').val() != $('#m_pwd_again').val() || trimPwd == "") {
         alert("비밀번호를 확인해주세요.");
-        $('#pwd').focus();
+        $('#m_pwd').focus();
         return;
       }
 
-      if ($('#pwd').val() == $('#before_pwd').val()) {
+      if ($('#m_pwd').val() == $('#m_before_pwd').val()) {
         alert('현재 비밀번호와 변경 비밀번호가 동일합니다.');
         return;
       }
@@ -506,14 +537,14 @@
         type: "json",
         data: objectifyForm($('#registerForm').serializeArray()),
         success: function (data) {
-          if (!data.isCheckPassword){
+          if (!data.isCheckPassword) {
             alert("비밀번호가 맞지 않습니다.");
             return;
           }
-          
+
           if (data.isSuccesses) {
             alert("성공적으로 변경되었습니다.");
-            removeCancleValue();  //항목삭제
+            removeCancleValue(); //항목삭제
             $('#pictureModal').modal('hide');
           } else {
             alert("변경에 실패했습니다..");

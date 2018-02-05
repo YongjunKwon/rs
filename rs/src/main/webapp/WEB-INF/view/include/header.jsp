@@ -38,8 +38,9 @@
 
 	<script src="/AdminLTE-2.3.11/plugins/jQuery/jquery-2.2.3.min.js"></script>
 	
-		<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+	<!-- Infinite-Scroll -->
  	<script src="/js/infinite/scroll/infinite-scroll.pkgd.js"></script>
+ 	<script src="/js/infinite/masonry.pkgd.min.js"></script>
  	
 	<script src="/AdminLTE-2.3.11/bootstrap/js/bootstrap.min.js"></script>
 	<!-- FastClick -->
@@ -70,9 +71,6 @@
 	<!-- <script src="/AdminLTE-2.3.11/dist/js/demo.js"></script> -->
 	<!-- Smart Editor -->
 	<script src="/se2/js/HuskyEZCreator.js"></script>	
-	
- 	<%-- <script src="/js/infinite/scroll/infinite-scroll.pkgd.min.js"></script> --%>
-
 	
 </head>
 

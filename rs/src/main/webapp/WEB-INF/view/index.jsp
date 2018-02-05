@@ -1,84 +1,84 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<%@include file="include/header.jsp"%>
+  <!DOCTYPE html>
+  <html>
+  <%@include file="include/header.jsp"%>
 
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
-<%@include file="include/top.jsp"%>
-<%@include file="include/sideMenu.jsp"%>
+    <body class="hold-transition skin-blue sidebar-mini">
+      <div class="wrapper">
+        <%@include file="include/top.jsp"%>
+          <%@include file="include/sideMenu.jsp"%>
 
-<!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Welcome!!
-        <small> 환영합니다. </small>
-      </h1>
-<!--       <ol class="breadcrumb">
+            <!-- Content Wrapper. Contains page content -->
+            <div class="content-wrapper">
+              <!-- Content Header (Page header) -->
+              <section class="content-header">
+                <h1>
+                  ♥ Welcome ♥
+                  <small>♥♥ </small>
+                </h1>
+                <!--       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
         <li class="active">Here</li>
       </ol> -->
-    </section>
+              </section>
 
-    <!-- Main content -->
-    <section class="content">
+              <!-- Main content -->
+              <section class="content">
 
-      <!-- Your Page Content Here -->
-      <!-- <img src="/images/main.png" /> -->
-      <div class="big-box"><h1>Page 1</h1></div>
-      <div class="big-box"><h1>Page 2</h1></div>
-     
-      
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-<%@include file="include/bottom.jsp"%>
-</div>
-<!-- ./wrapper -->
-</body>
 
-<style>
-  .big-box {
-    width: 100%;
-    background-color: gray;
-    height: 100vh;
-    border-top: 1px solid black;
-  }
+                    <div class="grid js-masonry"
+                    data-masonry-options='{ "itemSelector": ".grid-item", "columnWidth": 200, "gutter": 5 }'>
+                      <img class="grid-item" src="https://i.imgur.com/laIuV0D.jpg">
+                      <img class="grid-item" src="https://i.imgur.com/777dcVU.jpg">
+                      <img class="grid-item" src="https://i.imgur.com/ZPPFND3.jpg">
+                      <img class="grid-item" src="https://i.imgur.com/EpYbuG7.jpg">
+                      <img class="grid-item" src="https://i.imgur.com/kXUHDn5.jpg">
+                      <img class="grid-item" src="https://i.imgur.com/Qmz61wo.jpg">
+                      <img class="grid-item" src="https://i.imgur.com/aPia86B.jpg">
+                      <img class="grid-item" src="https://i.imgur.com/iQRKg2a.jpg">
+                      <img class="grid-item" src="https://i.imgur.com/XREWwIc.jpg">
+                      <img class="grid-item" src="https://i.imgur.com/MV9SvaP.jpg">
+                      <img class="grid-item" src="https://i.imgur.com/qjQ9XWl.jpg">
+                      <img class="grid-item" src="https://i.imgur.com/ZJ088Tk.jpg">
+                      <img class="grid-item" src="https://i.imgur.com/SuZLV2U.jpg">
+                      <img class="grid-item" src="https://i.imgur.com/71H2B0k.jpg">
+                      <img class="grid-item" src="https://i.imgur.com/vxOA4hg.jpg">
+                      <img class="grid-item" src="https://i.imgur.com/8kLXqdP.jpg">
+                  </div>
+                  <!-- /.grid -->
+                <!-- /.container -->
 
-  body { 
-    margin: 0px;
-    padding: 0px;
-  } 
-</style>
+              </section>
+              <!-- /.content -->
+            </div>
+            <!-- /.content-wrapper -->
+            <%@include file="include/bottom.jsp"%>
+      </div>
+      <!-- ./wrapper -->
+    </body>
+
+    <style>
+      .grid-item { margin-bottom: 10px; border-radius: 4px; border: 1px; }
+      /* .grid-item--width2 { width: 400px; }  */
+    </style>
 
     <script type="text/javascript">
-      var page = 2;
+      $(document).ready(function () {
 
-      $(window).scroll(function() {
-          if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-            console.log(++page);
-            $("body").append('<div class="big-box"><h1>Page ' + page + '</h1></div>');
-            
-          }
+        // $('.grid').masonry({
+        //   itemSelector: '.grid-item',
+        //   columnWidth: 200,
+        //   gutter: 10
+        // });
+
+        // $('.container').infiniteScroll({
+        //   // options
+        //   path: '.pagination__next',
+        //   append: '.post',
+        //   history: false,
+        // });
+
       });
-// $(document).ready(function () {
-//       $(document).scroll(function() {
-//           var maxHeight = $(document).height();
-//           var currentScroll = $(window).scrollTop() + $(window).height();
-
-//           if (maxHeight <= currentScroll + 100) {
-//             console.log("1121212");
-//             $.ajax({
-//               // Append next contents
-            
-//             });
-//           }
-//         });
-// });
     </script>
-</html>
 
-
+  </html>
