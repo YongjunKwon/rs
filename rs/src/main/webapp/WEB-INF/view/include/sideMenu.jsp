@@ -111,10 +111,11 @@
 
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu">
-        <li class="header">게시판목록</li>
+        <li class="header">좌측메뉴목록</li>
         <!-- Optionally, you can add icons to the links -->
 
-        <li class="treeview">
+		<!-- 업소정보 //시작-->
+        <li id="side_bizInfo" class="treeview">
           <a href="#">
             <i class="fa fa-share"></i>
             <span>업소정보</span>
@@ -123,86 +124,90 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li>
-              <a href="/board/sample/sampleList">
+            <li id="menu_op">
+              <a href="/board/bizBoardList?categorynm=op">
                 <i class="fa fa-circle-o"></i>오피스텔</a>
             </li>
             <li>
-            <li>
-              <a href="/board/sample/sampleList">
+            <li id="menu_gunma">
+              <a href="/board/bizBoardList?categorynm=gunma">
+                <i class="fa fa-circle-o"></i>건마</a>
+            </li>
+            <li id="menu_anma">
+              <a href="/board/bizBoardList?categorynm=anma">
                 <i class="fa fa-circle-o"></i>안마방</a>
             </li>
-            
+            <li id="menu_play">
+              <a href="/board/bizBoardList?categorynm=play">
+                <i class="fa fa-circle-o"></i>유흥주점</a>
+            </li>
+            <li id="menu_tel">
+              <a href="/board/bizBoardList?categorynm=tel">
+                <i class="fa fa-circle-o"></i>휴게텔</a>
+            </li>
+            <li id="menu_lib">
+              <a href="/board/bizBoardList?categorynm=lib">
+                <i class="fa fa-circle-o"></i>립카페/핸플/키스</a>
+            </li>
           </ul>
         </li>
-
+        <!-- 업소정보 //끝-->
+        
+        <!-- 업소후기 //시작-->
         <li class="treeview">
           <a href="#">
             <i class="fa fa-share"></i>
-            <span>후기정보</span>
+            <span>업소후기</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
             <li>
-              <a href="/board/chicken/list">
-                <i class="fa fa-circle-o"></i>치킨집</a>
+              <a href="/board/bizBoardList?categorynm=oph">
+                <i class="fa fa-circle-o"></i>오피스텔 후기</a>
             </li>
             <li>
-              <a href="#">
-                <i class="fa fa-circle-o"></i> 피자집
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-              </a>
-              <ul class="treeview-menu">
-                <li>
-                  <a href="#">
-                    <i class="fa fa-circle-o"></i> Level Two</a>
-                </li>
-                <li>
-                  <a href="#">
-                    <i class="fa fa-circle-o"></i> Level Two
-                    <span class="pull-right-container">
-                      <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                  </a>
-                  <ul class="treeview-menu">
-                    <li>
-                      <a href="#">
-                        <i class="fa fa-circle-o"></i> Level Three</a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i class="fa fa-circle-o"></i> Level Three</a>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
+            <li>
+              <a href="/board/bizBoardList?categorynm=gunmah">
+                <i class="fa fa-circle-o"></i>건마 후기</a>
             </li>
             <li>
-              <a href="#">
-                <i class="fa fa-circle-o"></i> 중국집</a>
+              <a href="/board/bizBoardList?categorynm=anmah">
+                <i class="fa fa-circle-o"></i>안마방 후기</a>
+            </li>
+            <li>
+              <a href="/board/bizBoardList?categorynm=playh">
+                <i class="fa fa-circle-o"></i>유흥주점 후기</a>
+            </li>
+            <li>
+              <a href="/board/bizBoardList?categorynm=libh">
+                <i class="fa fa-circle-o"></i>텔/립/핸플/키스 후기</a>
             </li>
           </ul>
         </li>
-
-        <li>
-          <a href="#">
-            <i class="fa fa-link"></i>
-            <span>Link</span>
+		<!-- 업소후기 //끝-->
+		
+        <!-- 업소언니정보 //시작-->
+        <!-- 언니들 정보 올리는 게시판 -->
+        <li class="treeview">
+          <a href="/board/bizBoardList?categorynm=bizwm">
+            <i class="fa fa-share"></i>
+            <span>업소언니정보</span>
           </a>
         </li>
-        <li>
-          <a href="#">
-            <i class="fa fa-link"></i>
-            <span>Another Link</span>
+		<!-- 업소언니정보 //끝-->
+		
+        <!-- 파트너공유 //시작-->
+        <li class="treeview">
+          <a href="/board/bizBoardList?categorynm=partner">
+            <i class="fa fa-share"></i>
+            <span>파트너공유</span>
           </a>
         </li>
+		<!-- 파트너정보 //끝-->
+        
       </ul>
-
-
 
       <!-- /.sidebar-menu -->
     </section>
