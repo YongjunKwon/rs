@@ -95,4 +95,21 @@ public interface UserMapper {
 		,"WHERE user_id=#{user_id}"
 	})
 	void setUser(User user);
+	
+	
+	@Insert({                           
+		 "	  INSERT INTO LOGIN           "                
+		,"	  	(                         "  
+		,"	  		 USER_ID              "             
+		,"			,LOGIN_DTIME          "                 
+		,"			,IP                   "        
+		,"		)                         "  
+		,"  	  VALUES (                "           
+		,"			 #{user_id}           "             
+		,"			,CURRENT_TIMESTAMP    "                       
+		,"			,#{ip}                "         
+		,"	  )                           "
+	})                              
+	void setLoginUserInfo(@Param("user_id") String user_id, @Param("ip") String ip);
+	
 }

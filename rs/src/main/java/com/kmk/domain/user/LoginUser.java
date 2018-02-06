@@ -19,6 +19,10 @@ public class LoginUser implements UserDetails {
     private String nick_nm;
     private String pwd;
     private String mem_type;
+    private String category;
+    private String area_cd;
+    private String biz_nm;
+    
     private List<String> roles;
 
 
@@ -30,8 +34,15 @@ public class LoginUser implements UserDetails {
         this.nick_nm = user.getNick_nm();
         this.pwd = user.getPwd();
         this.mem_type = user.getMem_type();
-        
+        this.category = user.getCategory();
+        this.area_cd = user.getArea_cd();
+        this.biz_nm = user.getBiz_nm();
     }
+    
+    public String getRole(){
+    	return this.roles.get(0);
+    }
+    
     @Override
     public String getPassword() {
 		return this.pwd;
