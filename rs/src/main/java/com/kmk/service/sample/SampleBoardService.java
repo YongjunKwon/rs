@@ -2,6 +2,7 @@ package com.kmk.service.sample;
 
 import java.util.List;
 
+import org.hibernate.validator.internal.util.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,6 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.kmk.domain.sample.Reply;
 import com.kmk.domain.sample.SampleBoard;
 import com.kmk.mapper.sample.SampleBoardMapper;
+
+import ch.qos.logback.classic.Logger;
 
 @Service
 @Transactional
@@ -43,15 +46,8 @@ public class SampleBoardService {
 		return sampleBoardMapper.selectReplyUserId(reply_seq);
 	}
 	
-	public void insertBoard(SampleBoard sampleBoard){	
-		//logger.info("query test: {}", testMapper.getList());
+	public void insertBoard(SampleBoard sampleBoard){
 		sampleBoardMapper.insertBoard(sampleBoard);
 	}
-	
-//	
-//	public List<SampleBoard> selectSampleBoard(){
-//		//logger.info("query test: {}", testMapper.getList());
-//		return chickenMapper.selectSampleBoard();
-//	}
 }
 			

@@ -135,19 +135,32 @@ public class SampleBoardController {
     		mav.addObject("success", sampleBoardService.delFalgUpadaeReply(reply.getReply_seq())); // not access
     	}
         return mav;
-    }
+	}
     
 	
-   @RequestMapping("write")
-   public String write(String tname, Model model) {
-	  logger.info(" write :::: >>>> tname ::: " + tname);
-      return "board/sample/write";
-   }
+	@RequestMapping("write")
+	public String write(String tname, Model model) {
+	   logger.info(" write :::: >>>> tname ::: " + tname);
+	  return "board/sample/write";
+	}
    
-   @RequestMapping("saveBoard")
-   public String saveBoard(SampleBoard sampleBoard) {
-	  sampleBoardService.insertBoard(sampleBoard);
-      return "redirect:sampleList";
+	@RequestMapping("saveBoard")
+	public String saveBoard(SampleBoard sampleBoard,  HttpSession session) 
+	{	
+		LoginUser loginUser = (LoginUser)session.getAttribute("loginUser");
+    	String userId = loginUser.getUser_id();
+    	String areaCd = "AA30";
+    	String bizNm = "수원왕서방";
+    	String category = "CG0101";		
+		
+		sampleBoard.setUser_id(userId);
+		sampleBoard.setArea_cd(areaCd);
+		sampleBoard.setBiz_nm(bizNm);
+		sampleBoard.setCategory(category);
+		
+		sampleBoardService.insertBoard(sampleBoard);
+		
+		return "redirect:bizBoardList";
    }
 	
  }

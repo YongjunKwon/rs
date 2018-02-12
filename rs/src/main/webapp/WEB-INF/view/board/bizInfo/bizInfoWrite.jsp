@@ -35,7 +35,11 @@
                    </div>
 					<!-- /.box-header -->
 					<div class="box-body">                      
-						<form id="frm" name="frm" method="post" class="form-inline" action="/board/sample/saveBoard">                                                                                       
+						<form id="frm" name="frm" method="post" class="form-inline" action="/board/sample/saveBoard">
+							<input type="hidden" id="user_id"	name="user_id"	value="">
+							<input type="hidden" id="category"	name="category"	value="">
+							<input type="hidden" id="area_cd"	name="area_cd"	value="">
+							<input type="hidden" id="biz_nm"	name="biz_nm"	value="">
 							<div class="row">
                             	<label class="col-sm-1 form_control_lebel">
                                	제목
@@ -51,13 +55,13 @@
 								<div class="col-sm-11">                          
 									<textarea class="form_control_textarea" name="content" id="content" rows="27" style="width:100%; hegith:595px">
 									</textarea>
-                        		</div>
+                        		</div>                        		
                      		</div>                                                   
                      		<div class="row">
                      			<label class="col-sm-1 form_control_lebel">
                      			</label>
                         		<div id="example1_filter" class="col-sm-11 pull-left">                              
-                           			<input class="btn_ btn-block_ btn-success_" type="submit" value="저장" />
+                           			<input class="btn_ btn-block_ btn-success_" type="submit" value="저장">
                         		</div>
                      		</div>                                                               
                   		</form>                     
@@ -75,9 +79,20 @@
 </div>
 </body>
 <script type="text/javascript">
-// Editor Setting
 var oEditors = []; // 개발되어 있는 소스에 맞추느라, 전역변수로 사용하였지만, 지역변수로 사용해도 전혀 무관 함.
 $(document).ready(function() {
+	$("#frm").submit(function(e){
+		if(validation()){
+			oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", [ ]);			
+		        	
+            if (!confirm(aslang[4])){ 
+                return false;
+            } else {
+            	return true;
+            }
+		}		
+	});		
+	
 	nhn.husky.EZCreator.createInIFrame({
 	   oAppRef : oEditors, // 전역변수 명과 동일해야 함.
 	   elPlaceHolder : "content", // 에디터가 그려질 textarea ID 값과 동일 해야 함.
@@ -92,60 +107,22 @@ $(document).ready(function() {
 	               bUseModeChanger : true, 
 	            }
 	});
-	
-    $("#frm").validate({
-        rules: {
-            category: {
-                required: true
-            },
-            title: {
-                required: true
-            },
-            content: {
-                required: true
-            }
-        },
-        messages: {
-            category: {
-                required: "카테고리는 필수입력값입니다."
-            },
-            title: {
-                required: "제목은 필수입력값입니다."
-            },
-            content: {
-                required: "내용은 필수입력값입니다."
-            }
-        },
-        submitHandler: function(form) {
-        		
-            if (!confirm(aslang[4]))
-            	alert("confirm");
-                return false;
-            else {
-                form.submit();
-            }
-        }
-    });
-    // });
 });
-
-
 
 //‘저장’ 버튼을 누르는 등 저장을 위한 액션을 했을 때 submitContents가 호출된다고 가정한다.
 function submitContents(elClickedObj) {
     // 에디터의 내용이 textarea에 적용된다.
-    oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", [ ]);
- 
+    
+alert("submitContents");
     // 에디터의 내용에 대한 값 검증은 이곳에서
     // document.getElementById("textAreaContent").value를 이용해서 처리한다.
-  	alert(document.getElementById("textAreaContent").value);
+  	alert(document.getElementById("content").value);
     try {
-        elClickedObj.form.submit();
+    	elClickedObj.form.submit();
     } catch(e) {
-     
+
     }
 }
-
 
 //textArea에 이미지 첨부
 function pasteHTML(filepath){
@@ -155,15 +132,22 @@ function pasteHTML(filepath){
 
 // 필수값 Check
 function validation(){
-   var contents = $.trim(oEditors[0].getContents());
-   if(contents === '<p>&nbsp;</p>' || contents === ''){ // 기본적으로 아무것도 입력하지 않아도 <p>&nbsp;</p> 값이 입력되어 있음. 
-      alert("내용을 입력하세요.");
-      oEditors.getById['content'].exec('FOCUS');
-      return false;
-   }
+	var contents = $.trim(oEditors[0].getContents());
+	var title = $.trim(document.getElementById("title").value);
+   
+	if(title === '<p>&nbsp;</p>' || title === ''){ // 기본적으로 아무것도 입력하지 않아도 <p>&nbsp;</p> 값이 입력되어 있음.
+		alert("제목을 입력하세요.");
+		$("#title").focus();
+		return false;
+	}
+   
+	if(contents === '<p>&nbsp;</p>' || contents === ''){ // 기본적으로 아무것도 입력하지 않아도 <p>&nbsp;</p> 값이 입력되어 있음. 
+		alert("내용을 입력하세요.");
+		oEditors.getById['content'].exec('FOCUS');
+		return false;
+	}
 
-   return true;
+	return true;
 }
 </script>
-
-    </html>
+</html>
