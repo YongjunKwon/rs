@@ -65,6 +65,12 @@ public class Usercontroller {
         return "/login/register";
     }
     
+    @RequestMapping(value = "/biz/register")
+    public String bizRegister(Model model) {
+        return "/login/biz_register";
+    }
+    
+    
     @RequestMapping(value = "/register/checkEmail")
     public ModelAndView checkEmail(User user) {
     	
@@ -122,4 +128,12 @@ public class Usercontroller {
     	
         return mav;
     }
+    
+    @RequestMapping(value = "/findPassword")
+    public ModelAndView findPassword() {
+    	ModelAndView mav = new ModelAndView("jsonView");
+    	log.info("===========kwon findPassword");
+        return mav;
+    }
+    
 }

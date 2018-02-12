@@ -12,7 +12,7 @@
         </div>
 
         <div class="register-box-body">
-          <p class="login-box-msg">회원가입</p>
+          <p class="login-box-msg">일반 회원가입</p>
 
           <form id="registerForm" action="/register/add" method="post">
 

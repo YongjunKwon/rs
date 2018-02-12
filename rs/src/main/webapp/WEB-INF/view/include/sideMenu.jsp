@@ -59,7 +59,7 @@
       <!-- 로그인//종료 -->
 
       <!-- 로그인성공시 //시작 -->
-      <c:if test="${loginUser.user_id != '' || loginUser.user_id ne null}">
+      <c:if test="${loginUser.user_id != '' and loginUser.user_id ne null}">
         <div class="user-panel">
           <div class="pull-left image user_picture" data-toggle="tooltip" title="사용자 정보 수정">
             <img src="/AdminLTE-2.3.11/dist/img/welcome_category_icon_privacy.png" class="img-circle cursor" alt="">
