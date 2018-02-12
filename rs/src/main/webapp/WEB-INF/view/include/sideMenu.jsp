@@ -111,7 +111,7 @@
 
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu">
-        <li class="header">좌측메뉴목록</li>
+        <li class="header">땡땡에 오신걸환영합니다.</li>
         <!-- Optionally, you can add icons to the links -->
 
         <!-- 업소정보 //시작-->
@@ -154,7 +154,7 @@
           <!-- 업소정보 //끝-->
 
           <!-- 업소후기 //시작-->
-          <li class="treeview">
+          <li id="side_bizComment" class="treeview">
             <a href="#">
               <i class="fa fa-share"></i>
               <span>업소후기</span>
@@ -163,24 +163,24 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li>
+              <li id="menu_oph">
                 <a href="/board/bizBoardList?categorynm=oph">
                   <i class="fa fa-circle-o"></i>오피스텔 후기</a>
               </li>
               <li>
-                <li>
+                <li id="menu_gunmah">
                   <a href="/board/bizBoardList?categorynm=gunmah">
                     <i class="fa fa-circle-o"></i>건마 후기</a>
                 </li>
-                <li>
+                <li id="menu_anmah">
                   <a href="/board/bizBoardList?categorynm=anmah">
                     <i class="fa fa-circle-o"></i>안마방 후기</a>
                 </li>
-                <li>
+                <li id="menu_playh">
                   <a href="/board/bizBoardList?categorynm=playh">
                     <i class="fa fa-circle-o"></i>유흥주점 후기</a>
                 </li>
-                <li>
+                <li id="menu_libh">
                   <a href="/board/bizBoardList?categorynm=libh">
                     <i class="fa fa-circle-o"></i>텔/립/핸플/키스 후기</a>
                 </li>
@@ -190,7 +190,7 @@
 
             <!-- 업소언니정보 //시작-->
             <!-- 언니들 정보 올리는 게시판 -->
-            <li class="treeview">
+            <li id="side_bizWm" class="treeview">
               <a href="/board/bizBoardList?categorynm=bizwm">
                 <i class="fa fa-share"></i>
                 <span>업소언니정보</span>
@@ -199,10 +199,19 @@
             <!-- 업소언니정보 //끝-->
 
             <!-- 파트너공유 //시작-->
-            <li class="treeview">
+            <li id="side_partner" class="treeview">
               <a href="/board/bizBoardList?categorynm=partner">
                 <i class="fa fa-share"></i>
                 <span>파트너공유</span>
+              </a>
+            </li>
+            <!-- 파트너정보 //끝-->
+
+            <!-- 파트너공유 //시작-->
+            <li id="side_bizQna" class="treeview">
+              <a href="/board/bizBoardList?categorynm=bizqna">
+                <i class="fa fa-share"></i>
+                <span>업체문의게시판</span>
               </a>
             </li>
             <!-- 파트너정보 //끝-->
@@ -378,7 +387,33 @@
     } else if ("${board.categorynm}" == "lib") {
       $('#menu_lib').parents('li').addClass('active');
       $('#menu_lib').addClass('active');
+    } else if ("${board.categorynm}" == "oph") {
+      $('#menu_oph').parents('li').addClass('active');
+      $('#menu_oph').addClass('active');
+    } else if ("${board.categorynm}" == "gunmah") {
+      $('#menu_gunmah').parents('li').addClass('active');
+      $('#menu_gunmah').addClass('active');
+    } else if ("${board.categorynm}" == "anmah") {
+      $('#menu_anmah').parents('li').addClass('active');
+      $('#menu_anmah').addClass('active');
+    } else if ("${board.categorynm}" == "playh") {
+      $('#menu_playh').parents('li').addClass('active');
+      $('#menu_playh').addClass('active');
+    } else if ("${board.categorynm}" == "telh") {
+      $('#menu_telh').parents('li').addClass('active');
+      $('#menu_telh').addClass('active');
+    } else if ("${board.categorynm}" == "libh") {
+      $('#menu_libh').parents('li').addClass('active');
+      $('#menu_libh').addClass('active');
+    } else if ("${board.categorynm}" == "bizwm") {
+      $('#side_bizWm').addClass('active');
+    } else if ("${board.categorynm}" == "partner") {
+      $('#side_partner').addClass('active');
+    } else if ("${board.categorynm}" == "bizqna") {
+      $('#side_bizQna').addClass('active');
     }
+
+
 
     /**
      * Open Modal

@@ -97,7 +97,7 @@
 													</span>
 												</span>
 												<div class="print-hide pull-right font-11" id="replyDelete" name="replyDelete">
-													<c:if test="${reply.check_del_flag eq 'true' }">
+													<c:if test="${reply.check_del_flag eq 'true'}">
 														<a href="#" data-values='{ "reply_seq" : "${reply.reply_seq}", "check_del_flag" : "${reply.check_del_flag}" }'><span>삭제</span></a>
 													</c:if>
 												</div>												
@@ -206,12 +206,50 @@
 		gv_auth = "${loginUser.roles[0]}";
         var $seq = "${contents.seq}";
 
+        // $("#replyDelete > a").on("click", function() {
+        // //$("#addBtn").on("click", function() {
+		// 	//e.preventDefault();
+			
+        //     var $dataTag = $(this).data('values');            
+
+        //     var params = {
+        //         "reply_seq": $dataTag.reply_seq,
+        //         "seq": $seq
+        //     };
+            
+        //     if(!confirm(aslang[11]))return;;
+            
+        //     $.ajax({
+        //         url: "/board/sample/delFalgUpadaeReply",
+        //         method: "post",
+        //         type: "json",
+        //         data: params,
+        //         success: function(data) {
+        //             if (data.success == -99) {
+        //                 alert(aslang[1]);
+        //                 return;
+        //             }
+        //         },
+        //         error: function(error) {
+        //             alert("error : " + eval(error));
+        //         }
+        //     });
+        // });
+
         // 댓글삭제
         $("#replyDelete > a").on("click", function() {
             var $dataTag = $(this).data('values');
+            console.log("---- 게시글 댓글 삭제 @@@@@ " + $dataTag.reply_seq);
+
+            //$(".tr_on").find("td").eq(0).find("[name$=h_cuslSeq]").val()
+            //console.log(" //// " + $(this));
+            //console.log("비밀번호 ::: " + $(this).next().val());
+
+
 
 			if(!confirm(aslang[11]))return;
 
+            //$("#commDelFrm #pwd").val($(this).next().val());
             $("#commDelFrm #reply_seq").val($dataTag.reply_seq);
 
             $("#commDelFrm").attr("action", "/board/delFalgUpadaeReply");
@@ -220,8 +258,10 @@
 
         });
 
+
         // 댓글등록
         $("#btnReplyReg").on("click", function() {
+            
         	$("#commFrm").attr("action", "/board/bizBoardReplyReg");
             $("#commFrm").attr("method", "post");
             $("#commFrm").submit();

@@ -97,7 +97,7 @@
 													</span>
 												</span>
 												<div class="print-hide pull-right font-11" id="replyDelete" name="replyDelete">
-													<c:if test="${reply.check_del_flag eq 'true' }">
+													<c:if test="${reply.check_del_flag eq 'true'}">
 														<a href="#" data-values='{ "reply_seq" : "${reply.reply_seq}", "check_del_flag" : "${reply.check_del_flag}" }'><span>삭제</span></a>
 													</c:if>
 												</div>												
@@ -200,8 +200,6 @@
 	var gv_auth = "";
     $(document).ready(function() {
         $("#area_cd").val("${sampleBoard.area_cd}");
-        console.log("${contents.seq}");
-		console.log("${loginUser.roles[0]}");
 
 		gv_auth = "${loginUser.roles[0]}";
         var $seq = "${contents.seq}";
@@ -221,7 +219,7 @@
         });
 
         // 댓글등록
-        $("#btnReplyReg").on("click", function() {
+        $("#btnReplyReg").on("click", function() {            
         	$("#commFrm").attr("action", "/board/bizBoardReplyReg");
             $("#commFrm").attr("method", "post");
             $("#commFrm").submit();

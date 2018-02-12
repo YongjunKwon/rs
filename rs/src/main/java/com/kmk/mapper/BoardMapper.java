@@ -84,7 +84,7 @@ public interface BoardMapper {
 	+ ", R.REG_DTIME"
 	+ ", DATE_FORMAT(R.REG_DTIME, '%Y.%m.%d %H:%i:%s') AS YYYYMMDD "
 	+ ", U.NICK_NM  "
-	+ ", CASE WHEN R.USER_ID = #{user_id} THEN 'true' ELSE 'false' END AS CHECK_DEL_FLAG "
+	+ ", CASE WHEN R.USER_ID = #{user_id} OR U.MEM_TYPE = 0 THEN 'true' ELSE 'false' END AS CHECK_DEL_FLAG "
 	+ "	  FROM REPLY R INNER JOIN USER U ON R.USER_ID = U.USER_ID "
 	+ "  WHERE 1=1 "
 	+ "    AND R.SEQ=#{seq} AND R.DEL_FLAG = 'N' ORDER BY R.SEQ ASC "

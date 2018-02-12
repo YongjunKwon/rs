@@ -122,34 +122,74 @@ public class BoardController {
 		     */	
 		    case "oph": 
 		    	logger.info(" oph return page setting " + board.getCategorynm());
+		    	model.addAttribute("captionTitle", "오피스텔 후기");
+		    	board.setCategory("CG0201");
+		    	returnPage = "board/bizComment/bizCommentBoardList";
 		    	break;
 		    	
 		    case "gunmah": 
 		    	logger.info(" gunmah return page setting " + board.getCategorynm());
+		    	model.addAttribute("captionTitle", "건마 후기");
+		    	board.setCategory("CG0202");
+		    	returnPage = "board/bizComment/bizCommentBoardList";
 		    	break;
 		    	
 		    case "anmah": 
 		    	logger.info(" anmah return page setting " + board.getCategorynm());
+		    	model.addAttribute("captionTitle", "안마방 후기");
+		    	board.setCategory("CG0203");
+		    	returnPage = "board/bizComment/bizCommentBoardList";
 		    	break;
 		    	
 		    case "playh": 
 		    	logger.info(" playh return page setting " + board.getCategorynm());
+		    	model.addAttribute("captionTitle", "유흥주점 후기");
+		    	board.setCategory("CG0204");
+		    	returnPage = "board/bizComment/bizCommentBoardList";
 		    	break;
 		    	
 		    case "telh": 
 		    	logger.info(" telh return page setting " + board.getCategorynm());
+		    	model.addAttribute("captionTitle", "휴게텔 후기");
+		    	board.setCategory("CG0205");
+		    	returnPage = "board/bizComment/bizCommentBoardList";
 		    	break;
 		    	
 		    case "libh": 
 		    	logger.info(" libh return page setting " + board.getCategorynm());
+		    	model.addAttribute("captionTitle", "립카페/핸플/키스 후기");
+		    	board.setCategory("CG0206");
+		    	returnPage = "board/bizComment/bizCommentBoardList";
 		    	break;
 		    	
+		    /*********************
+		     * 업소언니정보 카테고리
+		     */	
 		    case "bizwm": 
 		    	logger.info(" bizwm return page setting " + board.getCategorynm());
+		    	model.addAttribute("captionTitle", "업소언니정보");
+		    	board.setCategory("CG03");
+		    	returnPage = "board/bizWm/bizWmBoardList";
 		    	break;
-		    	
+	    	
+		    /*********************
+		     * 파트너공유 카테고리
+		     */	
 		    case "partner": 
 		    	logger.info(" partner return page setting " + board.getCategorynm());
+		    	model.addAttribute("captionTitle", "파트너공유");
+		    	board.setCategory("CG04");
+		    	returnPage = "board/partnerShare/partnerShareBoardList";
+		    	break;
+		    	
+	    	/*********************
+	    	 * 업체문의게시판 카테고리
+	    	 */	
+		    case "bizqna": 
+		    	logger.info(" bizqna return page setting " + board.getCategorynm());
+		    	model.addAttribute("captionTitle", "업체문의게시판");
+		    	board.setCategory("CG05");
+		    	returnPage = "board/bizQna/bizQnaBoardList";
 		    	break;
 		}
 		
@@ -194,26 +234,36 @@ public class BoardController {
 		         
 		    case "gunma": 
 		    	logger.info(" gunma return page setting " + categorynm);
+		    	model.addAttribute("categorynm","gunma");
+		    	model.addAttribute("category_tiele","건마");
 		    	returnPage = "board/bizInfo/bizBoardDetail";
 		    	break;
 		    	
 		    case "anma": 
 		    	logger.info(" anma return page setting " + categorynm);
+		    	model.addAttribute("categorynm","anma");
+		    	model.addAttribute("category_tiele","안마");
 		    	returnPage = "board/bizInfo/bizBoardDetail";
 		    	break;
 		    	
 		    case "play": 
 		    	logger.info(" play return page setting " + categorynm);
+		    	model.addAttribute("categorynm","play");
+		    	model.addAttribute("category_tiele","유흥주점");
 		    	returnPage = "board/bizInfo/bizBoardDetail";
 		    	break;
 		    	
 		    case "tel": 
 		    	logger.info(" tel return page setting " + categorynm);
+		    	model.addAttribute("categorynm","tel");
+		    	model.addAttribute("category_tiele","휴게텔");
 		    	returnPage = "board/bizInfo/bizBoardDetail";
 		    	break;
 		    	
 		    case "lib": 
 		    	logger.info(" lib return page setting " + categorynm);
+		    	model.addAttribute("categorynm","lib");
+		    	model.addAttribute("category_tiele","립카페/핸플/키스");
 		    	returnPage = "board/bizInfo/bizBoardDetail";
 		    	break;
 		    
@@ -223,35 +273,76 @@ public class BoardController {
 		     */	
 		    case "oph": 
 		    	logger.info(" oph return page setting " + categorynm);
+		    	model.addAttribute("categorynm","oph");
+		    	model.addAttribute("category_tiele","후기 후기");
+		    	returnPage = "board/bizComment/bizCommentBoardDetail";
 		    	break;
 		    	
 		    case "gunmah": 
 		    	logger.info(" gunmah return page setting " + categorynm);
+		    	model.addAttribute("categorynm","gunmah");
+		    	model.addAttribute("category_tiele","건마 후기");
+		    	returnPage = "board/bizComment/bizCommentBoardDetail";
 		    	break;
 		    	
 		    case "anmah": 
 		    	logger.info(" anmah return page setting " + categorynm);
+		    	model.addAttribute("categorynm","anmah");
+		    	model.addAttribute("category_tiele","안마 후기");
+		    	returnPage = "board/bizComment/bizCommentBoardDetail";
 		    	break;
 		    	
 		    case "playh": 
 		    	logger.info(" playh return page setting " + categorynm);
+		    	model.addAttribute("categorynm","playh");
+		    	model.addAttribute("category_tiele","유흥주점 후기");
+		    	returnPage = "board/bizComment/bizCommentBoardDetail";
 		    	break;
 		    	
 		    case "telh": 
 		    	logger.info(" telh return page setting " + categorynm);
+		    	model.addAttribute("categorynm","telh");
+		    	model.addAttribute("category_tiele","휴게텔 후기");
+		    	returnPage = "board/bizComment/bizCommentBoardDetail";
 		    	break;
 		    	
 		    case "libh": 
 		    	logger.info(" libh return page setting " + categorynm);
+		    	model.addAttribute("categorynm","libh");
+		    	model.addAttribute("category_tiele","립카페/핸플/키스 후기");
+		    	returnPage = "board/bizComment/bizWmDetail";
 		    	break;
 		    	
+		    /*********************
+		     * 업소언니정보 카테고리
+		     */	
 		    case "bizwm": 
 		    	logger.info(" bizwm return page setting " + categorynm);
+		    	model.addAttribute("categorynm","bizwm");
+		    	model.addAttribute("category_tiele","업소언니정보");
+		    	returnPage = "board/bizWm/partnerShareBoardDetail";
 		    	break;
 		    	
+		    /*********************
+		     * 파트너공유 카테고리
+		     */	
 		    case "partner": 
 		    	logger.info(" partner return page setting " + categorynm);
+		    	model.addAttribute("categorynm","partner");
+		    	model.addAttribute("category_tiele","업소언니정보");
+		    	returnPage = "board/partnerShare/partnerShareBoardDetail";
 		    	break;
+		    	
+		    /*********************
+		     * 업소언니정보 카테고리
+		     */	
+		    case "bizqna": 
+		    	logger.info(" bizqna return page setting " + categorynm);
+		    	model.addAttribute("categorynm","Q&A");
+		    	model.addAttribute("category_tiele","업체문의게시판");
+		    	returnPage = "board/bizQna/bizQnaBoardDetail";
+		    	break;
+		    	
 		}
 		
 		
@@ -315,10 +406,20 @@ public class BoardController {
     }
     
 	
+   // 업소정보
    @RequestMapping("bizBoardWrite")
-   public String write(String categorynm, Model model) {
+   public String bizBoardWrite(String categorynm, Model model) {
 	  logger.info(" bizBoardWrite :::: >>>> categorynm ::: " + categorynm);
+	  model.addAttribute("categorynm", categorynm);
       return "board/bizInfo/bizInfoWrite";
+   }
+   
+   // 업소후기
+   @RequestMapping("bizCommentBoardWrite")
+   public String bizCommentBoardWrite(String categorynm, Model model) {
+	   logger.info(" bizCommentBoardWrite :::: >>>> categorynm ::: " + categorynm);
+	   model.addAttribute("categorynm", categorynm);
+	   return "board/bizComment/bizCommentWrite";
    }
    
 //   @RequestMapping("saveBoard")

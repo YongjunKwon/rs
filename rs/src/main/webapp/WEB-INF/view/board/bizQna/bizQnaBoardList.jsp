@@ -135,6 +135,9 @@
     <script type="text/javascript">
             var $gbPageMap = new Map();
             $(document).ready(function() {
+                //console.log("${board.pagination.getFirstPageNoOnPageList()}");
+                //console.log("${board.pagination.getLastPageNo()}");
+                //console.log("${board.pagination.getTotalPageCount()}"); // 페이지수
 
                 //$('#side_bizInfo').addClass('active');
 
@@ -143,6 +146,11 @@
                 $gbPageMap.put("PERPAGE", "${board.pagination.getRecordCountPerPage()}");
                 $gbPageMap.put("PAGESIZE", "${board.pagination.getPageSize()}");
 
+                console.log("페이지 수" + $gbPageMap.get("TOTPAGE"));
+                console.log("현재페이지번호" + $gbPageMap.get("CURRPAGE"));
+                console.log("페이지사이즈" + $gbPageMap.get("PAGESIZE"));
+                console.log("한페이지에 게시될 게시글수" + $gbPageMap.get("PERPAGE"));
+
                 if ($gbPageMap.get("TOTPAGE") != "0") {
                     util.page.set($gbPageMap, 'page_area', 'goPage');
                 }
@@ -150,7 +158,11 @@
             });
 
             function goPage(pageNo) {
+                console.log("버튼클릭시 번호 ::::" + pageNo);
                 $("#pagination").val(pageNo);
+
+                console.log($("#pagination.currentPageNo").val());
+                //return false;
                 $("#board").submit();
             }
         </script>

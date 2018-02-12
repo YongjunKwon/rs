@@ -109,7 +109,7 @@
 
                               <div class="pull-right" id="example1_info" role="status" aria-live="polite">
                                 <button class="btn bg-olive margin">
-									<a class="a-color" href="/board/bizBoardWrite?categorynm=${board.categorynm}">글쓰기</a>
+									<a class="a-color" href="/board/bizCommentBoardWrite?categorynm=${board.categorynm}">글쓰기</a>
 								</button>								
                               </div>
                             </div>
@@ -134,19 +134,18 @@
 
     <script type="text/javascript">
             var $gbPageMap = new Map();
+            
+            //$('#side_bizComment').addClass('active');
+
+            $gbPageMap.put("TOTPAGE", "${board.pagination.getTotalPageCount()}");
+            $gbPageMap.put("CURRPAGE", "${board.pagination.getCurrentPageNo()}");
+            $gbPageMap.put("PERPAGE", "${board.pagination.getRecordCountPerPage()}");
+            $gbPageMap.put("PAGESIZE", "${board.pagination.getPageSize()}");
+
             $(document).ready(function() {
-
-                //$('#side_bizInfo').addClass('active');
-
-                $gbPageMap.put("TOTPAGE", "${board.pagination.getTotalPageCount()}");
-                $gbPageMap.put("CURRPAGE", "${board.pagination.getCurrentPageNo()}");
-                $gbPageMap.put("PERPAGE", "${board.pagination.getRecordCountPerPage()}");
-                $gbPageMap.put("PAGESIZE", "${board.pagination.getPageSize()}");
-
                 if ($gbPageMap.get("TOTPAGE") != "0") {
                     util.page.set($gbPageMap, 'page_area', 'goPage');
                 }
-
             });
 
             function goPage(pageNo) {
