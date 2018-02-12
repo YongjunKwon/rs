@@ -64,20 +64,6 @@
 
     <script type="text/javascript">
       $(document).ready(function () {
-
-        // $('.grid').masonry({
-        //   itemSelector: '.grid-item',
-        //   columnWidth: 200,
-        //   gutter: 10
-        // });
-
-        // $('.container').infiniteScroll({
-        //   // options
-        //   path: '.pagination__next',
-        //   append: '.post',
-        //   history: false,
-        // });
-
       });
     </script>
 

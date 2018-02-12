@@ -92,7 +92,11 @@ public class Usercontroller {
     @RequestMapping(value = "/register/add")
     public void addUser(User user, HttpServletResponse response) throws IOException {
     	log.info("========kwon user:{}", user);
-    	userDetailService.addUser(user);
+    	
+    	//권한 변조 방지
+    	if("1".equals(user.getMem_type()) || "2".equals(user.getMem_type()))
+    		userDetailService.addUser(user);
+    	else return;
     	
     	response.setContentType("text/html; charset=UTF-8");
     	PrintWriter out = response.getWriter();
