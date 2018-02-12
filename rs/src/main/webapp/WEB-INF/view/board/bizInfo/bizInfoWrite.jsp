@@ -10,8 +10,8 @@
 <div class="content-wrapper" style="min-height: 959.8px;">
    <!-- Content Header (Page header) -->
    <section class="content-header">
-      <h1>오피스텔
-           <small>각 지역의 오피를 소개해 드립니다.${classActiveSettings}</small>
+      <h1>${category_tiele}
+           <small>각 지역의 ${category_tiele}를 소개해 드립니다.</small>
          </h1>
          <ol class="breadcrumb">
            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -35,7 +35,8 @@
                    </div>
 					<!-- /.box-header -->
 					<div class="box-body">                      
-						<form id="frm" name="frm" method="post" class="form-inline" action="/board/sample/saveBoard">
+						<form id="frm" name="frm" method="post" class="form-inline" action="/board/bizSaveBoard">
+							<input type="hidden" id="categorynm" name="categorynm"	value="${categorynm}">
 							<input type="hidden" id="user_id"	name="user_id"	value="">
 							<input type="hidden" id="category"	name="category"	value="">
 							<input type="hidden" id="area_cd"	name="area_cd"	value="">

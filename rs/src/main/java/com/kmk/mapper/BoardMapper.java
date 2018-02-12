@@ -102,11 +102,11 @@ public interface BoardMapper {
 	})
 	String selectReplyUserId(int reply_seq);
 	
-//	// 게시판등록
-//	@Insert("INSERT INTO BOARD "
-//			+ "(TITLE, CONTENT, CNT, CATEGORY, AREA_CD, BIZ_NM, RECOMM_CNT, DEL_FLAG, IMG_URL, USER_ID, REG_DTIME)"
-//			+ " VALUES(#{title}, #{content}, #{cnt}, #{category}, #{area_cd}, #{biz_nm}, #{recomm_cnt}, #{del_flag}, #{img_url}, #{user_id}, NOW())")
-//	void insertBoard(Board board);
+	// 게시판등록
+	@Insert("INSERT INTO BOARD "
+			+ "(TITLE, CONTENT, CNT, CATEGORY, AREA_CD, BIZ_NM, RECOMM_CNT, DEL_FLAG, IMG_URL, USER_ID, REG_DTIME)"
+			+ " VALUES(#{title}, #{content}, #{cnt}, #{category}, #{area_cd}, #{biz_nm}, #{recomm_cnt}, #{del_flag}, #{img_url}, #{user_id}, NOW())")
+	void insertBoard(Board board);
 	
 	// 리플등록
 	@Insert("INSERT INTO REPLY "

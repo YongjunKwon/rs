@@ -23,6 +23,7 @@ import com.kmk.domain.Board;
 import com.kmk.domain.Reply;
 import com.kmk.domain.common.CommCode;
 import com.kmk.domain.common.CommCodeSearch;
+import com.kmk.domain.sample.SampleBoard;
 import com.kmk.domain.user.LoginUser;
 import com.kmk.service.BoardService;
 import com.kmk.service.common.CommonService;
@@ -338,7 +339,7 @@ public class BoardController {
 		     */	
 		    case "bizqna": 
 		    	logger.info(" bizqna return page setting " + categorynm);
-		    	model.addAttribute("categorynm","Q&A");
+		    	model.addAttribute("categorynm","bizqna");
 		    	model.addAttribute("category_tiele","업체문의게시판");
 		    	returnPage = "board/bizQna/bizQnaBoardDetail";
 		    	break;
@@ -410,8 +411,135 @@ public class BoardController {
    @RequestMapping("bizBoardWrite")
    public String bizBoardWrite(String categorynm, Model model) {
 	  logger.info(" bizBoardWrite :::: >>>> categorynm ::: " + categorynm);
-	  model.addAttribute("categorynm", categorynm);
-      return "board/bizInfo/bizInfoWrite";
+	  
+	  String returnPage = "";
+	  
+	  switch(categorynm) {
+		
+		    /*********************
+		     * 업소정보 카테고리
+		     */
+			case "op": 
+		    	logger.info(" op return page setting " + categorynm);
+		    	model.addAttribute("categorynm","op");
+		    	model.addAttribute("category_tiele","오피스텔");
+		    	returnPage = "board/bizInfo/bizBoardDetail";
+		    	break;
+		         
+		    case "gunma": 
+		    	logger.info(" gunma return page setting " + categorynm);
+		    	model.addAttribute("categorynm","gunma");
+		    	model.addAttribute("category_tiele","건마");
+		    	returnPage = "board/bizInfo/bizBoardDetail";
+		    	break;
+		    	
+		    case "anma": 
+		    	logger.info(" anma return page setting " + categorynm);
+		    	model.addAttribute("categorynm","anma");
+		    	model.addAttribute("category_tiele","안마");
+		    	returnPage = "board/bizInfo/bizBoardDetail";
+		    	break;
+		    	
+		    case "play": 
+		    	logger.info(" play return page setting " + categorynm);
+		    	model.addAttribute("categorynm","play");
+		    	model.addAttribute("category_tiele","유흥주점");
+		    	returnPage = "board/bizInfo/bizBoardDetail";
+		    	break;
+		    	
+		    case "tel": 
+		    	logger.info(" tel return page setting " + categorynm);
+		    	model.addAttribute("categorynm","tel");
+		    	model.addAttribute("category_tiele","휴게텔");
+		    	returnPage = "board/bizInfo/bizBoardDetail";
+		    	break;
+		    	
+		    case "lib": 
+		    	logger.info(" lib return page setting " + categorynm);
+		    	model.addAttribute("categorynm","lib");
+		    	model.addAttribute("category_tiele","립카페/핸플/키스");
+		    	returnPage = "board/bizInfo/bizBoardDetail";
+		    	break;
+		    
+		    	
+		    /*********************
+		     * 업소후기 카테고리
+		     */	
+		    case "oph": 
+		    	logger.info(" oph return page setting " + categorynm);
+		    	model.addAttribute("categorynm","oph");
+		    	model.addAttribute("category_tiele","후기 후기");
+		    	returnPage = "board/bizComment/bizCommentBoardDetail";
+		    	break;
+		    	
+		    case "gunmah": 
+		    	logger.info(" gunmah return page setting " + categorynm);
+		    	model.addAttribute("categorynm","gunmah");
+		    	model.addAttribute("category_tiele","건마 후기");
+		    	returnPage = "board/bizComment/bizCommentBoardDetail";
+		    	break;
+		    	
+		    case "anmah": 
+		    	logger.info(" anmah return page setting " + categorynm);
+		    	model.addAttribute("categorynm","anmah");
+		    	model.addAttribute("category_tiele","안마 후기");
+		    	returnPage = "board/bizComment/bizCommentBoardDetail";
+		    	break;
+		    	
+		    case "playh": 
+		    	logger.info(" playh return page setting " + categorynm);
+		    	model.addAttribute("categorynm","playh");
+		    	model.addAttribute("category_tiele","유흥주점 후기");
+		    	returnPage = "board/bizComment/bizCommentBoardDetail";
+		    	break;
+		    	
+		    case "telh": 
+		    	logger.info(" telh return page setting " + categorynm);
+		    	model.addAttribute("categorynm","telh");
+		    	model.addAttribute("category_tiele","휴게텔 후기");
+		    	returnPage = "board/bizComment/bizCommentBoardDetail";
+		    	break;
+		    	
+		    case "libh": 
+		    	logger.info(" libh return page setting " + categorynm);
+		    	model.addAttribute("categorynm","libh");
+		    	model.addAttribute("category_tiele","립카페/핸플/키스 후기");
+		    	returnPage = "board/bizComment/bizWmDetail";
+		    	break;
+		    	
+		    /*********************
+		     * 업소언니정보 카테고리
+		     */	
+		    case "bizwm": 
+		    	logger.info(" bizwm return page setting " + categorynm);
+		    	model.addAttribute("categorynm","bizwm");
+		    	model.addAttribute("category_tiele","업소언니정보");
+		    	returnPage = "board/bizWm/partnerShareBoardDetail";
+		    	break;
+		    	
+		    /*********************
+		     * 파트너공유 카테고리
+		     */	
+		    case "partner": 
+		    	logger.info(" partner return page setting " + categorynm);
+		    	model.addAttribute("categorynm","partner");
+		    	model.addAttribute("category_tiele","업소언니정보");
+		    	returnPage = "board/partnerShare/partnerShareBoardDetail";
+		    	break;
+		    	
+		    /*********************
+		     * 업소언니정보 카테고리
+		     */	
+		    case "bizqna": 
+		    	logger.info(" bizqna return page setting " + categorynm);
+		    	model.addAttribute("categorynm","bizqna");
+		    	model.addAttribute("category_tiele","업체문의게시판");
+		    	returnPage = "board/bizQna/bizQnaBoardDetail";
+		    	break;
+		}
+	  
+	  return returnPage;
+      //return "board/bizInfo/bizInfoWrite";
    }
    
    // 업소후기
@@ -422,10 +550,25 @@ public class BoardController {
 	   return "board/bizComment/bizCommentWrite";
    }
    
-//   @RequestMapping("saveBoard")
-//   public String saveBoard(Board board) {
-//	  boardService.insertBoard(board);
-//      return "redirect:sampleList";
-//   }
+   
+   
+	@RequestMapping("bizSaveBoard")
+	public String bizSaveBoard(Board board,  HttpSession session) 
+	{	
+		LoginUser loginUser = (LoginUser)session.getAttribute("loginUser");
+	   	String userId = loginUser.getUser_id();
+	   	String areaCd = loginUser.getArea_cd(); 
+	   	String bizNm = loginUser.getBiz_nm();
+	   	//String category = loginUser.getCategory();		
+		
+	   	board.setUser_id(userId);
+	   	board.setArea_cd(areaCd);
+	   	board.setBiz_nm(bizNm);
+		//sampleBoard.setCategory(category);
+		
+		boardService.insertBoard(board);
+		
+		return "redirect:bizBoardList";
+	}
 	
  }

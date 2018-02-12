@@ -47,10 +47,9 @@ public class BoardService {
 		return boardMapper.selectReplyUserId(reply_seq);
 	}
 	
-//	public void insertBoard(Board board){	
-//		//logger.info("query test: {}", testMapper.getList());
-//		boardMapper.insertBoard(board);
-//	}
+	public void insertBoard(Board board){	
+		boardMapper.insertBoard(board);
+	}
 	
 //	
 //	public List<Board> selectSampleBoard(){
