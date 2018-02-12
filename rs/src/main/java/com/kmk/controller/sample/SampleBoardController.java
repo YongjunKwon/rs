@@ -149,9 +149,9 @@ public class SampleBoardController {
 	{	
 		LoginUser loginUser = (LoginUser)session.getAttribute("loginUser");
     	String userId = loginUser.getUser_id();
-    	String areaCd = "AA30";
-    	String bizNm = "수원왕서방";
-    	String category = "CG0101";		
+    	String areaCd = loginUser.getArea_cd(); 
+    	String bizNm = loginUser.getBiz_nm();
+    	String category = loginUser.getCategory();		
 		
 		sampleBoard.setUser_id(userId);
 		sampleBoard.setArea_cd(areaCd);
