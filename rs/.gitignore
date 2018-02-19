@@ -11,6 +11,7 @@
 .settings
 .springBeans
 .class
+*.class
 
 ### IntelliJ IDEA ###
 .idea
@@ -24,6 +25,4 @@ build/
 nbbuild/
 nbdist/
 .nb-gradle/
-/bin/
 
-*.log**
