@@ -13,7 +13,7 @@
 
 	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>logs/uiplat.log.%d{yyyyMMdd}.gz</fileNamePattern>
+			<fileNamePattern>logs/rs.log.%d{yyyyMMdd}.gz</fileNamePattern>
 			<maxHistory>185</maxHistory>
 			<cleanHistoryOnStart>true</cleanHistoryOnStart>
 		</rollingPolicy>
