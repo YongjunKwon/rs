@@ -67,7 +67,7 @@ public class Usercontroller {
     
     @RequestMapping(value = "/biz/register")
     public String bizRegister(Model model) {
-        return "/login/biz_register";
+        return "/login/bizRegister";
     }
     
     

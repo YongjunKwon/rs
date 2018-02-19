@@ -14,7 +14,7 @@
         <div class="login-box-body" style="height: 260px;">
 
           <form action="/login" method="POST">
-            <p class="login-box-msg">회원가입</p>
+            <p class="login-box-msg">로그인</p>
             <div class="form-group has-feedback">
               <input type="email" class="form-control" name="user_id" placeholder="Email">
               <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -73,7 +73,7 @@
         /**
          *  로그인 아이디 기억하기.
          *
-         * @author tmtwo
+         * @author 
          * @version 1.0, 2017.1.24 소스 수정
          * @see    None
          */

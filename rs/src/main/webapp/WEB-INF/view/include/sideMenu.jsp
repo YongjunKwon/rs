@@ -365,7 +365,7 @@
     /**
      * sidemenu actiove
      *
-     * @author tmtwo
+     * @author 
      * @version 1.0, 2018.2.5 소스 수정
      */
     $('.treeview').removeClass('active');
@@ -418,7 +418,7 @@
     /**
      * Open Modal
      *
-     * @author tmtwo
+     * @author 
      * @version 1.0, 2017.12.16 소스 수정
      */
     $('.user_picture').click((e) => {
@@ -434,7 +434,7 @@
      * Modal
      * Email, 닉네임 수정시 중복체크 초기화
      *
-     * @author tmtwo
+     * @author 
      * @version 1.0, 2017.12.16 소스 수정
      */
     $('#m_user_id').change(function (e) {
@@ -452,7 +452,7 @@
      * Modal
      * 닉네임 중복 체크 버튼 클릭.
      *
-     * @author tmtwo
+     * @author 
      * @version 1.0, 2017.12.16 소스 수정
      * @see    None
      */
@@ -522,7 +522,7 @@
      * Modal
      * 삭제
      *
-     * @author tmtwo
+     * @author 
      * @version 1.0, 2017.12.16 소스 수정
      */
 
@@ -543,7 +543,7 @@
      * Modal
      * Save LoginUser
      *
-     * @author tmtwo
+     * @author 
      * @version 1.0, 2017.12.16 소스 수정
      */
     $('#setUserInfo').click((e) => {
