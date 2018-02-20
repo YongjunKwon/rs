@@ -514,7 +514,7 @@ public class BoardController {
 		    	logger.info(" bizwm return page setting " + categorynm);
 		    	model.addAttribute("categorynm","bizwm");
 		    	model.addAttribute("category_tiele","업소언니정보");
-		    	returnPage = "board/bizWm/partnerShareBoardDetail";
+		    	returnPage = "board/bizWm/bizWmDetail";
 		    	break;
 		    	
 		    /*********************
@@ -523,12 +523,12 @@ public class BoardController {
 		    case "partner": 
 		    	logger.info(" partner return page setting " + categorynm);
 		    	model.addAttribute("categorynm","partner");
-		    	model.addAttribute("category_tiele","업소언니정보");
+		    	model.addAttribute("category_tiele","파트너공유");
 		    	returnPage = "board/partnerShare/partnerShareBoardDetail";
 		    	break;
 		    	
 		    /*********************
-		     * 업소언니정보 카테고리
+		     * 업체문의게시판
 		     */	
 		    case "bizqna": 
 		    	logger.info(" bizqna return page setting " + categorynm);
