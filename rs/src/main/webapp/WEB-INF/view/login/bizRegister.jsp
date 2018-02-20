@@ -14,7 +14,7 @@
         <div class="register-box-body">
           <p class="login-box-msg text-bold">업체 회원가입</p>
 
-          <form id="registerForm" action="/register/add" method="post">
+          <form id="registerForm" action="/biz/register/add" method="post">
 
             <div class="form-group has-feedback">
               <div class="input-group">
@@ -46,24 +46,30 @@
             </div>
 
             <div class="form-group has-feedback">
-              <input type="text" class="form-control" id="biz_nm" name="biz_nm" maxlength="10" placeholder="업체명" />
+              <input type="text" class="form-control" id="biz_nm" name="biz_nm" maxlength="20" placeholder="업체명" label="업체명" />
             </div>
             <div class="form-group has-feedback">
-              <input type="text" class="form-control" id="mgr_nm" name="mgr_nm" maxlength="10" placeholder="이름" />
+              <input type="text" class="form-control" id="mgr_nm" name="mgr_nm" maxlength="10" placeholder="이름" label="이름" />
             </div>
             <div class="form-group has-feedback">
-              <input type="text" class="form-control" id="tel" name="tel" maxlength="10" placeholder="전화번호" />
+              <input type="text" class="form-control phone-number-check" id="tel" name="tel" maxlength="15" placeholder="전화번호" label="전화번호" />
             </div>
             <div class="form-group has-feedback">
-              <input type="text" class="form-control" id="addr" name="addr" maxlength="10" placeholder="주소" />
+              <input type="text" class="form-control phone-number-check" id="mobile" name="mobile" maxlength="15" placeholder="핸드폰" label="핸드폰" />
             </div>
             <div class="form-group has-feedback">
-              <input type="text" class="form-control" id="category" name="category" maxlength="10" placeholder="업종" />
+              <input type="text" class="form-control" id="addr" name="addr" maxlength="50" placeholder="주소" label="주소" />
             </div>
             <div class="form-group has-feedback">
-              <input type="text" class="form-control" id="area_cd" name="area_cd" maxlength="10" placeholder="지역" />
+              <input type="text" class="form-control" id="category" name="category" maxlength="10" placeholder="업종" label="업종" />
             </div>
-
+            <div class="form-group has-feedback">
+              <select class="form-control" id="area_cd" name="area_cd">
+              <c:forEach var="item" items="${comboAreaCdList}" varStatus="status">
+                <option value="${item.cd}">${item.cd_nm}</option>
+              </c:forEach>
+            </select>
+            </div>
 
             <div class="row">
               <div class="col-xs-8">
@@ -258,16 +264,22 @@
              * 비밀번호 체크
              */
             $('#pwd').keyup(function() {
-              $('font[name=check]').text('');
+              if ($('#pwd').val() == "" || $('#pwd_again').val() == "") {
+                $('font[name=check]').text('');
+              } else if ($('#pwd').val() != $('#pwd_again').val()) {
+                $('font[name=check]').text('').html("비밀번호가 다릅니다.").css('color', 'red');
+              } else {
+                $('font[name=check]').text('').html("비밀번호가 일치합니다.").css('color', 'blue');
+              }
             }); //#pwd.keyup
 
             $('#pwd_again').keyup(function() {
-              if ($('#pwd').val() != $('#pwd_again').val()) {
+              if ($('#pwd').val() == "" || $('#pwd_again').val() == "") {
                 $('font[name=check]').text('');
-                $('font[name=check]').html("비밀번호가 다릅니다.");
+              } else if ($('#pwd').val() != $('#pwd_again').val()) {
+                $('font[name=check]').text('').html("비밀번호가 다릅니다.").css('color', 'red');
               } else {
-                $('font[name=check]').text('');
-                $('font[name=check]').html("비밀번호가 일치합니다.");
+                $('font[name=check]').text('').html("비밀번호가 일치합니다.").css('color', 'blue');
               }
             }); //#pwd_again.keyup
 
@@ -283,28 +295,56 @@
             $("#registerForm").submit(function(e) {
               var trimPwd = trim($('#pwd').val());
 
-              if (!isCheckedEmailDupl) {
-                alert("Email 중복확인을 해주세요.");
-                $('#user_id').focus();
+              // if (!isCheckedEmailDupl) {
+              //   alert("Email 중복확인을 해주세요.");
+              //   $('#user_id').focus();
+              //   e.preventDefault();
+              //   return;
+              // } else if (!isCheckedNickNmDupl) {
+              //   alert("닉네임 중복확인을 해주세요.");
+              //   $('#nick_nm').focus();
+              //   e.preventDefault();
+              //   return;
+              // } else if ($('#pwd').val() != $('#pwd_again').val() || trimPwd == "") {
+              //   alert("비밀번호를 확인해주세요.");
+              //   $('#pwd').focus();
+              //   e.preventDefault();
+              //   return;
+              // }
+
+              //공백&특수문자 입력 방지
+
+              if (!checkMark($('#biz_nm'))) {
                 e.preventDefault();
                 return;
-              } else if (!isCheckedNickNmDupl) {
-                alert("닉네임 중복확인을 해주세요.");
-                $('#nick_nm').focus();
+              };
+              if (!checkMark($('#mgr_nm'))) {
                 e.preventDefault();
                 return;
-              } else if ($('#pwd').val() != $('#pwd_again').val() || trimPwd == "") {
-                alert("비밀번호를 확인해주세요.");
-                $('#pwd').focus();
+              };
+              if (!checkPhone($('#tel'))) {
                 e.preventDefault();
                 return;
-              } else if (!$('#agree_check').iCheck('update')[0].checked) {
+              };
+
+              if (!checkPhone($('#mobile'))) {
+                e.preventDefault();
+                return;
+              };
+
+              if (isEmpty($('#addr').val())) {
+                e.preventDefault();
+                return;
+              };
+
+              //TODO: category, area_cd validation
+
+              if (!$('#agree_check').iCheck('update')[0].checked) {
                 alert("약관동의를 체크 해주세요.");
                 e.preventDefault();
                 return;
               }
             });
-
 
           }); //end jquery
         </script>

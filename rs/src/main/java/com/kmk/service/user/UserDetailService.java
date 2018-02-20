@@ -55,11 +55,16 @@ public class UserDetailService implements UserDetailsService {
 		return userMapper.checkNickNm(nick_nm);
 	}
 
+	public void addBizUser(User user) {
+	    user.setMem_type("1"); //회원구분(0;ADMIN, 1;업소회원, 2;일반회원) 기본 0
+	    userMapper.addUser(user);
+	}
+	
 	public void addUser(User user) {
 		user.setMem_type("2"); //회원구분(0;ADMIN, 1;업소회원, 2;일반회원) 기본 0
 		userMapper.addUser(user);
 	}
-	
+		
 	public void setUser(User user) {
 		userMapper.setUser(user);
 	}
