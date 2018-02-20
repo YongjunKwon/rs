@@ -27,8 +27,9 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class Usercontroller {
 
-    @Autowired CommonService commonService;
-    
+    @Autowired
+    CommonService commonService;
+
     @Autowired
     UserDetailService userDetailService = new UserDetailService();
 
@@ -71,11 +72,9 @@ public class Usercontroller {
 
     @RequestMapping(value = "/biz/register")
     public String bizRegister(Model model) {
-
         CommCode commCode = new CommCode();
         commCode.setCd_grp("AA");
         commCode.setCd(null);
-
         model.addAttribute("comboAreaCdList", commonService.findComboAreaCdList(commCode));
         return "/login/bizRegister";
     }
