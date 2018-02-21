@@ -220,6 +220,10 @@ public class BoardController {
 		logger.info(" @@@@@@@@@@@@@ boardDetail 공통분기처리::: 카데고리명 ::: " + categorynm);
 		
 		String returnPage = "";
+
+		Board board = new Board();
+		board.setCategorynm(categorynm);
+		model.addAttribute("board", board);
 		
 		switch(categorynm) {
 		
@@ -413,6 +417,10 @@ public class BoardController {
 	  logger.info(" bizBoardWrite :::: >>>> categorynm ::: " + categorynm);
 	  
 	  String returnPage = "";
+  
+	  Board board = new Board();
+	  board.setCategorynm(categorynm);
+	  model.addAttribute("board", board);
 	  
 	  switch(categorynm) {
 		
