@@ -190,7 +190,7 @@
 <form id="commDelFrm" name="commDelFrm" action="">
     <input type="hidden" id="del_seq" name="seq" value="${contents.seq}">
     <input type="hidden" id="reply_seq" name="reply_seq" value="" />
-	<input type="hidden" id="categorynm" name="categorynm" value="${categorynm}" />
+	<input type="hidden" id="del_categorynm" name="categorynm" value="${categorynm}" />
     <!-- <input type="hidden" id="pwd" name="pwd" value="" /> -->
 </form>
 <%@include file="../../include/bottom.jsp"%>
