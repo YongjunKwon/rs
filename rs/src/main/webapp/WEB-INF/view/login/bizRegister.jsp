@@ -49,10 +49,10 @@
               <input type="text" class="form-control" id="biz_nm" name="biz_nm" maxlength="20" placeholder="업체명" label="업체명" />
             </div>
             <div class="form-group has-feedback">
-              <input type="text" class="form-control" id="mgr_nm" name="mgr_nm" maxlength="10" placeholder="이름" label="이름" />
-            </div>
+              <input type="text" class="form-control" id="mgr_nm" name="mgr_nm" maxlength="10" placeholder="매니저 이름" label="매니저 이름" />
+            </div>            
             <div class="form-group has-feedback">
-              <input type="text" class="form-control phone-number-check" id="tel" name="tel" maxlength="15" placeholder="전화번호" label="전화번호" />
+              <input type="text" class="form-control" id="tel" name="tel" maxlength="15" placeholder="전화번호" label="전화번호" />
             </div>
             <div class="form-group has-feedback">
               <input type="text" class="form-control phone-number-check" id="mobile" name="mobile" maxlength="15" placeholder="핸드폰" label="핸드폰" />
@@ -61,10 +61,16 @@
               <input type="text" class="form-control" id="addr" name="addr" maxlength="50" placeholder="주소" label="주소" />
             </div>
             <div class="form-group has-feedback">
-              <input type="text" class="form-control" id="category" name="category" maxlength="10" placeholder="업종" label="업종" />
+              <select class="form-control" id="category" name="category">
+                <option value="">카테고리 선택</option>
+                <c:forEach var="item" items="${comboBizCdList}" varStatus="status">
+                <option value="${item.cd}">${item.cd_nm}</option>
+              </c:forEach>
+            </select>
             </div>
             <div class="form-group has-feedback">
               <select class="form-control" id="area_cd" name="area_cd">
+              <option value="">지역 선택</option>
               <c:forEach var="item" items="${comboAreaCdList}" varStatus="status">
                 <option value="${item.cd}">${item.cd_nm}</option>
               </c:forEach>
@@ -295,22 +301,22 @@
             $("#registerForm").submit(function(e) {
               var trimPwd = trim($('#pwd').val());
 
-              // if (!isCheckedEmailDupl) {
-              //   alert("Email 중복확인을 해주세요.");
-              //   $('#user_id').focus();
-              //   e.preventDefault();
-              //   return;
-              // } else if (!isCheckedNickNmDupl) {
-              //   alert("닉네임 중복확인을 해주세요.");
-              //   $('#nick_nm').focus();
-              //   e.preventDefault();
-              //   return;
-              // } else if ($('#pwd').val() != $('#pwd_again').val() || trimPwd == "") {
-              //   alert("비밀번호를 확인해주세요.");
-              //   $('#pwd').focus();
-              //   e.preventDefault();
-              //   return;
-              // }
+              if (!isCheckedEmailDupl) {
+                alert("Email 중복확인을 해주세요.");
+                $('#user_id').focus();
+                e.preventDefault();
+                return;
+              } else if (!isCheckedNickNmDupl) {
+                alert("닉네임 중복확인을 해주세요.");
+                $('#nick_nm').focus();
+                e.preventDefault();
+                return;
+              } else if ($('#pwd').val() != $('#pwd_again').val() || trimPwd == "") {
+                alert("비밀번호를 확인해주세요.");
+                $('#pwd').focus();
+                e.preventDefault();
+                return;
+              }
 
               //공백&특수문자 입력 방지
 
@@ -322,22 +328,26 @@
                 e.preventDefault();
                 return;
               };
-              if (!checkPhone($('#tel'))) {
+              if (trim($('#mobile').val()) == "" || trim($('#mobile').val()).length < 1) {
+                alert("핸드폰 번호는 필수 항목 입니다.");
                 e.preventDefault();
+                $('#mobile').focus();
                 return;
-              };
-
-              if (!checkPhone($('#mobile'))) {
-                e.preventDefault();
-                return;
-              };
-
-              if (isEmpty($('#addr').val())) {
-                e.preventDefault();
-                return;
-              };
-
+              }
               //TODO: category, area_cd validation
+              if (trim($('#category').val()) == "" || trim($('#category').val()).length < 1) {
+                alert("카테고리는 필수 항목 입니다.");
+                e.preventDefault();
+                $('#category').focus();
+                return;
+              }
+
+              if (trim($('#area_cd').val()) == "" || trim($('#area_cd').val()).length < 1) {
+                alert("지역은 필수 항목 입니다.");
+                e.preventDefault();
+                $('#area_cd').focus();
+                return;
+              }
 
               if (!$('#agree_check').iCheck('update')[0].checked) {
                 alert("약관동의를 체크 해주세요.");

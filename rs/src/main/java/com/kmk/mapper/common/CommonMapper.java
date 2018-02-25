@@ -15,9 +15,12 @@ public interface CommonMapper {
 		+ " SELECT CD, CD_NM		 "
 		+ "	 FROM COMM_CODE "
 		+ " WHERE CD_GRP = #{cd_grp} "
-		+ " <if test='cd != null '> "
+		+ " <if test='cd != null'> "
 		+ "  AND CD = #{cd}"
 		+ " </if>"
+		+ " <if test='parent_cd != null'> "
+    + "  AND PARENT_CD = #{parent_cd}"
+    + " </if>"
 		+ "  ORDER BY SORT_SEQ "
 		+ "</script>"
 	})

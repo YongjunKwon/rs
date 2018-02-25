@@ -76,18 +76,36 @@ public class Usercontroller {
         commCode.setCd_grp("AA");
         commCode.setCd(null);
         model.addAttribute("comboAreaCdList", commonService.findComboAreaCdList(commCode));
+        commCode.setCd_grp("CG");
+        commCode.setParent_cd("CG01");
+        model.addAttribute("comboBizCdList", commonService.findComboAreaCdList(commCode));
         return "/login/bizRegister";
+    }
+
+    @RequestMapping(value = "/biz/register/add")
+    public void addBiz(User user, HttpServletResponse response) throws IOException {
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
+        PrintWriter out = response.getWriter();
+
+        // 권한 변조 방지
+        if ("0".equals(user.getMem_type())) {
+            out.println("<script>alert('비 정상적인 접근입니다.'); location.href='/';</script>");
+            out.flush();
+        } else {
+            userDetailService.addBizUser(user);
+            out.println("<script>alert('회원가입이 정상적으로 처리되었습니다.'); location.href='/';</script>");
+            out.flush();
+        }
     }
 
     @RequestMapping(value = "/register/checkEmail")
     public ModelAndView checkEmail(User user) {
-
         ModelAndView mav = new ModelAndView("jsonView");
         if (userDetailService.checkEmail(user.getUser_id()) > 0)
             mav.addObject("isDuplicated", true);
         else
             mav.addObject("isDuplicated", false);
-
         return mav;
     }
 
@@ -105,34 +123,18 @@ public class Usercontroller {
 
     @RequestMapping(value = "/register/add")
     public void addUser(User user, HttpServletResponse response) throws IOException {
-        log.info("========kwon user:{}", user);
-
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
+        PrintWriter out = response.getWriter();
         // 권한 변조 방지
-        if ("1".equals(user.getMem_type()) || "2".equals(user.getMem_type()))
+        if ("0".equals(user.getMem_type())) {
+            out.println("<script>alert('비 정상적인 접근입니다.'); location.href='/';</script>");
+            out.flush();
+        } else {
             userDetailService.addUser(user);
-        else
-            return;
-
-        response.setContentType("text/html; charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        out.println("<script>alert('회원가입이 정상적으로 처리되었습니다.'); location.href='/';</script>");
-        out.flush();
-    }
-
-    @RequestMapping(value = "biz/register/add")
-    public void addBiz(User user, HttpServletResponse response) throws IOException {
-        log.info("========kwon user:{}", user);
-        // 권한 변조 방지
-        if ("1".equals(user.getMem_type()) || "2".equals(user.getMem_type()))
-            userDetailService.addBizUser(user);
-        else
-            return;
-
-        response.setContentType("text/html; charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        out.println("<script>alert('회원가입이 정상적으로 처리되었습니다.'); location.href='/';</script>");
-        out.flush();
-
+            out.println("<script>alert('회원가입이 정상적으로 처리되었습니다.'); location.href='/';</script>");
+            out.flush();
+        }
     }
 
     @RequestMapping(value = "/register/changeLoginUser")

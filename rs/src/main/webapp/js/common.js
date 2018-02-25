@@ -783,6 +783,7 @@ function checkMark(obj) {
     "공백 및 특수문자는 입력 할 수 없습니다."
   if (!pattern.test(val)) {
     alert(alertMsg);
+    $(obj).val("");
     $(obj).focus();
     return false;
   }
@@ -802,25 +803,6 @@ function checkMobile(obj) {
   return true;
 }
 
-//전화번호 형식 체크
-function checkPhone(obj) {
-  var pattern = /(02)([0-9]{3,4})([0-9]{4})$/;
-  if (!pattern.test(obj)) {
-    alert("전화번호 형식이 맞지 않습니다.");
-    $(obj).focus();
-    return false;
-  } else {
-    pattern = /(0[3-9]{1}[0-9]{1})([0-9]{3,4})([0-9]{4})$/;
-    if (pattern.test(obj)) {
-      alert("전화번호 형식이 맞지 않습니다.");
-      $(obj).focus();
-      return false;
-    }
-  }
-  return true;
-}
-
-
 function isEmpty(obj) {
   if (trim(obj).length < 1 || obj == "")
     return true;
@@ -834,9 +816,6 @@ $(function() {
     var trans_num = $(this).val().replace(/-/gi, '');
     var k = e.keyCode;
 
-    if (trans_num.length >= 12) {
-      e.preventDefault();      
-    }
   }).on('blur', function() { // 포커스를 잃었을때 실행합니다.
     if ($(this).val() == '') return;
 
@@ -867,3 +846,18 @@ $(function() {
   });
 
 })
+
+//특수문자 검증
+function regExp(str) {
+
+  //특수문자 검증 start
+  var regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi
+
+  if (regExp.test(str)) {
+      alert("특수문자는 사용하실수 없습니다.");
+      return false;
+  } else {
+      return true;
+  }
+  //특수문자 검증 end
+}
