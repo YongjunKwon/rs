@@ -11,7 +11,7 @@
 		</layout>
 	</appender>
 
-	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+	<!-- <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<fileNamePattern>logs/rs.log.%d{yyyyMMdd}.gz</fileNamePattern>
 			<maxHistory>185</maxHistory>
@@ -23,7 +23,7 @@
 			<pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] %-5level %logger{36} - %msg%n
 			</pattern>
 		</encoder>
-	</appender> 
+	</appender>  -->
   
   	<!-- Application Loggers -->
 	<!-- <logger name="com.kmk.security" level="INFO"/> -->

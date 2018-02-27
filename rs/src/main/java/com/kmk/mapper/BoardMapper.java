@@ -20,42 +20,44 @@ public interface BoardMapper {
 		"<script>"
 		+ "SELECT B.* FROM ( SELECT ROWNUM AS RNUM, A.*FROM ( "
 		+ " SELECT @ROWNUM:=@ROWNUM+1 AS ROWNUM"
-		+ "       , B.*"
+		+ "       , B.*, U.nick_nm"
 		+ "		  , ("
-		+ "				SELECT COUNT(*) FROM BOARD "
-		+ "             WHERE 1=1 "
+		+ "				  SELECT COUNT(*) FROM BOARD "
+		+ "               WHERE 1=1 "
+		            
+		+ " 			  <if test=\"title != null and title !='' \"> "
+		+ "  			  	AND TITLE LIKE CONCAT('%',#{title},'%') "
+		+ " 			  </if> "
+		            
+		+ "         <if test=\"category != null and category !='' \"> "
+		+ "           AND B.CATEGORY = #{category}"
+		+ "         </if>"
+		            
+		+ " 			  <if test=\"area_cd != null and area_cd !='' \"> "
+		+ "  			  	AND B.AREA_CD = #{area_cd} "
+		+ " 			  </if> "
 		
-		+ " 			<if test=\"title != null and title !='' \"> "
-		+ "  				AND TITLE LIKE CONCAT('%',#{title},'%') "
-		+ " 			</if> "
-		
-		+ "             <if test=\"category != null and category !='' \"> "
-		+ "                 AND CATEGORY = #{category}"
-		+ "             </if>"
-		
-		+ " 			<if test=\"area_cd != null and area_cd !='' \"> "
-		+ "  				AND AREA_CD = #{area_cd} "
-		+ " 				</if> "
-		
-		+ "          ) AS TOT_CNT "
-		+ "	 FROM BOARD B ,  ( SELECT @ROWNUM := 0 ) R  WHERE 1=1 "
+		+ "        ) AS TOT_CNT "
+		+ "	 FROM BOARD B "
+		+ " INNER JOIN USER U ON B.USER_ID = U.USER_ID"
+		+ " LEFT JOIN ( SELECT @ROWNUM := 0 ) R ON 1=1"
 		
 		+ " <if test=\"title != null and title !='' \"> "
-		+ "  AND TITLE LIKE CONCAT('%',#{title},'%') "
+		+ "  AND B.TITLE LIKE CONCAT('%',#{title},'%') "
 		+ " </if>"
 		
 		+ " <if test=\"category != null and category !='' \"> "
-		+ "  AND CATEGORY = #{category}"
+		+ "  AND B.CATEGORY = #{category}"
 		+ " </if>"
 		
 		+ " <if test=\"area_cd != null and area_cd !='' \"> "
-		+ "  AND AREA_CD = #{area_cd}"
+		+ "  AND B.AREA_CD = #{area_cd}"
 		+ " </if>"
 		
 		+ " <if test=\"content != null and content != '' \"> "
-		+ "  AND CONTENT LIKE CONCAT('%',#{content},'%') "
+		+ "  AND B.CONTENT LIKE CONCAT('%',#{content},'%') "
 		+ " </if>"
-		+ " ORDER BY SEQ DESC"
+		+ " ORDER BY B.SEQ DESC"
 		+ ") A WHERE ROWNUM &lt;= #{pagination.lastRecordIndex} ) B WHERE B.RNUM &gt; #{pagination.firstRecordIndex} "
 		+ "</script>"
 	})
@@ -64,10 +66,13 @@ public interface BoardMapper {
 	// 게시판 상세조회
 	@Select({
 	"<script>"
-	+ " SELECT *		 "
-	+ "	  FROM BOARD "
+	+ " SELECT b.*,	"
+	+ "        u.nick_nm	 "
+	+ "	  FROM BOARD b"
+	+ "  INNER JOIN USER u"
+	+ "     ON b.user_id = u.user_id"	
 	+ "  WHERE 1=1 "
-	+ "    AND SEQ=#{seq} "
+	+ "    AND b.SEQ=#{seq} "
 	+ "</script>"
 	})
 	Board selectDetailBoard(int seq);

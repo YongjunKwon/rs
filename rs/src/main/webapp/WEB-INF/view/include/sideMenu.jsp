@@ -427,7 +427,6 @@
 
 
     //중복체크 및 약관 동의
-    var isCheckedEmailDupl = false;
     var isCheckedNickNmDupl = true;
 
     /**
@@ -437,11 +436,6 @@
      * @author 
      * @version 1.0, 2017.12.16 소스 수정
      */
-    $('#m_user_id').change(function (e) {
-      isCheckedEmailDupl = false;
-      e.preventDefault();
-    });
-
     $('#m_nick_nm').change(function (e) {
       isCheckedNickNmDupl = false;
       e.preventDefault();
@@ -531,8 +525,9 @@
       $('#m_before_pwd').val("");
       $('#m_pwd').val("");
       $('#m_pwd_again').val("");
-      isCheckedEmailDupl = false;
-      isCheckedNickNmDupl = false;
+      $('font[name=check]').text('');
+      $('font[name=check2]').text('');
+      isCheckedNickNmDupl = true;
     }
 
     $('#pictureModal').on('hidden.bs.modal', function (e) {

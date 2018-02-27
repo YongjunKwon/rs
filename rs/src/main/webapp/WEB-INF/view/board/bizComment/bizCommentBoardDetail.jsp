@@ -10,8 +10,8 @@
 <div class="content-wrapper" style="min-height: 959.8px;">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
-		<h1>${category_tiele}
-        	<small>각 지역의 ${category_tiele}를 소개해 드립니다.</small>
+		<h1>${captionTitle}
+        	<small>각 지역의 ${captionTitle}를 소개해 드립니다.</small>
       	</h1>
       	<ol class="breadcrumb">
         	<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
