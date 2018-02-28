@@ -4,7 +4,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>RS</title>
   <!-- Tell the browser to be responsive to screen width -->
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<!-- <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"> -->
+	<meta name="viewport" content="width=1024">
   <!-- Bootstrap 4.0.0-alpha.6-1 -->
   <link rel="stylesheet" href="/AdminLTE-2.3.11/bootstrap/css/bootstrap.min.css">
   <!-- Font Awesome -->

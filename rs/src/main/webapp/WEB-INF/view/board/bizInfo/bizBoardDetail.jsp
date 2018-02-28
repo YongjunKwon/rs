@@ -42,9 +42,9 @@
                             </h1>
                             <div class="panel panel-default view-head">
                               <div class="panel-heading">
-                                <div class="ellipsis text-muted font-12 pull-right">
-                                  <span class="sv_merber">${list.nick_nm}</span>                                  
-                                  <span class="sp"></span>                                                                                                      
+                                <div class="ellipsis text-muted font-12 pull-left">
+                                  <span class="sv_merber">${list.nick_nm}</span>
+                                  <span class="sp"></span>
                                   <i class="fa fa-eye"></i> ${list.cnt}
                                   <span class="sp"></span>
                                   <i class="fa fa-clock-o"></i>
@@ -56,9 +56,7 @@
                           </div>
                         </div>
                         <div class="row">
-                          <div itemprop="description" class="view-content">${contents.content}</div>
-                          <div class="ht-50"></div>
-                          <div class="view-author-none"></div>
+                          <div class="view-content">${list.content}</div>
                         </div>
                         <div class="view-comment font-18 en">
                           <i class="fa fa-commenting"></i>
@@ -77,11 +75,8 @@
                                 <div class="media-body">
                                   <div class="media-heading">
                                     <b><span class="member">${reply.nick_nm}</span></b>
-                                    <span class="font-11 text-muted">
-<span class="media-info">
-<i class="fa fa-clock-o"></i>
-${reply.yyyymmdd}
-</span>
+                                    <span class="font-11 text-muted"><span class="media-info">
+                                      <i class="fa fa-clock-o"></i>${reply.yyyymmdd}</span>
                                     </span>
                                     <div class="print-hide pull-right font-11" id="replyDelete" name="replyDelete">
                                       <c:if test="${reply.check_del_flag eq 'true' }">
@@ -106,18 +101,12 @@ ${reply.yyyymmdd}
                               <div class="clearfix"></div>
                               <div class="form-group row">
                                 <div class="col-xs-6">
-                                  <!-- label for="nick_nm" class="sound_only"><strong class="sound_only">필수</strong></label>
-<div class="input-group">
-<span class="input-group-addon"><i class="fa fa-user gray"></i></span>
-<input type="text" name="nick_nm" value="" id="nick_nm" class="form-control input-sm" size="5" maxlength="20" placeholder="닉네임" value="">
-</div-->
                                 </div>
                               </div>
                               <div class="form-group comment-content">
                                 <div class="comment-cell">
                                   <textarea tabindex="13" id="content" name="content" maxlength="200" rows="5" class="form-control input-sm" title="내용"></textarea>
                                 </div>
-
                                 <div tabindex="14" class="comment-cell comment-submit" onkeydown="apms_comment_onKeyDown();" id="btnReplyReg">
                                   등록
                                 </div>
@@ -126,25 +115,22 @@ ${reply.yyyymmdd}
                               <div class="view-btn">
                                 <div class="pull-right">
                                   <div class="btn-group" role="group">
-                                    <a role="button" href="./board.php?bo_table=oph&amp;wr_id=347" class="btn btn-black btn-sm" title="이전글">
-<i class="fa fa-chevron-circle-left"></i>
-<span class="hidden-xs"> 이전</span>
-</a>
+                                    <!-- <a role="button" href="./board.php?bo_table=oph&amp;wr_id=347" class="btn btn-black btn-sm" title="이전글">
+                                    <i class="fa fa-chevron-circle-left"></i>
+                                    <span class="hidden-xs"> 이전</span>
+                                    </a>
                                     <a role="button" href="./board.php?bo_table=oph&amp;wr_id=345" class="btn btn-black btn-sm" title="다음글">
-<i class="fa fa-chevron-circle-right"></i><span class="hidden-xs"> 다음</span>
-</a>
-                                    <a role="button" href="./password.php?w=d&amp;bo_table=oph&amp;wr_id=346&amp;page=" class="btn btn-black btn-sm" title="삭제" onclick="del(this.href); return false;">
-<i class="fa fa-times"></i><span class="hidden-xs"> 삭제</span>
-</a>
-                                    <a role="button" href="./password.php?w=u&amp;bo_table=oph&amp;wr_id=346&amp;page=" class="btn btn-black btn-sm" title="수정">
-<i class="fa fa-plus"></i><span class="hidden-xs"> 수정</span>
-</a>
-                                    <a role="button" href="./write.php?w=r&amp;bo_table=oph&amp;wr_id=346" class="btn btn-black btn-sm">
-<i class="fa fa-commenting"></i><span class="hidden-xs"> 답변</span>
-</a>
-                                    <a role="button" href="./write.php?bo_table=oph" class="btn btn-color btn-sm">
-<i class="fa fa-pencil"></i><span class="hidden-xs"> 글쓰기</span>
-</a>
+                                    <i class="fa fa-chevron-circle-right"></i><span class="hidden-xs"> 다음</span> 
+                                    </a> -->
+                                    <c:if test="${loginUser.user_id eq list.user_id}">
+                                      <a role="button" href="./password.php?w=d&amp;bo_table=oph&amp;wr_id=346&amp;page=" class="btn btn-black btn-sm" title="삭제" onclick="del(this.href); return false;">
+                                      <i class="fa fa-times"></i><span class="hidden-xs"> 삭제</span>
+                                      </a>
+                                      <a role="button" href="./password.php?w=u&amp;bo_table=oph&amp;wr_id=346&amp;page=" class="btn btn-black btn-sm" title="수정">
+                                      <i class="fa fa-plus"></i><span class="hidden-xs"> 수정</span>
+                                    </c:if>
+                                    </a>
+                                      </a>
                                   </div>
                                 </div>
                                 <div class="clearfix"></div>
@@ -155,9 +141,9 @@ ${reply.yyyymmdd}
                         <!-- ./box-footer -->
                         <div class="pull-left">
                           <a role="button" href="/board/bizBoardList?categorynm=${categorynm}" class="btn btn-black btn-sm pull-left">
-<i class="fa fa-bars"></i>
-<span class="hidden-xs"> 목록</span>
-</a>
+                          <i class="fa fa-bars"></i>
+                          <span class="hidden-xs"> 목록</span>
+                          </a>
                         </div>
                       </div>
                       <!-- ./box-body -->

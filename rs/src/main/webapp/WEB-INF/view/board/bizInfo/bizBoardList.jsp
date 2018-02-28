@@ -32,6 +32,7 @@
                             <form:form modelAttribute="board" method="get" action="/board/bizBoardList?categorynm=${board.categorynm}">
                               <input type="hidden" id="pagination" name="pagination.currentPageNo" value="1">
                               <input type="hidden" id="categorynm" name="categorynm" value="${board.categorynm}">
+                              <input type="hidden" id="category" name="category" value="${board.category}">
                               <div class="col-sm-4 pull-left">
                                 <div class="form-group" id="example1_length">
                                   <form:select path="area_cd" class="form-area" data-placeholder="지역" disabled="false" onchange="javascript:submit()">
@@ -136,7 +137,7 @@
       }
 
       $('#btnWrite').click(function() {
-        window.location.href = '/board/bizBoardWrite?categorynm=${board.categorynm}';
+        window.location.href = '/board/bizBoardWrite?categorynm=${board.categorynm}&category=${board.category}';
       })
     </script>
 
