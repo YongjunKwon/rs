@@ -28,7 +28,7 @@
                         <div class="row">
                           <div class="col-sm-12">
                             <div class="row form_control_h3">
-                              <h3 class="form_control_h3">****회원가 적용 받으시려면 밤길보고 전화했다고 말씀해주세요!****</h3>
+
                             </div>
                           </div>
                         </div>
@@ -76,10 +76,10 @@
                                   <div class="media-heading">
                                     <b><span class="member">${reply.nick_nm}</span></b>
                                     <span class="font-11 text-muted"><span class="media-info">
-                                      <i class="fa fa-clock-o"></i>${reply.yyyymmdd}</span>
+                                      <i class="fa fa-clock-o"></i>${reply.yyyymmdd} ${reply.check_del_flag}</span>
                                     </span>
                                     <div class="print-hide pull-right font-11" id="replyDelete" name="replyDelete">
-                                      <c:if test="${reply.check_del_flag eq 'true' }">
+                                      <c:if test="${reply.check_del_flag eq 'true' or loginUser.roles[0] eq 'ROLE_ADMIN' }">
                                         <a href="#" data-values='{ "reply_seq" : "${reply.reply_seq}", "check_del_flag" : "${reply.check_del_flag}" }'><span>삭제</span></a>
                                       </c:if>
                                     </div>
@@ -93,8 +93,8 @@
                           <!-- Loop end -->
                         </section>
                         <div class="box-footer">
-                          <form id="commFrm" name="commFrm" action="">
-                            <input type="hidden" id="seq" name="seq" value="${contents.seq}">
+                          <form id="commFrm" name="commFrm" action="/board/bizBoardReplyReg">
+                            <input type="hidden" id="seq" name="seq" value="${list.seq}">
                             <input type="hidden" id="user_id" name="user_id" value="">
                             <input type="hidden" id="categorynm" name="categorynm" value="${categorynm}">
                             <div class="comment-box">
@@ -122,11 +122,11 @@
                                     <a role="button" href="./board.php?bo_table=oph&amp;wr_id=345" class="btn btn-black btn-sm" title="다음글">
                                     <i class="fa fa-chevron-circle-right"></i><span class="hidden-xs"> 다음</span> 
                                     </a> -->
-                                    <c:if test="${loginUser.user_id eq list.user_id}">
-                                      <a role="button" href="./password.php?w=d&amp;bo_table=oph&amp;wr_id=346&amp;page=" class="btn btn-black btn-sm" title="삭제" onclick="del(this.href); return false;">
+                                    <c:if test="${loginUser.user_id eq list.user_id or loginUser.roles[0] eq 'ROLE_ADMIN'}">
+                                      <a role="button" id="btn_del" class="btn btn-black btn-sm" title="삭제">
                                       <i class="fa fa-times"></i><span class="hidden-xs"> 삭제</span>
                                       </a>
-                                      <a role="button" href="./password.php?w=u&amp;bo_table=oph&amp;wr_id=346&amp;page=" class="btn btn-black btn-sm" title="수정">
+                                      <a role="button" id="btn_modify" class="btn btn-black btn-sm" title="수정">
                                       <i class="fa fa-plus"></i><span class="hidden-xs"> 수정</span>
                                     </c:if>
                                     </a>
@@ -156,12 +156,11 @@
               </section>
               <br/>
             </div>
-            <!-- 코멘트 종료 -->
 
       </div>
       <!-- /.content-wrapper -->
-      <form id="commDelFrm" name="commDelFrm" action="">
-        <input type="hidden" id="del_seq" name="seq" value="${contents.seq}">
+      <form id="commDelFrm" name="commDelFrm" method="post" action="/board/delFalgUpadaeReply">
+        <input type="hidden" id="del_seq" name="seq" value="${list.seq}">
         <input type="hidden" id="reply_seq" name="reply_seq" value="" />
         <input type="hidden" id="del_categorynm" name="categorynm" value="${categorynm}" />
         <!-- <input type="hidden" id="pwd" name="pwd" value="" /> -->
@@ -186,9 +185,6 @@
           if (!confirm(aslang[11])) return;
 
           $("#commDelFrm #reply_seq").val($dataTag.reply_seq);
-
-          $("#commDelFrm").attr("action", "/board/delFalgUpadaeReply");
-          $("#commDelFrm").attr("method", "post");
           $("#commDelFrm").submit();
 
         });
@@ -199,6 +195,18 @@
           $("#commFrm").attr("method", "post");
           $("#commFrm").submit();
         });
+
+        //게시글 삭제
+        $("#btn_del").on("click", function() {
+          if (confirm("게시글을 삭제 하시겠습니까?"))
+            window.location.href = "/board/bizBoardDelete?user_id=${loginUser.user_id}&seq=${list.seq}&categorynm=${categorynm}";
+        });
+
+        //게시글 수정
+        $("#btn_modify").on("click", function() {
+          window.location.href = "/board/bizBoardModify?user_id=${loginUser.user_id}&seq=${list.seq}&categorynm=${categorynm}";
+        });
+
       });
     </script>
 

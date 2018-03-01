@@ -45,9 +45,9 @@
               <span class="pull-right">
                 <a href="/register">
                   <span class="sidebar-text">회원가입</span>
-                </a>
-                &nbsp;|&nbsp;
-                <a href="/findPassword" class="win_password_lost">
+              </a>
+              &nbsp;|&nbsp;
+              <a href="/findPassword" class="win_password_lost">
                   <span class="sidebar-text">비번찾기</span>
                 </a>
               </span>
@@ -111,7 +111,7 @@
 
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu">
-        <li class="header">땡땡에 오신걸환영합니다.</li>
+        <li class="header">밤프리카에 오신걸환영합니다.</li>
         <!-- Optionally, you can add icons to the links -->
 
         <!-- 업소정보 //시작-->
@@ -206,16 +206,16 @@
               </a>
             </li>
             <!-- 파트너정보 //끝-->
-
-            <!-- 파트너공유 //시작-->
-            <li id="side_bizQna" class="treeview">
-              <a href="/board/bizBoardList?categorynm=bizqna">
+            <c:if test="${!empty loginUser and loginUser.roles[0] ne 'ROLE_USER'}">
+              <!-- 파트너공유 //시작-->
+              <li id="side_bizQna" class="treeview">
+                <a href="/board/bizBoardList?categorynm=bizqna">
                 <i class="fa fa-share"></i>
                 <span>업체문의게시판</span>
               </a>
-            </li>
-            <!-- 파트너정보 //끝-->
-
+              </li>
+              <!-- 파트너정보 //끝-->
+            </c:if>
       </ul>
 
       <!-- /.sidebar-menu -->
@@ -360,7 +360,7 @@
   </div>
 
   <script type="text/javascript">
-    $(document).ready(function () {});
+    $(document).ready(function() {});
 
     /**
      * sidemenu actiove
@@ -413,8 +413,6 @@
       $('#side_bizQna').addClass('active');
     }
 
-
-
     /**
      * Open Modal
      *
@@ -428,6 +426,7 @@
 
     //중복체크 및 약관 동의
     var isCheckedNickNmDupl = true;
+    var isCheckedNickNmDupl = true;
 
     /**
      * Modal
@@ -436,7 +435,7 @@
      * @author 
      * @version 1.0, 2017.12.16 소스 수정
      */
-    $('#m_nick_nm').change(function (e) {
+    $('#m_nick_nm').change(function(e) {
       isCheckedNickNmDupl = false;
       e.preventDefault();
     });
@@ -471,7 +470,7 @@
         method: "post",
         type: "json",
         data: objectifyForm($('#registerForm').serializeArray()),
-        success: function (data) {
+        success: function(data) {
           if (!data.isDuplicated) {
             isCheckedNickNmDupl = true;
             alert('"' + $('#m_nick_nm').val() + '" 사용 가능한 닉네임 입니다.');
@@ -481,7 +480,7 @@
             $('#m_nick_nm').focus();
           }
         },
-        error: function (error) {
+        error: function(error) {
           alert("error : " + eval(error));
         }
       });
@@ -492,7 +491,7 @@
     /**
      * 비밀번호 체크
      */
-    $('#m_pwd').keyup(function () {
+    $('#m_pwd').keyup(function() {
       if ($('#m_before_pwd').val() != $('#m_pwd').val()) {
         $('font[name=check2]').text('');
       } else {
@@ -501,7 +500,7 @@
       }
     }); //#m_pwd.keyup
 
-    $('#m_pwd_again').keyup(function () {
+    $('#m_pwd_again').keyup(function() {
       if ($('#m_pwd').val() != $('#m_pwd_again').val()) {
         $('font[name=check]').text('');
         $('font[name=check]').html("비밀번호가 다릅니다.");
@@ -514,7 +513,7 @@
 
     /**
      * Modal
-     * 삭제
+     * close
      *
      * @author 
      * @version 1.0, 2017.12.16 소스 수정
@@ -530,7 +529,7 @@
       isCheckedNickNmDupl = true;
     }
 
-    $('#pictureModal').on('hidden.bs.modal', function (e) {
+    $('#pictureModal').on('hidden.bs.modal', function(e) {
       removeCancleValue();
     })
 
@@ -544,29 +543,45 @@
     $('#setUserInfo').click((e) => {
 
       var trimPwd = trim($('#m_pwd').val());
-
       if (!isCheckedNickNmDupl) {
         alert("닉네임 중복확인을 해주세요.");
         $('#m_nick_nm').focus();
         return;
-      } else if ($('#m_pwd').val() != $('#m_pwd_again').val() || trimPwd == "") {
-        alert("비밀번호를 확인해주세요.");
-        $('#m_pwd').focus();
+      }
+
+      if (trim($('#m_before_pwd').val()) == "") {
+        alert('현재 비밀번호를 입력해 주세요.');
+        $('#m_before_pwd').focus();
         return;
       }
 
-      if ($('#m_pwd').val() == $('#m_before_pwd').val()) {
-        alert('현재 비밀번호와 변경 비밀번호가 동일합니다.');
-        return;
-      }
+      if ($('#m_pwd').val() != "" || ($('#m_pwd_again').val() != "")) {
 
+        if ($('#m_pwd').val().search(/\s/) != -1) {
+          alert("비밀번호에는 공백이 들어갈 수 없습니다.");
+          $('#m_pwd').val("");
+          $('#m_pwd').focus();
+          return false;
+        }
+
+        if ($('#m_pwd').val() != $('#m_pwd_again').val() || trimPwd == "") {
+          alert("비밀번호를 확인해 주세요.");
+          $('#m_pwd').focus();
+          return;
+        }
+
+        if ($('#m_pwd').val() == $('#m_before_pwd').val()) {
+          alert('현재 비밀번호와 변경 비밀번호가 동일합니다.');
+          return;
+        }
+      }
 
       $.ajax({
         url: "/register/changeLoginUser",
         method: "post",
         type: "json",
         data: objectifyForm($('#registerForm').serializeArray()),
-        success: function (data) {
+        success: function(data) {
           if (!data.isCheckPassword) {
             alert("비밀번호가 맞지 않습니다.");
             return;
@@ -576,11 +591,12 @@
             alert("성공적으로 변경되었습니다.");
             removeCancleValue(); //항목삭제
             $('#pictureModal').modal('hide');
+            location.reload();
           } else {
             alert("변경에 실패했습니다..");
           }
         },
-        error: function (error) {
+        error: function(error) {
           alert("error : " + eval(error));
         }
       });

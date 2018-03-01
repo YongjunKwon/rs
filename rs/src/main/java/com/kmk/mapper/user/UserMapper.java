@@ -90,9 +90,14 @@ public interface UserMapper {
 	void addUser(User user);
 
 	@Update({
-		"UPDATE USER"
-		,"  SET nick_nm=#{nick_nm}, pwd=#{pwd}"
+	  "<script>"
+		,"UPDATE USER"
+		,"  SET nick_nm=#{nick_nm}"
+    , " <if test=\"pwd != null and pwd !='' \"> "
+    , " ,pwd=#{pwd}"
+    , " </if>"
 		,"WHERE user_id=#{user_id}"
+		,"</script>"
 	})
 	void setUser(User user);
 	

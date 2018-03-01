@@ -3,8 +3,9 @@
   <footer class="main-footer">
     <!-- To the right -->
     <div class="pull-right hidden-xs">
-      Welcome.
+    
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2017 <a href="#">KMK Company</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2017 <a href="#">Bamfrica Company</a>.</strong> All rights reserved.
+      <button class="btn" onclick="desktopMode()">pc ←→ 모바일 전환 </button>
   </footer>

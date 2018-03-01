@@ -27,7 +27,6 @@
                     <div class="box">
                       <div class="box-header">
                         <div class="col-sm-12">
-                          <h3 class="form_control_h3">****회원가 적용 받으시려면 밤길보고 전화했다고 말씀해주세요!****</h3>
                           <div class="row">
                             <form:form modelAttribute="board" method="get" action="/board/bizBoardList?categorynm=${board.categorynm}">
                               <input type="hidden" id="pagination" name="pagination.currentPageNo" value="1">
@@ -43,7 +42,7 @@
                               </div>
                               <div class="col-sm-8 ">
                                 <div class="input-group input-group-sm">
-                                  <input type="text" class="form-control__" name="title" value="${board.title}" id="title" placeholder="검색내용 입력">
+                                  <input type="text" class="form-control__" name="title" value="${board.title}" id="title" placeholder="검색내용">
                                   <div class="input-group-btn">
                                     <button type="submit" id="btnSearch" name="btnSearch" class="btn btn-info btn-flat">검색</button>
                                   </div>
@@ -58,29 +57,35 @@
                         <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                           <div class="row">
                             <div class="col-sm-12">
-                              <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+                              <table id="example1" class="table table-bordered table-hover dataTable board-table" role="grid" aria-describedby="example1_info">
                                 <thead>
                                   <tr role="row">
                                     <th class="align-center wd-50">번호</th>
                                     <!-- <th class=">사진</th> -->
                                     <th class="align-left"> 제목</th>
-                                    <th class="align-center wd-100">닉네임</th>
-                                    <th class="align-center wd-100">조회수</th>
+                                    <th class="align-center wd-50 font-12">닉네임</th>
+                                    <th class="align-center wd-50 font-12">조회수</th>
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  <c:forEach items="${list}" var="list" varStatus="status">
+                                  <c:if test="${!empty list}">
+                                    <c:forEach items="${list}" var="list" varStatus="status">
+                                      <tr>
+                                        <td class="align-center">${list.rownum}</td>
+                                        <!-- <td><img class="wd-50" alt="" src="${list.img_url}"></td> -->
+                                        <td class="board_text_color board_title word-break vertical-middle" data='${list.seq}'>
+                                          <a href="/board/bizBoardDetail?seq=${list.seq}&categorynm=${board.categorynm}">${list.title}</a>
+                                        </td>
+                                        <td class="align-center wd-50 font-11">${list.nick_nm} </td>
+                                        <td class="align-center wd-50 font-11">${list.cnt} </td>
+                                      </tr>
+                                    </c:forEach>
+                                  </c:if>
+                                  <c:if test="${empty list}">
                                     <tr>
-                                      <td align="center">${list.seq}
-                                      </td>
-                                      <!-- <td><img class="wd-50" alt="" src="${list.img_url}"></td> -->
-                                      <td class="board_text_color text-align: center;">
-                                        <a href="/board/bizBoardDetail?seq=${list.seq}&categorynm=${board.categorynm}">${list.title}</a>
-                                      </td>
-                                      <td align="center">${list.nick_nm} </td>
-                                      <td align="center">${list.cnt} </td>
+                                      <td colspan="4" class="text-center">게시글이 없습니다.</td>
                                     </tr>
-                                  </c:forEach>
+                                  </c:if>
                                 </tbody>
                               </table>
                             </div>
@@ -91,11 +96,12 @@
                               <!-- //페이징 -->
                               <div class="text-center" id="page_area"></div>
                               <!-- //페이징 -->
-
-                              <div class="pull-right" id="example1_info" role="status" aria-live="polite">
-                                <button id="btnWrite" class="btn bg-olive margin">글쓰기</button>
-                                <!-- <a class="a-color" href="/board/bizBoardWrite?categorynm=${board.categorynm}">글쓰기</a> -->
-                              </div>
+                              <c:if test="${loginUser.roles[0] ne 'ROLE_USER'}">
+                                <div class="pull-right" id="example1_info" role="status" aria-live="polite">
+                                  <button id="btnWrite" class="btn bg-olive margin">글쓰기</button>
+                                  <!-- <a class="a-color" href="/board/bizBoardWrite?categorynm=${board.categorynm}">글쓰기</a> -->
+                                </div>
+                              </c:if>
                             </div>
                           </div>
                         </div>
@@ -138,7 +144,11 @@
 
       $('#btnWrite').click(function() {
         window.location.href = '/board/bizBoardWrite?categorynm=${board.categorynm}&category=${board.category}';
-      })
+      });
+
+      $('.board_title').click(function() {
+        window.location.href = "/board/bizBoardDetail?seq= " + $(this).attr('data') + "&categorynm=${board.categorynm}";
+      });
     </script>
 
   </html>

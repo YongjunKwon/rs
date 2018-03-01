@@ -27,7 +27,7 @@ util.page = {
         var _cur = data.get("CURRPAGE");
 
         var _page_sz = Math.floor(parseInt(_tot) / 10);
-        var _curr_sz = Math.floor(parseInt(_cur) / 10);
+        var _curr_sz = Math.floor(parseInt(_cur-1) / 10);
 
         var stnum = (_curr_sz < 1) ? 1 : parseInt((_curr_sz * 10)) + 1;
         var ennum = (_page_sz == _curr_sz) ? parseInt(_tot) + 1 : (eval(stnum) + 10);
@@ -59,10 +59,10 @@ util.page = {
 
         //전체페이지수가 10개 미만은 화살표 숨김처리
         if (_page_sz == 0) {
-            //arrow_first.hide();
-            //arrow_prev.hide();
-            //arrow_next.hide();
-            //arrow_last.hide();
+            arrow_first.hide();
+            arrow_prev.hide();
+            arrow_next.hide();
+            arrow_last.hide();
         } else {
 
             if (_curr_sz == _page_sz) {

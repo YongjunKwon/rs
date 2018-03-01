@@ -8,6 +8,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Update;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -172,10 +173,10 @@ public class BoardController {
                 returnPage = "board/bizQna/bizQnaBoardList";
                 break;
             }
-        }else {
+        } else {
             return "redirect:/";
         }
-        
+
         CommCode commCode = new CommCode();
         commCode.setCd_grp("AA");
         commCode.setCd(null);
@@ -183,7 +184,7 @@ public class BoardController {
         // List<CamelCaseMap> recvList = vocmService.findRecvList(vocmWebSearch);
         List<Board> list = new ArrayList<Board>();
         list = boardService.selectBoard(board);
-        
+
         PaginationUtils.bindTotalRecordCount(board.getPagination(), list, "tot_cnt");
         logger.info(" @@@@@@@@@@@@@ board.getPagination(): getCurrentPageNo : {} ",
                 board.getPagination().getCurrentPageNo());
@@ -347,6 +348,160 @@ public class BoardController {
         return returnPage;
     }
 
+    @RequestMapping("bizBoardDelete")
+    public void bizBoardDelete(Board board, HttpServletResponse response, HttpSession session) throws IOException {
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
+        String return_url = "/board/bizBoardList?categorynm=" + board.getCategorynm();
+        PrintWriter out = response.getWriter();
+        LoginUser loginUser = (LoginUser) session.getAttribute("loginUser");
+        
+        if(!loginUser.getUser_id().equals(board.getUser_id())) {
+            out.println("<script>alert('잘못된 접근입니다.');location.href='" + return_url + "'; </script>");
+            return;
+        }
+        
+        boardService.delFlagUpadateBoard(board.getSeq());
+
+        out.println("<script>alert('정상적으로 삭제 되었습니다.');location.href='" + return_url + "'; </script>");
+        out.flush();
+
+    }
+    
+    @RequestMapping("bizBoardModify")
+    public String bizBoardModify(Board board, Model model, HttpServletResponse response, HttpSession session) throws IOException {
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
+        String return_url = "/board/bizBoardList?categorynm=" + board.getCategorynm();
+        PrintWriter out = response.getWriter();
+        LoginUser loginUser = (LoginUser) session.getAttribute("loginUser");
+        
+        if(!(loginUser.getUser_id().equals(board.getUser_id())||loginUser.getRole().equals("ROOT_ADMIN"))) {
+            out.println("<script>alert('잘못된 접근입니다.');location.href='" + return_url + "'; </script>");
+            out.flush();
+            return "/";
+        }
+        
+        
+        CommCode commCode = new CommCode();
+        commCode.setCd_grp("AA");
+        commCode.setCd(null);
+        model.addAttribute("comboAreaCdList", commonService.findComboAreaCdList(commCode));
+
+        String returnPage = "";
+
+        switch (board.getCategorynm()) {
+
+        /*********************
+         * 업소정보 카테고리
+         */
+        case "op":
+            model.addAttribute("categorynm", "op");
+            model.addAttribute("captionTitle", "오피스텔");
+            returnPage = "board/bizInfo/bizBoardModify";
+            break;
+
+        case "gunma":
+            model.addAttribute("categorynm", "gunma");
+            model.addAttribute("captionTitle", "건마");
+            returnPage = "board/bizInfo/bizBoardModify";
+            break;
+
+        case "anma":
+            model.addAttribute("categorynm", "anma");
+            model.addAttribute("captionTitle", "안마");
+            returnPage = "board/bizInfo/bizBoardModify";
+            break;
+
+        case "play":
+            model.addAttribute("categorynm", "play");
+            model.addAttribute("captionTitle", "유흥주점");
+            returnPage = "board/bizInfo/bizBoardModify";
+            break;
+
+        case "tel":
+            model.addAttribute("categorynm", "tel");
+            model.addAttribute("captionTitle", "휴게텔");
+            returnPage = "board/bizInfo/bizBoardModify";
+            break;
+
+        case "lib":
+            model.addAttribute("categorynm", "lib");
+            model.addAttribute("captionTitle", "립카페/핸플/키스");
+            returnPage = "board/bizInfo/bizBoardModify";
+            break;
+
+        /*********************
+         * 업소후기 카테고리
+         */
+        case "oph":
+            model.addAttribute("categorynm", "oph");
+            model.addAttribute("captionTitle", "후기 후기");
+            returnPage = "board/bizComment/bizCommentModify";
+            break;
+
+        case "gunmah":
+            model.addAttribute("categorynm", "gunmah");
+            model.addAttribute("captionTitle", "건마 후기");
+            returnPage = "board/bizComment/bizCommentModify";
+            break;
+
+        case "anmah":
+            model.addAttribute("categorynm", "anmah");
+            model.addAttribute("captionTitle", "안마 후기");
+            returnPage = "board/bizComment/bizCommentModify";
+            break;
+
+        case "playh":
+            model.addAttribute("categorynm", "playh");
+            model.addAttribute("captionTitle", "유흥주점 후기");
+            returnPage = "board/bizComment/bizCommentModify";
+            break;
+
+        case "telh":
+            model.addAttribute("categorynm", "telh");
+            model.addAttribute("captionTitle", "휴게텔 후기");
+            returnPage = "board/bizComment/bizCommentModify";
+            break;
+
+        case "libh":
+            model.addAttribute("categorynm", "libh");
+            model.addAttribute("captionTitle", "립카페/핸플/키스 후기");
+            returnPage = "board/bizComment/bizCommentModify";
+            break;
+
+        /*********************
+         * 업소언니정보 카테고리
+         */
+        case "bizwm":
+            model.addAttribute("categorynm", "bizwm");
+            model.addAttribute("captionTitle", "업소언니정보");
+            returnPage = "board/bizWm/bizWmModify";
+            break;
+
+        /*********************
+         * 파트너공유 카테고리
+         */
+        case "partner":
+            model.addAttribute("categorynm", "partner");
+            model.addAttribute("captionTitle", "파트너공유");
+            returnPage = "board/partnerShare/partnerShareModify";
+            break;
+
+        /*********************
+         * 업체문의게시판
+         */
+        case "bizqna":
+            model.addAttribute("categorynm", "bizqna");
+            model.addAttribute("captionTitle", "업체문의게시판");
+            returnPage = "board/bizQna/bizQnaModify";
+            break;
+        }
+        model.addAttribute("list", boardService.selectDetailBoard(board.getSeq()));
+        model.addAttribute("board", board);
+        return returnPage;
+    }    
+    
     @RequestMapping("bizBoardReplyReg")
     public String bizBoardReplyReg(Reply reply, RedirectAttributes redirectAttributes, Model model,
             HttpSession session) {
@@ -366,8 +521,6 @@ public class BoardController {
     @RequestMapping(value = "delFalgUpadaeReply", method = RequestMethod.POST)
     public String delFalgUpadaeReply(Reply reply, RedirectAttributes redirectAttributes, HttpSession session) {
 
-        ModelAndView mav = new ModelAndView("jsonView");
-
         logger.info(" @@@@@@@@@@@@@ deleteReply @@@@@ " + reply.toString());
         logger.debug("TestForm : {}", reply);
 
@@ -383,7 +536,7 @@ public class BoardController {
             redirectAttributes.addAttribute("categorynm", reply.getCategorynm());
         } else {
             redirectAttributes.addAttribute("seq", reply.getSeq());
-            redirectAttributes.addAttribute("success", boardService.delFalgUpadaeReply(reply.getReply_seq())); // not
+            redirectAttributes.addAttribute("success", boardService.delFlagUpadateReply(reply.getReply_seq())); // not
                                                                                                                // access
             redirectAttributes.addAttribute("categorynm", reply.getCategorynm());
         }
@@ -395,12 +548,11 @@ public class BoardController {
     @RequestMapping("bizBoardWrite")
     public String bizBoardWrite(Board board, Model model) {
 
-        log.info("===========kwon:"+ board.getCategorynm());
         CommCode commCode = new CommCode();
         commCode.setCd_grp("AA");
         commCode.setCd(null);
         model.addAttribute("comboAreaCdList", commonService.findComboAreaCdList(commCode));
-        
+
         String returnPage = "";
 
         board.setCategorynm(board.getCategorynm());
@@ -513,7 +665,7 @@ public class BoardController {
             returnPage = "board/bizQna/bizQnaWrite";
             break;
         }
-        
+
         model.addAttribute("board", board);
         return returnPage;
         // return "board/bizInfo/bizBoardWrite";
@@ -528,18 +680,32 @@ public class BoardController {
     }
 
     @RequestMapping("bizSaveBoard")
-    public String bizSaveBoard(Board board, HttpSession session, HttpServletResponse response) throws IOException {
+    public void bizSaveBoard(Board board, HttpSession session, HttpServletResponse response) throws IOException {
         LoginUser loginUser = (LoginUser) session.getAttribute("loginUser");
-        board.setBiz_nm(loginUser.getBiz_nm());
+        board.setBiz_nm(loginUser.getBiz_nm());        
         boardService.insertBoard(board);
-        
+
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
         PrintWriter out = response.getWriter();
-        out.println("<script>alert('정상적으로 등록 되었습니다.');");
+        String return_url = "/board/bizBoardList?categorynm=" + board.getCategorynm();
+
+        out.println("<script>alert('정상적으로 등록 되었습니다.');location.href='" + return_url + "'; </script>");
         out.flush();
-        
-        return "redirect:bizBoardList";
+
     }
 
+    @RequestMapping("bizSaveBoardModify")
+    public void bizSaveBoardModify(Board board, HttpServletResponse response) throws IOException {
+        boardService.updateBoard(board);
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        String return_url = "/board/bizBoardList?categorynm=" + board.getCategorynm();
+
+        out.println("<script>alert('정상적으로 등록 되었습니다.');location.href='" + return_url + "'; </script>");
+        out.flush();
+    }
+    
+    
 }

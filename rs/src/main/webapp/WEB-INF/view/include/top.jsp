@@ -5,9 +5,9 @@
     <!-- Logo -->
     <a href="/" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>RS</b></span>
+      <span class="logo-mini"><b>BamF</b></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>RS</b>PJT</span>
+      <span class="logo-lg"><b>밤</b>프리카</span>
     </a>
 
     <!-- Header Navbar -->
@@ -19,7 +19,10 @@
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">    
-            
+          <div id="banner1" class="rolling-banner">
+            <img src="/images/top_banner1.png">
+            <img src="/images/top_banner1.png">
+          </div>
           <!-- User Account Menu -->
 <!--           <li class="dropdown user user-menu">
             Menu Toggle Button

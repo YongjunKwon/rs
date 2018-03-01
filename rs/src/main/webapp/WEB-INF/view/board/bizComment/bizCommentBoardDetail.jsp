@@ -28,7 +28,7 @@
               			<div class="row">
               				<div class="col-sm-12">
               					<div class="row form_control_h3">
-              						<h3 class="form_control_h3">****회원가 적용 받으시려면 밤길보고 전화했다고 말씀해주세요!****</h3>
+              						
               					</div>
 	       					</div>
 	       				</div>

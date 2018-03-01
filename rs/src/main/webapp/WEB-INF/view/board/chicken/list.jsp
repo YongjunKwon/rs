@@ -35,7 +35,7 @@
 	
 
 					<div class="at-content">
-								<p><span style="color: rgb(255, 0, 0); font-size: 12pt;"><b>****회원가 적용 받으시려면 밤길보고 전화했다고 말씀해주세요!****</b></span></p>
+								<p><span style="color: rgb(255, 0, 0); font-size: 12pt;"><b>****회원가 적용 받으시려면 밤프리카보고 전화했다고 말씀해주세요!****</b></span></p>
 <section class="board-list"> 
 
 	

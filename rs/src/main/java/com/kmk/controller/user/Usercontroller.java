@@ -143,13 +143,23 @@ public class Usercontroller {
         ModelAndView mav = new ModelAndView("jsonView");
         log.info("======kwon user:{}", user);
         log.info("======kwon loginUser:{}", loginUser);
+        Boolean isSamePassword = true;
 
         if (!loginUser.getPwd().equals(user.getBefore_pwd())) {
-            mav.addObject("isCheckPassword", false);
+            isSamePassword = false;
             return mav;
         }
 
+        user.setUser_id(loginUser.getUser_id());
         userDetailService.setUser(user);
+
+        // 변경된 닉네임 세션 셋팅
+        if (user.getPwd().length() > 0)
+            loginUser.setPwd(user.getPwd());
+        loginUser.setNick_nm(user.getNick_nm());
+        session.setAttribute("loginUser", loginUser);
+
+        mav.addObject("isCheckPassword", isSamePassword);
         mav.addObject("isSuccesses", true);
 
         return mav;
