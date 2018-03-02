@@ -63,7 +63,7 @@
                                     <th class="align-center wd-50">번호</th>
                                     <!-- <th class=">사진</th> -->
                                     <th class="align-left"> 제목</th>
-                                    <th class="align-center wd-150 font-12">닉네임</th>
+                                    <th class="align-center wd-50 font-12">닉네임</th>
                                     <th class="align-center wd-50 font-12">조회수</th>
                                   </tr>
                                 </thead>
