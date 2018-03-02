@@ -440,18 +440,18 @@
      */
 	function addEvent() {
 		bAttachEvent = true;
-		elDropArea.addEventListener("dragenter", dragEnter, false);
-		elDropArea.addEventListener("dragexit", dragExit, false);
-		elDropArea.addEventListener("dragover", dragOver, false);
-		elDropArea.addEventListener("drop", drop, false);
+		//elDropArea.addEventListener("dragenter", dragEnter, false);
+		//elDropArea.addEventListener("dragexit", dragExit, false);
+		//elDropArea.addEventListener("dragover", dragOver, false);
+		//elDropArea.addEventListener("drop", drop, false);
 	}
 	
 	function removeEvent(){
 		bAttachEvent = false;
-		elDropArea.removeEventListener("dragenter", dragEnter, false);
-	    elDropArea.removeEventListener("dragexit", dragExit, false);
-	    elDropArea.removeEventListener("dragover", dragOver, false);
-	    elDropArea.removeEventListener("drop", drop, false);
+		//elDropArea.removeEventListener("dragenter", dragEnter, false);
+	    //elDropArea.removeEventListener("dragexit", dragExit, false);
+	    //elDropArea.removeEventListener("dragover", dragOver, false);
+	    //elDropArea.removeEventListener("drop", drop, false);
 	}
  	
 	/**
