@@ -300,7 +300,7 @@ public class BoardController {
             logger.info(" libh return page setting " + categorynm);
             model.addAttribute("categorynm", "libh");
             model.addAttribute("captionTitle", "립카페/핸플/키스 후기");
-            returnPage = "board/bizComment/bizWmDetail";
+            returnPage = "board/bizComment/bizCommentBoardDetail";
             break;
 
         /*********************
@@ -310,7 +310,7 @@ public class BoardController {
             logger.info(" bizwm return page setting " + categorynm);
             model.addAttribute("categorynm", "bizwm");
             model.addAttribute("captionTitle", "업소언니정보");
-            returnPage = "board/bizWm/partnerShareBoardDetail";
+            returnPage = "board/bizWm/bizWmDetail";
             break;
 
         /*********************
@@ -671,14 +671,7 @@ public class BoardController {
         // return "board/bizInfo/bizBoardWrite";
     }
 
-    // 업소후기
-    @RequestMapping("bizCommentBoardWrite")
-    public String bizCommentBoardWrite(String categorynm, Model model) {
-        logger.info(" bizCommentBoardWrite :::: >>>> categorynm ::: " + categorynm);
-        model.addAttribute("categorynm", categorynm);
-        return "board/bizComment/bizCommentWrite";
-    }
-
+    // 저장
     @RequestMapping("bizSaveBoard")
     public void bizSaveBoard(Board board, HttpSession session, HttpServletResponse response) throws IOException {
         LoginUser loginUser = (LoginUser) session.getAttribute("loginUser");
@@ -695,6 +688,7 @@ public class BoardController {
 
     }
 
+    // 수정
     @RequestMapping("bizSaveBoardModify")
     public void bizSaveBoardModify(Board board, HttpServletResponse response) throws IOException {
         boardService.updateBoard(board);

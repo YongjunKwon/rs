@@ -33,10 +33,11 @@
                       </div>
                       <!-- /.box-header -->
                       <div class="box-body">
-                        <form id="frm" name="frm" method="post" class="form-inline" action="/board/bizSaveBoard">
+                        <form id="frm" name="frm" method="post" class="form-inline" action="/board/bizSaveBoardModify">
                           <input type="hidden" id="categorynm" name="categorynm" value="${board.categorynm}">
                           <input type="hidden" id="user_id" name="user_id" value="${loginUser.user_id}">
                           <input type="hidden" id="category" name="category" value="${board.category}">
+                          <input type="hidden" id="seq" name="seq" value="${board.seq}">
                           <input type="hidden" id="biz_nm" name="biz_nm" value="${loginUser.biz_nm}">
                           <div class="row">
                             <div class="col-sm-1"></div>
@@ -44,7 +45,7 @@
                               <select class="form-control" id="area_cd" name="area_cd">
 																<option value="">지역 선택</option>
 																<c:forEach var="item" items="${comboAreaCdList}" varStatus="status">
-																	<option value="${item.cd}">${item.cd_nm}</option>
+																	<option value="${item.cd}" <c:if test="${item.cd eq list.area_cd}">selected</c:if> >${item.cd_nm}</option>
 																</c:forEach>
 															</select>
                             </div>
@@ -52,13 +53,13 @@
                           <div class="row">
                             <label class="col-sm-1 form_control_lebel">제목</label>
                             <div class="col-sm-11">
-                              <input type="text" id="title" name="title" class="form_control_edit2" placeholder=" 제목을 입력하세요.">
+                              <input type="text" id="title" name="title" value="${list.title}" class="form_control_edit2" placeholder=" 제목을 입력하세요.">
                             </div>
                           </div>
                           <div class="row">
                             <label class="col-sm-1 form_control_lebel">내용</label>
                             <div class="col-sm-11">
-                              <textarea class="form_control_textarea" name="content" id="content" rows="27"></textarea>
+                              <textarea class="form_control_textarea" id="content" name="content" >${list.content}</textarea>
                             </div>
                           </div>
                           <div class="row">

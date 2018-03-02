@@ -59,10 +59,10 @@ util.page = {
 
         //전체페이지수가 10개 미만은 화살표 숨김처리
         if (_page_sz == 0) {
-            arrow_first.hide();
+            //arrow_first.hide();
             arrow_prev.hide();
             arrow_next.hide();
-            arrow_last.hide();
+            //arrow_last.hide();
         } else {
 
             if (_curr_sz == _page_sz) {

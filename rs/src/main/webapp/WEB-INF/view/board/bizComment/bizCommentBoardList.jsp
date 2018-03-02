@@ -16,9 +16,8 @@
                   <small>각 지역의 ${captionTitle}를 소개해 드립니다.</small>
                 </h1>
                 <ol class="breadcrumb">
-                  <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                  <li><a href="#">Tables</a></li>
-                  <li class="active">Data tables</li>
+                  <li><a href="/"><i class="fa fa-dashboard"></i>Home</a></li>
+                  <li><a href="/board/bizBoardList?categorynm=${board.categorynm}">${captionTitle}</a></li>
                 </ol>
               </section>
               <!-- Main content -->
@@ -27,33 +26,29 @@
                   <div class="col-xs-12">
                     <div class="box">
                       <div class="box-header">
-                        <div class="row">
-                          <div class="col-sm-12">
-                            <div class="row form_control_h3">
-                              
-                            </div>
-                            <div class="row">
-                              <form:form modelAttribute="board" method="post" action="/board/bizBoardList">
-                                <input type="hidden" id="pagination" name="pagination.currentPageNo" value="1">
-                                <input type="hidden" id="categorynm" name="categorynm" value="${board.categorynm}">
-                                <div class="col-sm-4 pull-left">
-                                  <div class="form-group" id="example1_length">
-                                    <form:select path="area_cd" class="form-control__" data-placeholder="지역" disabled="false">
-                                      <option value="">지역선택</option>
-                                      <form:options items="${comboAreaCdList}" itemValue="cd" itemLabel="cd_nm" />
-                                    </form:select>
+                        <div class="col-sm-12">
+                          <div class="row">
+                            <form:form modelAttribute="board" method="get" action="/board/bizBoardList?categorynm=${board.categorynm}">
+                              <input type="hidden" id="pagination" name="pagination.currentPageNo" value="1">
+                              <input type="hidden" id="categorynm" name="categorynm" value="${board.categorynm}">
+                              <input type="hidden" id="category" name="category" value="${board.category}">
+                              <div class="col-sm-4 pull-left">
+                                <div class="form-group" id="example1_length">
+                                  <form:select path="area_cd" class="form-area" data-placeholder="지역" disabled="false" onchange="javascript:submit()">
+                                    <option value="">지역선택</option>
+                                    <form:options items="${comboAreaCdList}" itemValue="cd" itemLabel="cd_nm" />
+                                  </form:select>
+                                </div>
+                              </div>
+                              <div class="col-sm-8 ">
+                                <div class="input-group input-group-sm">
+                                  <input type="text" class="form-control__" name="title" value="${board.title}" id="title" placeholder="검색내용">
+                                  <div class="input-group-btn">
+                                    <button type="submit" id="btnSearch" name="btnSearch" class="btn btn-info btn-flat">검색</button>
                                   </div>
                                 </div>
-								<div class="col-sm-8 ">                                
-									<div class="input-group input-group-sm">
-										<input type="text" class="form-control__" name="title" value="${board.title}" id="title" placeholder="검색내용 입력">
-										<span class="input-group-btn">
-											<button type="submit" id="btnSearch" name="btnSearch" class="btn btn-info btn-flat">검색</button>
-										</span>
-									</div>
-								</div>
-                              </form:form>
-                            </div>
+                              </div>
+                            </form:form>
                           </div>
                         </div>
                       </div>
@@ -62,40 +57,35 @@
                         <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                           <div class="row">
                             <div class="col-sm-12">
-                              <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+                              <table id="example1" class="table table-bordered table-hover dataTable board-table" role="grid" aria-describedby="example1_info">
                                 <thead>
                                   <tr role="row">
-                                    <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">번호
-                                    </th>
-                                    <th class="board_header-text">사진
-                                    </th>
-                                    <th class="board_header-text">제목
-                                    </th>
-                                    <th class="board_header-text">글쓴이
-                                    </th>
-                                    <th class="board_header-text">날짜
-                                    </th>
-                                    <th class="board_header-text">조회수
-                                    </th>
+                                    <th class="align-center wd-50">번호</th>
+                                    <!-- <th class=">사진</th> -->
+                                    <th class="align-left"> 제목</th>
+                                    <th class="align-center wd-150 font-12">닉네임</th>
+                                    <th class="align-center wd-50 font-12">조회수</th>
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  <c:forEach items="${list}" var="list" varStatus="status">
+                                  <c:if test="${!empty list}">
+                                    <c:forEach items="${list}" var="list" varStatus="status">
+                                      <tr>
+                                        <td class="align-center">${list.rownum}</td>
+                                        <!-- <td><img class="wd-50" alt="" src="${list.img_url}"></td> -->
+                                        <td class="board_text_color board_title word-break vertical-middle" data='${list.seq}'>
+                                          <a href="/board/bizBoardDetail?seq=${list.seq}&categorynm=${board.categorynm}">${list.title}</a>
+                                        </td>
+                                        <td class="align-center wd-50 font-11">${list.nick_nm} </td>
+                                        <td class="align-center wd-50 font-11">${list.cnt} </td>
+                                      </tr>
+                                    </c:forEach>
+                                  </c:if>
+                                  <c:if test="${empty list}">
                                     <tr>
-                                      <td align="center">${list.seq}
-                                      </td>
-                                      <td><img class="wd-50" alt="" src="${list.img_url}">
-                                      </td>
-                                      <td class="board_text_color"><a href="/board/bizBoardDetail?seq=${list.seq}&categorynm=${board.categorynm}">${list.title}</a>
-                                      </td>
-                                      <td>${list.user_id}
-                                      </td>
-                                      <td>${list.seq}
-                                      </td>
-                                      <td>${list.cnt}
-                                      </td>
+                                      <td colspan="4" class="text-center">게시글이 없습니다.</td>
                                     </tr>
-                                  </c:forEach>
+                                  </c:if>
                                 </tbody>
                               </table>
                             </div>
@@ -106,12 +96,12 @@
                               <!-- //페이징 -->
                               <div class="text-center" id="page_area"></div>
                               <!-- //페이징 -->
-
-                              <div class="pull-right" id="example1_info" role="status" aria-live="polite">
-                                <button class="btn bg-olive margin">
-									<a class="a-color" href="/board/bizCommentBoardWrite?categorynm=${board.categorynm}">글쓰기</a>
-								</button>								
-                              </div>
+                              <c:if test="${loginUser.roles[0] ne 'ROLE_USER'}">
+                                <div class="pull-right" id="example1_info" role="status" aria-live="polite">
+                                  <button id="btnWrite" class="btn bg-olive margin">글쓰기</button>
+                                  <!-- <a class="a-color" href="/board/bizBoardWrite?categorynm=${board.categorynm}">글쓰기</a> -->
+                                </div>
+                              </c:if>
                             </div>
                           </div>
                         </div>
@@ -133,25 +123,32 @@
     </body>
 
     <script type="text/javascript">
-            var $gbPageMap = new Map();
-            
-            //$('#side_bizComment').addClass('active');
+      var $gbPageMap = new Map();
+      $(document).ready(function() {
 
-            $gbPageMap.put("TOTPAGE", "${board.pagination.getTotalPageCount()}");
-            $gbPageMap.put("CURRPAGE", "${board.pagination.getCurrentPageNo()}");
-            $gbPageMap.put("PERPAGE", "${board.pagination.getRecordCountPerPage()}");
-            $gbPageMap.put("PAGESIZE", "${board.pagination.getPageSize()}");
+        $gbPageMap.put("TOTPAGE", "${board.pagination.getTotalPageCount()}");
+        $gbPageMap.put("CURRPAGE", "${board.pagination.getCurrentPageNo()}");
+        $gbPageMap.put("PERPAGE", "${board.pagination.getRecordCountPerPage()}");
+        $gbPageMap.put("PAGESIZE", "${board.pagination.getPageSize()}");
 
-            $(document).ready(function() {
-                if ($gbPageMap.get("TOTPAGE") != "0") {
-                    util.page.set($gbPageMap, 'page_area', 'goPage');
-                }
-            });
+        if ($gbPageMap.get("TOTPAGE") != "0") {
+          util.page.set($gbPageMap, 'page_area', 'goPage');
+        }
 
-            function goPage(pageNo) {
-                $("#pagination").val(pageNo);
-                $("#board").submit();
-            }
-        </script>
+      });
+
+      function goPage(pageNo) {
+        $("#pagination").val(pageNo);
+        $("#board").submit();
+      }
+
+      $('#btnWrite').click(function() {
+        window.location.href = '/board/bizBoardWrite?categorynm=${board.categorynm}&category=${board.category}';
+      });
+
+      $('.board_title').click(function() {
+        window.location.href = "/board/bizBoardDetail?seq= " + $(this).attr('data') + "&categorynm=${board.categorynm}";
+      });
+    </script>
 
   </html>
