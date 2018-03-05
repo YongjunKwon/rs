@@ -97,7 +97,6 @@
                             <input type="hidden" id="seq" name="seq" value="${list.seq}">
                             <input type="hidden" id="user_id" name="user_id" value="">
                             <input type="hidden" id="categorynm" name="categorynm" value="${categorynm}">
-                            <input type="hidden" id="img_url" name="img_url" value="">
                             <div class="comment-box">
                               <div class="clearfix"></div>
                               <div class="form-group row">
@@ -129,10 +128,6 @@
                                       </a>
                                       <a role="button" id="btn_modify" class="btn btn-black btn-sm" title="수정">
                                       <i class="fa fa-plus"></i><span class="hidden-xs"> 수정</span>
-                                      
-                                      <a role="button" id="btn_src" class="btn btn-black btn-sm" title="get SRC">
-                                      <i class="fa fa-plus"></i><span class="hidden-xs"> get SRC</span>
-                                      
                                     </c:if>
                                     </a>
                                       </a>
@@ -196,10 +191,6 @@
 
         // 댓글등록
         $("#btnReplyReg").on("click", function() {
-          // 첫번째이미지 취득 URL 저장	
-          var firstimg = $(".view-content ").find('img:first').attr('src');
-          console.log("::: 첫번째 이미지 ::: " + firstimg);
-           
           $("#commFrm").attr("action", "/board/bizBoardReplyReg");
           $("#commFrm").attr("method", "post");
           $("#commFrm").submit();
@@ -215,13 +206,6 @@
         $("#btn_modify").on("click", function() {
           window.location.href = "/board/bizBoardModify?user_id=${loginUser.user_id}&seq=${list.seq}&categorynm=${categorynm}";
         });
-        
-        $("#btn_src").on("click", function() {
-        	var firstimg = $(".view-content ").find('img:first').attr('src');
-       		alert(firstimg);
-        });
-
-        
         
       });
     </script>
