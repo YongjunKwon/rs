@@ -3,7 +3,7 @@
   <html>
   <%@include file="../include/header.jsp"%>
 
-    <body class="hold-transition skin-blue sidebar-mini">
+    <body class="hold-transition skin-black sidebar-mini">
       <div class="wrapper">
         <%@include file="../include/top.jsp"%>
           <%@include file="../include/adminSideMenu.jsp"%>
@@ -26,12 +26,7 @@
                                 <input type="hidden" id="pagination" name="pagination.currentPageNo" value="1">
                                 <input type="hidden" id="categorynm" name="categorynm" value="${board.categorynm}">
                                 <div class="col-sm-4 pull-left">
-                                  <div class="form-group" id="example1_length">
-                                    <form:select path="area_cd" class="form-control__" data-placeholder="지역" disabled="false">
-                                      <option value="">지역선택</option>
-                                      <form:options items="${comboAreaCdList}" itemValue="cd" itemLabel="cd_nm" />
-                                    </form:select>
-                                  </div>
+                                
                                 </div>
                                 <div class="col-sm-8 ">
                                   <div class="input-group input-group-sm">

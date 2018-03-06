@@ -35,11 +35,11 @@
 	
 	<logger name="org.mybatis.spring.SqlSessionUtils" level="INFO" />
 	
-	<logger name="jdbc" level="ERROR" />
+	<logger name="jdbc" level="DEBUG" />
 	<logger name="jdbc.sqlonly" level="DEBUG" />
 	<logger name="jdbc.resultsettable" level="INFO" />
 	
-	<logger name="org.apache.http.headers" level="INFO" />
+	<logger name="org.apache.http.headers" level="DEBUG" />
 
 	<root level="DEBUG">
 		<appender-ref ref="STDOUT" />

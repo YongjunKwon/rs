@@ -3,7 +3,7 @@
   <html>
   <%@include file="../../include/header.jsp"%>
 
-    <body class="hold-transition skin-blue sidebar-mini">
+    <body class="hold-transition skin-black sidebar-mini">
       <div class="wrapper">
         <%@include file="../../include/top.jsp"%>
           <%@include file="../../include/sideMenu.jsp"%>
@@ -72,7 +72,7 @@
                                     <c:forEach items="${list}" var="list" varStatus="status">
                                       <tr>
                                         <td class="align-center">${list.rownum}</td>
-                                        <td><img class="wd-50" alt="" src="${list.img_url}"></td>
+                                        <td><img class="img-thumb" alt="" src="${list.img_url}"></td>
                                         <td class="board_text_color board_title word-break vertical-middle" data='${list.seq}'>
                                           <a href="/board/bizBoardDetail?seq=${list.seq}&categorynm=${board.categorynm}">${list.title}</a>
                                         </td>

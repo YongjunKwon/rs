@@ -114,7 +114,7 @@
         <li class="header"></li>
         <!-- Optionally, you can add icons to the links -->
             <li class="treeview">
-              <a href="/admin/customer">
+              <a href="/admin/biz/upToMember">
                 <i class="fa fa-share"></i>
                 <span>업체 관리</span>
               </a>

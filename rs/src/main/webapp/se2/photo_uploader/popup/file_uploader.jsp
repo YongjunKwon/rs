@@ -3,12 +3,16 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
 <%@page import="java.io.File"%>
+<%@page import="javax.servlet.ServletContext"%>
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%
 
 //String path = "/se2/upload"; // 이미지가 저장될 주소
-String path = request.getSession().getServletContext().getRealPath("/") + File.separator + "se2" + File.separator + "upload";
+ServletContext context = session.getServletContext();
+String realContextPath = context.getRealPath("/");
+
+String path = realContextPath + File.separator + "se2" + File.separator + "upload";
 String filename = "";
 
 if(request.getContentLength() > 10*1024*1024 ){

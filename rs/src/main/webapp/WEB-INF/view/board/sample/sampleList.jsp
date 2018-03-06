@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 	<%@include file="../../include/header.jsp"%>
-	<body class="hold-transition skin-blue sidebar-mini">
+	<body class="hold-transition skin-black sidebar-mini">
 		<div class="wrapper">
 			<%@include file="../../include/top.jsp"%>
 			<%@include file="../../include/sideMenu.jsp"%>
