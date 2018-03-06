@@ -120,7 +120,7 @@ public interface BoardMapper {
     int delFlagUpadateBoard(int seq);
 
     // 게시글 수정
-    @Update("UPDATE BOARD SET TITLE=#{title}, CONTENT=#{content}, AREA_CD=#{area_cd} WHERE SEQ =#{seq} ")
+    @Update("UPDATE BOARD SET TITLE=#{title}, CONTENT=#{content}, AREA_CD=#{area_cd}, IMG_URL=#{img_url}  WHERE SEQ =#{seq} ")
     void upadateBoard(Board board);
 
 }

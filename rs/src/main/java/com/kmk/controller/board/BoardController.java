@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -543,7 +545,7 @@ public class BoardController {
 
         return "redirect:bizBoardDetail";
     }
-
+	
     // 업소정보
     @RequestMapping("bizBoardWrite")
     public String bizBoardWrite(Board board, Model model) {
@@ -671,11 +673,36 @@ public class BoardController {
         // return "board/bizInfo/bizBoardWrite";
     }
 
+    public  String[] convertHtmlimg(String contents) {
+        Pattern p = Pattern.compile("<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>");
+        Matcher m = p.matcher(contents);
+        String imgArrayUrl[] = new String[30];
+        int count = 0;
+        
+        while (m.find()) {
+        	logger.debug("::: get img src url Loop ::::" + m.group(1));
+        	imgArrayUrl[count] = m.group(1);
+        	count++;
+        }
+        
+        return imgArrayUrl;
+    }
+    
     // 저장
     @RequestMapping("bizSaveBoard")
     public void bizSaveBoard(Board board, HttpSession session, HttpServletResponse response) throws IOException {
         LoginUser loginUser = (LoginUser) session.getAttribute("loginUser");
-        board.setBiz_nm(loginUser.getBiz_nm());        
+        board.setBiz_nm(loginUser.getBiz_nm());     
+        
+        // img url setting
+        // 이미지 태그 SRC 경로 추출
+        String imgUrl[] = convertHtmlimg(board.getContent());
+        
+        if(imgUrl != null && imgUrl.length > 0) {
+            board.setImg_url(imgUrl[0]);
+            logger.debug("::: board.getImg_url() ::::" + board.getImg_url());
+        }
+        
         boardService.insertBoard(board);
 
         response.setCharacterEncoding("UTF-8");
@@ -691,7 +718,18 @@ public class BoardController {
     // 수정
     @RequestMapping("bizSaveBoardModify")
     public void bizSaveBoardModify(Board board, HttpServletResponse response) throws IOException {
-        boardService.updateBoard(board);
+       
+        // img url setting
+        // 이미지 태그 SRC 경로 추출
+        String imgUrl[] = convertHtmlimg(board.getContent());
+        
+        if(imgUrl != null && imgUrl.length > 0) {
+            board.setImg_url(imgUrl[0]);
+            logger.debug("::: board.getImg_url() ::::" + board.getImg_url());
+        }
+
+        	
+    	boardService.updateBoard(board);
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
         PrintWriter out = response.getWriter();

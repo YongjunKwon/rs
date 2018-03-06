@@ -61,7 +61,7 @@
                                 <thead>
                                   <tr role="row">
                                     <th class="align-center wd-50">번호</th>
-                                    <!-- <th class=">사진</th> -->
+                                    <th class="align-center wd-50 font-12">사진</th>
                                     <th class="align-left"> 제목</th>
                                     <th class="align-center wd-50 font-12">닉네임</th>
                                     <th class="align-center wd-50 font-12">조회수</th>
@@ -72,7 +72,7 @@
                                     <c:forEach items="${list}" var="list" varStatus="status">
                                       <tr>
                                         <td class="align-center">${list.rownum}</td>
-                                        <!-- <td><img class="wd-50" alt="" src="${list.img_url}"></td> -->
+                                        <td><img class="wd-50" alt="" src="${list.img_url}"></td>
                                         <td class="board_text_color board_title word-break vertical-middle" data='${list.seq}'>
                                           <a href="/board/bizBoardDetail?seq=${list.seq}&categorynm=${board.categorynm}">${list.title}</a>
                                         </td>
