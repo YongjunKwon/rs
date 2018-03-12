@@ -41,13 +41,6 @@
                   <img class="grid-item" src="https://i.imgur.com/aPia86B.jpg">
                   <img class="grid-item" src="https://i.imgur.com/iQRKg2a.jpg">
                   <img class="grid-item" src="https://i.imgur.com/XREWwIc.jpg">
-                  <img class="grid-item" src="https://i.imgur.com/MV9SvaP.jpg">
-                  <img class="grid-item" src="https://i.imgur.com/qjQ9XWl.jpg">
-                  <img class="grid-item" src="https://i.imgur.com/ZJ088Tk.jpg">
-                  <img class="grid-item" src="https://i.imgur.com/SuZLV2U.jpg">
-                  <img class="grid-item" src="https://i.imgur.com/71H2B0k.jpg">
-                  <img class="grid-item" src="https://i.imgur.com/vxOA4hg.jpg">
-                  <img class="grid-item" src="https://i.imgur.com/8kLXqdP.jpg">
                 </div>
                 <!-- /.grid -->
                 <!-- /.container -->

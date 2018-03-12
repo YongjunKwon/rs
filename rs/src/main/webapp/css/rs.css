@@ -483,10 +483,10 @@ i.font-11 {
   
 }
 img{
-  max-width: 100%; /* 이미지의 최대사이즈 */
-  width /***/: auto; /* IE8 */
-  height: auto;
-  vertical-align: bottom;
+  max-width: 100% !important; /* 이미지의 최대사이즈 */
+  width /***/: auto !important; /* IE8 */
+  height: auto !important;
+  vertical-align: bottom !important;
 }
 
 
@@ -502,15 +502,15 @@ img{
   padding-right: 20px;
   /* top: 100px;
 	left: 50px; */
-  width: 350px;
+  width: auto;
   height: 50px;
 }
 
-#banner2 {
-  top: 150px;
-  left: 500px;
-  width: 200px;
-  height: 50px;
+#banner1 > img{
+  min-width: 100px;
+  min-height: 50px !important;
+  float: right !important;
+  /* max-width: 340px !important; */
 }
 
 .box-header {
@@ -549,7 +549,7 @@ img{
 /* .sidebar-toggle{
     background-color: #333;
 }
-
+*/
 .navbar {
-    background-color: white;
-} */
+    display: flex;
+} 
