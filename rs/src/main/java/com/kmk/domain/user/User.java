@@ -4,10 +4,15 @@ import java.sql.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.kmk.base.Pagination;
+import com.kmk.base.PaginationSearch;
+
 import lombok.Data;
 
 @Data
-public class User {
+public class User implements PaginationSearch {
+	private static final long serialVersionUID = -726859005688794223L;
+	
 	private String user_id;
 	private String pwd;
 	private String before_pwd;
@@ -16,6 +21,7 @@ public class User {
 	private String sex;
 	private String birthday;
 	private String tel;
+	private String mobile;
 	@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	private Date act_s_time;
 	@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
@@ -30,5 +36,13 @@ public class User {
 	private String biz_reg_flag;
 	@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	private Date reg_dtime;
-	private String user_role;
+	private String us1er_role;
+	private String expire_date;
+	
+	
+    private int tot_cnt;
+    private int rownum;
+    private String chkVal;
+	
+	private Pagination pagination = new Pagination();
 }

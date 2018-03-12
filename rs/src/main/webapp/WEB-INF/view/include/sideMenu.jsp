@@ -219,7 +219,7 @@
             <c:if test="${!empty loginUser and loginUser.roles[0] eq 'ROLE_ADMIN'}">
               <!-- 파트너공유 //시작-->
               <li id="side_bizQna" class="treeview">
-                <a href="admin/">
+                <a href="/admin/">
                 <i class="fa fa-share"></i>
                 <span>관리자메뉴가기</span>
               </a>
