@@ -11,10 +11,16 @@
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
               <!-- Content Header (Page header) -->
-              <section class="content-header">
+              <section class="content-header">                                
                 <h1>
-                  <span style='color: salmon;'>${loginUser.nick_nm}</span>♥ Welcome ♥
-                  <small>♥ ♥</small>
+                  <span style='color: black;'>
+                      ${loginUser.nick_nm}                    
+                  </span>
+                  <c:if test="${!empty loginUser.nick_nm}">님</c:if>
+                  <span style='color: salmon;'>♥ </span>
+                  <span style='color: black;'>Welcome</span> 
+                  <span style='color: salmon;'>♥</span>
+                  <small style='color: salmon;'>♥</small>
                 </h1>
                 <!--       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>

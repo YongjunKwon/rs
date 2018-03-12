@@ -23,7 +23,7 @@
         <ul class="nav navbar-nav">    
           <div id="banner1" class="rolling-banner">
             <img src="/images/top_banner2.png">
-            <img src="/images/top_banner2.png">
+            <!-- <img src="/images/top_banner2.png"> -->
           </div>
           <!-- User Account Menu -->
 <!--           <li class="dropdown user user-menu">

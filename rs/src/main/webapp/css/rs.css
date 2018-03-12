@@ -480,7 +480,15 @@ i.font-11 {
   /* position: absolute; */
   overflow: hidden;
   border: 0px solid #ccc;
+  
 }
+img{
+  max-width: 100%; /* 이미지의 최대사이즈 */
+  width /***/: auto; /* IE8 */
+  height: auto;
+  vertical-align: bottom;
+}
+
 
 .rolling-banner img {
   /* position: absolute;
@@ -534,6 +542,9 @@ i.font-11 {
     max-height: 50px;
 }
 
+.logo-lg, .logo{
+  background-color: white !important;
+}
 
 /* .sidebar-toggle{
     background-color: #333;
