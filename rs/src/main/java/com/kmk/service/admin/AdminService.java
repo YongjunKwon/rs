@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kmk.domain.Board;
 import com.kmk.domain.user.User;
 import com.kmk.mapper.admin.AdminMapper;
 
@@ -22,6 +23,10 @@ public class AdminService {
         return adminMapper.selectUserList(user);
     }
 
+    public void updateUserExpireDate(User user) {
+    	adminMapper.updateUserExpireDate(user);
+    }
+    
 //    public Board selectDetailBoard(int seq) {
 //        // logger.info("query test: {}", testMapper.getList());
 //        return boardMapper.selectDetailBoard(seq);

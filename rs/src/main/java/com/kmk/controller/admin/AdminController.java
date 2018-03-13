@@ -5,12 +5,14 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -70,36 +72,55 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/saveData")
-    public void saveData(UserListWrapper userListWrapper, HttpSession session, HttpServletResponse response) throws IOException {
+    public void saveData(HttpServletRequest req, UserListWrapper userListWrapper, HttpSession session, HttpServletResponse response) throws IOException {
         LoginUser loginUser = (LoginUser) session.getAttribute("loginUser");
         //board.setBiz_nm(loginUser.getBiz_nm());     
         
-		List<User> list = userListWrapper.getUserList();
-		
-		logger.info(" list.size() : {} ", list.size());
-		
-		if(null != list && list.size() > 0) {
-			
-			for (User user : list) {
-				
-				logger.info(" User user.getChkVal() : {} ", user.getChkVal());
-				if("Y".equals( user.getChkVal())) {
-					logger.info(" User user.getUser_id() : {} ", user.getUser_id());
-					logger.info(" User user.getExpire_date() : {} ", user.getExpire_date());
-				}
-				//adminService.iBoard(board);
-			}
-		}
-		
-		
+        String[] chkValues = req.getParameterValues("hiddenChkval"); 
+        String[] userIds = req.getParameterValues("user_id"); 
+        String[] expireDates = req.getParameterValues("expire_date"); 
         
+        logger.info(" chkValues.length : {} ", chkValues.length);
         
+        // 1번반복됨...
+        for(int i=0; i<userIds.length; i++) {
+        	if("Y".equals(chkValues[i])) {
+        		logger.info(" chkValues["+i+"] : {} ", chkValues[i]);
+        		logger.info(" expire_date : {} ", expireDates[i].replaceAll("-", ""));
+        		logger.info(" user_id : {} ", userIds[i]);
+        		
+        		User user = new User();
+        		user.setUser_id(userIds[i]);
+        		user.setExpire_date(expireDates[i].replaceAll("-", ""));
+        		adminService.updateUserExpireDate(user);
+        		
+        	}
+        	
+        }
+        
+//        
+//		List<User> list = userListWrapper.getUserList();
+//		
+//		logger.info(" list.size() : {} ", list.size());
+//		
+//		if(null != list && list.size() > 0) {
+//			
+//			for (User user : list) {
+//				
+//				logger.info(" User user.getChkVal() : {} ", user.getChkVal());
+//				if("Y".equals( user.getChkVal())) {
+//					logger.info(" User user.getUser_id() : {} ", user.getUser_id());
+//					logger.info(" User user.getExpire_date() : {} ", user.getExpire_date());
+//				}
+//				//adminService.iBoard(board);
+//			}
+//		}
 
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
         PrintWriter out = response.getWriter();
         //String return_url = "/board/bizBoardList?categorynm=" + board.getCategorynm();
-        String return_url = "/admin/home";
+        String return_url = "/admin/";
 
         out.println("<script>alert('정상적으로 등록 되었습니다.');location.href='" + return_url + "'; </script>");
         out.flush();

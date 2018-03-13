@@ -80,7 +80,8 @@
 	                                    <input type = "hidden" name ="user_id" value ="${list.user_id}">
 	                                      <tr>
 	                                        <td class="align-center wd-50 font-11">
-	                                        	<input type="checkbox" neme= "chkval" id="chk_${status.index}" value="N" style="cursor: pointer;">
+	                                        	<input type="checkbox" name= "chkval" id="chk_${status.index}" value="N" style="cursor: pointer;">
+	                                        	<input type="hidden" name= "hiddenChkval" value="N">
 	                                        </td>
 	                                        <td class="align-center wd-50 font-11">${list.area_cd}</td>
 	                                        <td class="align-center wd-50 font-11">-</td>
@@ -161,9 +162,11 @@
     	    $("#frm :checkbox").click(function() {
     	        if($(this).is(":checked")) {
     	        	console.log("checkded~~~~");
-    	            $(this).val("Y");
+    	            $(this).next("input").val("Y");
+    	        	$(this).val("Y");
     	        } else {
     	        	console.log("un un un checkded~~~~");
+    	        	$(this).next("input").val("N");
     	        	$(this).val("N");
     	        }
     	    });

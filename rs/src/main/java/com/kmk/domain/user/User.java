@@ -42,7 +42,7 @@ public class User implements PaginationSearch {
 	
     private int tot_cnt;
     private int rownum;
-    private String chkVal;
+    private String chkval;
 	
 	private Pagination pagination = new Pagination();
 }
