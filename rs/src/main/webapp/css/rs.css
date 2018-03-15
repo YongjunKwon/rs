@@ -509,6 +509,7 @@ img{
 #banner1 > img{
   min-width: 100px;
   min-height: 50px !important;
+  max-height: 50px !important;
   float: right !important;
   /* max-width: 340px !important; */
 }
