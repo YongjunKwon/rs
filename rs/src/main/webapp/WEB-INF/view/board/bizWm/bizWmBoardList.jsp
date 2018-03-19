@@ -32,20 +32,19 @@
                               <input type="hidden" id="pagination" name="pagination.currentPageNo" value="1">
                               <input type="hidden" id="categorynm" name="categorynm" value="${board.categorynm}">
                               <input type="hidden" id="category" name="category" value="${board.category}">
-                              <div class="col-sm-4 pull-left">
+                              <div class="col-sm-6 pull-left search-group">
                                 <div class="form-group" id="example1_length">
                                   <form:select path="area_cd" class="form-area" data-placeholder="지역" disabled="false" onchange="javascript:submit()">
                                     <option value="">지역선택</option>
                                     <form:options items="${comboAreaCdList}" itemValue="cd" itemLabel="cd_nm" />
                                   </form:select>
                                 </div>
-                              </div>
-                              <div class="col-sm-8 ">
-                                <div class="input-group input-group-sm">
-                                  <input type="text" class="form-control__" name="title" value="${board.title}" id="title" placeholder="검색내용">
-                                  <div class="input-group-btn">
-                                    <button type="submit" id="btnSearch" name="btnSearch" class="btn btn-info btn-flat">검색</button>
-                                  </div>
+                              </div>       
+                              <!-- <div class="col-sm-4"></div> -->
+                              <div class="col-sm-6 pull-right">
+                                <div class="form-group pull-right">                                  
+                                  <button type="submit" id="btnSearch" name="btnSearch" class="btn btn-info btn-flat pull-right">검색</button>                                  
+                                  <input type="text" class="search-area pull-right" name="title" value="${board.title}" id="title" placeholder="검색내용" />
                                 </div>
                               </div>
                             </form:form>
@@ -61,7 +60,7 @@
                                 <thead>
                                   <tr role="row">
                                     <th class="align-center wd-50">번호</th>
-                                    <!-- <th class=">사진</th> -->
+                                    <th class="align-center wd-50 font-12">사진</th>
                                     <th class="align-left"> 제목</th>
                                     <th class="align-center wd-50 font-12">닉네임</th>
                                     <th class="align-center wd-50 font-12">조회수</th>
@@ -72,7 +71,7 @@
                                     <c:forEach items="${list}" var="list" varStatus="status">
                                       <tr>
                                         <td class="align-center">${list.rownum}</td>
-                                        <!-- <td><img class="wd-50" alt="" src="${list.img_url}"></td> -->
+                                        <td><img class="img-thumb" alt="" src="${list.img_url}"></td>
                                         <td class="board_text_color board_title word-break vertical-middle" data='${list.seq}'>
                                           <a href="/board/bizBoardDetail?seq=${list.seq}&categorynm=${board.categorynm}">${list.title}</a>
                                         </td>
@@ -83,7 +82,7 @@
                                   </c:if>
                                   <c:if test="${empty list}">
                                     <tr>
-                                      <td colspan="4" class="text-center">게시글이 없습니다.</td>
+                                      <td colspan="5" class="text-center">게시글이 없습니다.</td>
                                     </tr>
                                   </c:if>
                                 </tbody>

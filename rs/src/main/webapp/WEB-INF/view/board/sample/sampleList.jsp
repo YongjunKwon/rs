@@ -44,7 +44,7 @@
 													<input type="hidden" id="pagination" name="pagination.currentPageNo" value="1">
 													<div class="col-sm-4 pull-left">
 														<div class="form-group" id="example1_length">
-	                                    					<form:select path="area_cd" class="form-control__" data-placeholder="지역" disabled="false">
+	                                    					<form:select path="area_cd" class="search-area" data-placeholder="지역" disabled="false">
 																<option value="">지역선택</option>
 																<form:options items="${comboAreaCdList}" itemValue="cd" itemLabel="cd_nm" />
 															</form:select>
@@ -52,7 +52,7 @@
 													</div>
 													<div class="col-sm-8 ">                                
 														<div class="input-group input-group-sm">
-															<input type="text" class="form-control__" name="title" value="" id="title" placeholder="검색내용 입력">
+															<input type="text" class="search-area" name="title" value="" id="title" placeholder="검색내용 입력">
 															<span class="input-group-btn">
 																<button type="submit" id="btnSearch" name="btnSearch" class="btn btn-info btn-flat">검색</button>
 															</span>

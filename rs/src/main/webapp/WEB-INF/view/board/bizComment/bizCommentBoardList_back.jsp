@@ -16,9 +16,8 @@
                   <small>각 지역의 ${captionTitle}를 소개해 드립니다.</small>
                 </h1>
                 <ol class="breadcrumb">
-                  <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                  <li><a href="#">Tables</a></li>
-                  <li class="active">Data tables</li>
+                    <li><a href="/"><i class="fa fa-dashboard"></i>Home</a></li>
+                    <li><a href="/board/bizBoardList?categorynm=${board.categorynm}">${captionTitle}</a></li>
                 </ol>
               </section>
               <!-- Main content -->
@@ -27,56 +26,45 @@
                   <div class="col-xs-12">
                     <div class="box">
                       <div class="box-header">
-                        <div class="row">
                           <div class="col-sm-12">
-                            <div class="row form_control_h3">
-                              
-                            </div>
                             <div class="row">
                               <form:form modelAttribute="board" method="post" action="/board/bizBoardList">
                                 <input type="hidden" id="pagination" name="pagination.currentPageNo" value="1">
                                 <input type="hidden" id="categorynm" name="categorynm" value="${board.categorynm}">
-                                <div class="col-sm-4 pull-left">
+                                <input type="hidden" id="category" name="category" value="${board.category}">
+                                <div class="col-sm-6 pull-left search-group">
                                   <div class="form-group" id="example1_length">
-                                    <form:select path="area_cd" class="form-control__" data-placeholder="지역" disabled="false">
+                                    <form:select path="area_cd" class="form-area" data-placeholder="지역" disabled="false" onchange="javascript:submit()">
                                       <option value="">지역선택</option>
                                       <form:options items="${comboAreaCdList}" itemValue="cd" itemLabel="cd_nm" />
                                     </form:select>
                                   </div>
+                                </div>       
+                                <!-- <div class="col-sm-4"></div> -->
+                                <div class="col-sm-6 pull-right">
+                                  <div class="form-group pull-right">                                  
+                                    <button type="submit" id="btnSearch" name="btnSearch" class="btn btn-info btn-flat pull-right">검색</button>                                  
+                                    <input type="text" class="search-area pull-right" name="title" value="${board.title}" id="title" placeholder="검색내용" />
+                                  </div>
                                 </div>
-								<div class="col-sm-8 ">                                
-									<div class="input-group input-group-sm">
-										<input type="text" class="form-control__" name="title" value="${board.title}" id="title" placeholder="검색내용 입력">
-										<span class="input-group-btn">
-											<button type="submit" id="btnSearch" name="btnSearch" class="btn btn-info btn-flat">검색</button>
-										</span>
-									</div>
-								</div>
                               </form:form>
                             </div>
                           </div>
                         </div>
-                      </div>
+                      
                       <!-- /.box-header -->
                       <div class="box-body">
                         <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                           <div class="row">
                             <div class="col-sm-12">
-                              <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
-                                <thead>
-                                  <tr role="row">
-                                    <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">번호
-                                    </th>
-                                    <th class="board_header-text">사진
-                                    </th>
-                                    <th class="board_header-text">제목
-                                    </th>
-                                    <th class="board_header-text">글쓴이
-                                    </th>
-                                    <th class="board_header-text">날짜
-                                    </th>
-                                    <th class="board_header-text">조회수
-                                    </th>
+                                <table id="example1" class="table table-bordered table-hover dataTable board-table" role="grid" aria-describedby="example1_info">
+                                    <thead>
+                                      <tr role="row">
+                                        <th class="align-center wd-50">번호</th>
+                                        <th class="align-center wd-50 font-12">사진</th>
+                                        <th class="align-left"> 제목</th>
+                                        <th class="align-center wd-50 font-12">닉네임</th>
+                                        <th class="align-center wd-50 font-12">조회수</th>
                                   </tr>
                                 </thead>
                                 <tbody>

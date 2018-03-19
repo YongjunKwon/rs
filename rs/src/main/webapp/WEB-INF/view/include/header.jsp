@@ -42,8 +42,8 @@
 	<script src="/AdminLTE-2.3.11/plugins/jQuery/jquery-2.2.3.min.js"></script>
 	
 	<!-- Infinite-Scroll -->
- 	<script src="/js/infinite/scroll/infinite-scroll.pkgd.js"></script>
- 	<script src="/js/infinite/masonry.pkgd.min.js"></script>
+ 	<%-- <script src="/js/infinite/scroll/infinite-scroll.pkgd.js"></script> --%>
+ 	<script src="/js/infinite/masonry.pkgd.js"></script>
  	
 	<script src="/AdminLTE-2.3.11/bootstrap/js/bootstrap.min.js"></script>
 	<!-- FastClick -->

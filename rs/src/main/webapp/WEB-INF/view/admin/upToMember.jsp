@@ -30,7 +30,7 @@
                                 </div>
                                 <div class="col-sm-8 ">
                                   <div class="input-group input-group-sm">
-                                    <input type="text" class="form-control__" name="title" value="${board.title}" id="title" placeholder="검색내용 입력">
+                                    <input type="text" class="search-area" name="title" value="${board.title}" id="title" placeholder="검색내용 입력">
                                     <span class="input-group-btn">
                                       <button type="submit" id="btnSearch" name="btnSearch" class="btn btn-info btn-flat">검색</button>
                                     </span>

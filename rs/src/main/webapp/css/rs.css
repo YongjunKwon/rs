@@ -424,13 +424,19 @@ i.font-11 {
   transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
 
-.input-group .form-control__ {
-  width: 30%;
+.search-area {
+  width: 100px;
   position: relative;
-  z-index: 2;
-  float: right;
-  height: 30px;
-  margin-bottom: 0;
+  z-index: 2;  
+  height: 34px !important;
+  margin-bottom: 0;  
+  border: 1px solid #ccc;
+  border-color: #d2d6de;
+
+}
+
+.search-group{
+  display: inline-flex;  
 }
 
 .btn-success_ {
@@ -506,7 +512,7 @@ img{
   height: 50px;
 }
 
-#banner1 > img{
+#banner1 > img {
   min-width: 100px;
   min-height: 50px !important;
   max-height: 50px !important;
