@@ -5,11 +5,11 @@
     <!-- Logo -->
     <a href="/" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><img src="/images/logo.png"></span>
+      <span class="logo-mini"><img src="/images/logo-mini.png"></span>
       <!-- <span class="logo-mini"><b>BamF</b></span> -->
       <!-- logo for regular state and mobile devices -->
       <!-- <span class="logo-lg"><b>밤</b>프리카</span> -->
-      <span class="logo-lg"><img src="/images/logo.png">
+      <span class="logo-lg"><img src="/images/logo-lg.png"></span>
     </a>
 
     <!-- Header Navbar -->

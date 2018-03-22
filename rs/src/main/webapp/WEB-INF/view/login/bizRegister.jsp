@@ -7,7 +7,7 @@
       <div class="register-box">
         <div class="register-logo">
           <a href="/">
-            <b>RS PJT</b>
+            <span class="logo-lg register-logo"><img src="/images/logo-lg.png"></span>
           </a>
         </div>
 
@@ -120,7 +120,7 @@
              * @author
              * @version 1.0, 2018.2.19 추가
              */
-            $('#provision').click(() => {
+            $('#provision').click(function() {
               console.log("provision click");
               $('#provisionModal').modal();
             });
@@ -173,7 +173,7 @@
              * @author
              * @version 1.0, 2017.12.16 소스 수정
              */
-            $('#checkEmail').click((e) => {
+            $('#checkEmail').click(function(e) {
               var trimEmail = trim($('#user_id').val());
 
               //email null check
@@ -219,7 +219,7 @@
              * @version 1.0, 2017.12.16 소스 수정
              * @see    None
              */
-            $('#checkNickNm').click((e) => {
+            $('#checkNickNm').click(function(e) {
               var trimNickNm = trim($('#nick_nm').val());
 
               //nick_nm null check

@@ -7,7 +7,7 @@
       <div class="login-box">
         <div class="login-logo">
           <a href="/">
-            <b>RS PJT</b>
+            <b>밤프리카</b>
           </a>
         </div>
         <!-- /.login-logo -->

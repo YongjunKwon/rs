@@ -107,7 +107,7 @@
                                 <div class="comment-cell">
                                   <textarea tabindex="13" id="content" name="content" maxlength="200" rows="5" class="form-control input-sm" title="내용"></textarea>
                                 </div>
-                                <div tabindex="14" class="comment-cell comment-submit" onkeydown="apms_comment_onKeyDown();" id="btnReplyReg">
+                                <div tabindex="14" class="comment-cell comment-submit" id="btnReplyReg">
                                   등록
                                 </div>
 

@@ -870,97 +870,97 @@ function regExp(str) {
   var regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi
 
   if (regExp.test(str)) {
-      alert("특수문자는 사용하실수 없습니다.");
-      return false;
+    alert("특수문자는 사용하실수 없습니다.");
+    return false;
   } else {
-      return true;
+    return true;
   }
   //특수문자 검증 end
 }
 
 //rolling-banner
 $(function() {
-	// 인스턴스 생성
-	var rolling1 = new RollingBanner();
+  // 인스턴스 생성
+  var rolling1 = new RollingBanner();
 });
 
 // 메서드와 프로퍼티를 담을 생성자(클래스)를 생성
 function RollingBanner() {
-	// 프로퍼티 생성 및 초기화
+  // 프로퍼티 생성 및 초기화
 
-	// 배너 목록을 담을 프로퍼티 생성
-	// (객체 내부에서만 사용할 프로퍼티이기 때문에 private이라는 의미로 언더바(_)를 사용)
-	this._$banners = null;
-	// 초기 활성화된 인덱스 정보를 담을 프로퍼티 생성
-	this._currentIndex = 0;
-	this._timerID = -1;
+  // 배너 목록을 담을 프로퍼티 생성
+  // (객체 내부에서만 사용할 프로퍼티이기 때문에 private이라는 의미로 언더바(_)를 사용)
+  this._$banners = null;
+  // 초기 활성화된 인덱스 정보를 담을 프로퍼티 생성
+  this._currentIndex = 0;
+  this._timerID = -1;
 
-	this._init();
-	this._initBannerPos();
-	this.startAutoPlay();
+  this._init();
+  this._initBannerPos();
+  this.startAutoPlay();
 }
 
 RollingBanner.prototype = {
-	// 요소 초기화
-	'_init': function() {
-		this._$banners = $('#banner1 img');
+  // 요소 초기화
+  '_init': function() {
+    this._$banners = $('#banner1 img');
 
-	},
-	'_initBannerPos': function() {
-		// 배너 위치 화면에서 모두 숨기기
-		this._$banners.css({
-			top: 200
-		});
-		// 0번째 배너 활성화
-		this._$banners.eq(this._currentIndex).css({
-			top: 0
-		});
-	},
-	'startAutoPlay': function() {
-		var _self = this;
+  },
+  '_initBannerPos': function() {
+    // 배너 위치 화면에서 모두 숨기기
+    this._$banners.css({
+      top: 200
+    });
+    // 0번째 배너 활성화
+    this._$banners.eq(this._currentIndex).css({
+      top: 0
+    });
+  },
+  'startAutoPlay': function() {
+    var _self = this;
 
-		// 타이머가 두 번이상 실행되지 않도록 조건 처리
-		console.log(this._timerID);
-		this._timerID = setInterval(function() {
-			_self.nextBanner();
-		}, 2000)
-	},
-	'nextBanner': function() {
-		// 현재 인덱스값 구하기
-		var outIndex = this._currentIndex;
+    // 타이머가 두 번이상 실행되지 않도록 조건 처리
+    console.log(this._timerID);
+    this._timerID = setInterval(function() {
+      _self.nextBanner();
+    }, 2000)
+  },
+  'nextBanner': function() {
+    // 현재 인덱스값 구하기
+    var outIndex = this._currentIndex;
 
-		// 다음 배너 인덱스값 구하기
-		this._currentIndex++;
+    // 다음 배너 인덱스값 구하기
+    this._currentIndex++;
 
-		// 마지막 배너까지 롤링되면 다시 0번째부터 롤링되도록 인덱스값 설정하기
-		if (this._currentIndex >= this._$banners.length) {
-			this._currentIndex = 0;
-		}
+    // 마지막 배너까지 롤링되면 다시 0번째부터 롤링되도록 인덱스값 설정하기
+    if (this._currentIndex >= this._$banners.length) {
+      this._currentIndex = 0;
+    }
 
-		// 현재 배너 구하기
-		var $outBanner = this._$banners.eq(outIndex);
+    // 현재 배너 구하기
+    var $outBanner = this._$banners.eq(outIndex);
 
-		// 다음 배너 구하기
-		var $inBanner = this._$banners.eq(this._currentIndex);
+    // 다음 배너 구하기
+    var $inBanner = this._$banners.eq(this._currentIndex);
 
-		// 롤링 준비 - 나타날 다음 배너 위치 초기화
-		$inBanner.css({
-			top: 200,
-			opacity: 0
-		});
+    // 롤링 준비 - 나타날 다음 배너 위치 초기화
+    $inBanner.css({
+      top: 200,
+      opacity: 0
+    });
 
-		// 현재 배너 사라지게 하기
-		$outBanner.stop().animate({
-			top: -200,
-			opacity: 0
-		}, 600);
+    // 현재 배너 사라지게 하기
+    $outBanner.stop().animate({
+      top: -200,
+      opacity: 0
+    }, 600);
 
-		// 다음 배너 나타나게 하기
-		$inBanner.stop().animate({
-			top: 0,
-			opacity: 1
-		}, 600);
-	}
+    // 다음 배너 나타나게 하기
+    $inBanner.stop().animate({
+      top: 0,
+      opacity: 1
+    }, 600);
+  }
 }
 
 
@@ -982,28 +982,42 @@ var Scale = getMobileCookie("DesktopModeScale");
 var defWidth = 1170;
 if (desktopModeTF == "true") {
   document
-      .write('<meta name="viewport" content="width='+defWidth+', user-scalable=yes, initial-scale='+Scale+'">');
+    .write('<meta name="viewport" content="width=' + defWidth + ', user-scalable=yes, initial-scale=' + Scale + '">');
 } else {
   document
-      .write('<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">');
+    .write('<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">');
 }
+
+
 function desktopMode() {
-  if(getMobileCookie("DesktopMode") == "true"){
+  if (getMobileCookie("DesktopMode") == "true") {
     setModeCookie(false);
-  }else{    
+  } else {
     setModeCookie(true);
     window.scrollTo(0, 0);
   }
   location.reload();
   $("body").scrollTop(0);
 }
-function setModeCookie(switchOn){
+
+
+function setModeCookie(switchOn) {
   var now = new Date();
   var time = now.getTime();
   time += 3600 * 1000;
   now.setTime(time);
-  document.cookie ='DesktopMode='+switchOn +'; expires=' + now.toUTCString() ;
-  if(switchOn){
-    document.cookie = "DesktopModeScale=" + $('html').width() / defWidth +'; expires=' + now.toUTCString() ;;
+  document.cookie = 'DesktopMode=' + switchOn + '; expires=' + now.toUTCString();
+  if (switchOn) {
+    document.cookie = "DesktopModeScale=" + $('html').width() / defWidth + '; expires=' + now.toUTCString();;
+  }
+}
+
+
+function checkReplyEmpty(obj) {
+  if (trim(obj) == "" || trim(obj).length < 1) {
+    alert("댓글을 입력해 주세요.");
+    return true;
+  } else {
+    return false;
   }
 }

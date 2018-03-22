@@ -11,14 +11,14 @@
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
               <!-- Content Header (Page header) -->
-              <section class="content-header">                                
+              <section class="content-header">
                 <h1>
                   <span style='color: black;'>
                       ${loginUser.nick_nm}                    
                   </span>
                   <c:if test="${!empty loginUser.nick_nm}">님</c:if>
                   <span style='color: salmon;'>♥ </span>
-                  <span style='color: black;'>Welcome</span> 
+                  <span style='color: black;'>Welcome</span>
                   <span style='color: salmon;'>♥</span>
                   <small style='color: salmon;'>♥</small>
                 </h1>
@@ -30,8 +30,7 @@
 
               <!-- Main content -->
               <section class="content">
-
-                <div class="grid js-masonry" data-masonry-options='{ "itemSelector": ".grid-item", "columnWidth": 200, "gutter": 5 }'>
+                <div class="grid js-masonry" id="js-masonry">
                   <img class="grid-item" src="https://i.imgur.com/laIuV0D.jpg">
                   <img class="grid-item" src="https://i.imgur.com/777dcVU.jpg">
                   <img class="grid-item" src="https://i.imgur.com/ZPPFND3.jpg">
@@ -54,18 +53,20 @@
       <!-- ./wrapper -->
     </body>
 
-    <style>
-      .grid-item {
-        margin-bottom: 10px;
-        border-radius: 4px;
-        border: 1px;
-      }
-
-      /* .grid-item--width2 { width: 400px; }  */
-    </style>
-
     <script type="text/javascript">
-      $(document).ready(function() {});
+      jQuery(function($) {
+
+        var $container = $('#js-masonry');
+        
+        $container.imagesLoaded(function() {
+          $container.masonry({
+            itemSelector: '.grid-item',
+            columnWidth: 200,
+            gutter: 5
+          });
+        });
+
+      });
     </script>
 
   </html>

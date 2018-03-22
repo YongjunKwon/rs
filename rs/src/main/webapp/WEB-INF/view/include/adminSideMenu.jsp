@@ -298,7 +298,7 @@
      * @author 
      * @version 1.0, 2017.12.16 소스 수정
      */
-    $('.user_picture').click((e) => {
+    $('.user_picture').click(function(e) {
       $('#pictureModal').modal();
     });
 
@@ -333,7 +333,7 @@
      * @version 1.0, 2017.12.16 소스 수정
      * @see    None
      */
-    $('#checkNickNm').click((e) => {
+    $('#checkNickNm').click(function(e) {
       var trimNickNm = trim($('#m_nick_nm').val());
 
       //nick_nm null check
@@ -423,7 +423,7 @@
      * @author 
      * @version 1.0, 2017.12.16 소스 수정
      */
-    $('#setUserInfo').click((e) => {
+    $('#setUserInfo').click(function(e) {
 
       var trimPwd = trim($('#m_pwd').val());
 
