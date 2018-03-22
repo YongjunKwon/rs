@@ -32,6 +32,7 @@ public interface AdminMapper {
        	    + "          , A.BIZ_REG_FLAG    "
        	    + "          , A.REG_DTIME       "
        	    + "          , DATE_FORMAT(A.EXPIRE_DATE, '%Y-%m-%d') AS EXPIRE_DATE "
+       	    + "          , DATE_FORMAT(A.IMG_VISIBLE_DATE, '%Y-%m-%d') AS IMG_VISIBLE_DATE "
             + "  FROM (" 
 
           	+ " 	 SELECT X.* "
@@ -77,7 +78,7 @@ public interface AdminMapper {
     List<User> selectUserList(User user);
 
 
-    @Update(" UPDATE USER SET EXPIRE_DATE = #{expire_date} WHERE USER_ID = #{user_id} ")
+    @Update(" UPDATE USER SET EXPIRE_DATE = #{expire_date}, IMG_VISIBLE_DATE = #{img_visible_date} WHERE USER_ID = #{user_id} ")
     int updateUserExpireDate(User user);
 
 

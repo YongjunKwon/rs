@@ -79,6 +79,7 @@ public class AdminController {
         String[] chkValues = req.getParameterValues("hiddenChkval"); 
         String[] userIds = req.getParameterValues("user_id"); 
         String[] expireDates = req.getParameterValues("expire_date"); 
+        String[] imgVisibleDate = req.getParameterValues("img_visible_date"); 
         
         logger.info(" chkValues.length : {} ", chkValues.length);
         
@@ -87,11 +88,13 @@ public class AdminController {
         	if("Y".equals(chkValues[i])) {
         		logger.info(" chkValues["+i+"] : {} ", chkValues[i]);
         		logger.info(" expire_date : {} ", expireDates[i].replaceAll("-", ""));
+        		logger.info(" img_visible_date : {} ", imgVisibleDate[i].replaceAll("-", ""));
         		logger.info(" user_id : {} ", userIds[i]);
         		
         		User user = new User();
         		user.setUser_id(userIds[i]);
         		user.setExpire_date(expireDates[i].replaceAll("-", ""));
+        		user.setImg_visible_date(imgVisibleDate[i].replaceAll("-", ""));
         		adminService.updateUserExpireDate(user);
         		
         	}

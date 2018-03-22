@@ -38,6 +38,7 @@ public class User implements PaginationSearch {
 	private Date reg_dtime;
 	private String us1er_role;
 	private String expire_date;
+	private String img_visible_date;
 	
 	
     private int tot_cnt;

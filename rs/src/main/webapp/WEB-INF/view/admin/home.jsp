@@ -67,10 +67,11 @@
 	                                    <th class="align-center wd-50 font-12">지역</th>
 	                                    <th class="align-center wd-50 font-12">상세지역</th>
 	                                    <th class="align-center wd-50 font-12">업종구분</th>
-	                                    <th class="align-center wd-150 font-12">업체명</th>
+	                                    <th class="align-center wd-100 font-12">업체명</th>
 	                                    <th class="align-center wd-50 font-12">닉네임</th>
-	                                    <th class="align-center wd-150 font-12">아이디</th>
+	                                    <th class="align-center wd-100 font-12">아이디</th>
 	                                    <th class="align-center wd-50 font-12">휴대전화번호</th>
+	                                    <th class="align-center wd-50 font-12">이미지</br>노출기간</th>
 	                                    <th class="align-center wd-50 font-12">유효기간</th>
 	                                  </tr>
 	                                </thead>
@@ -90,6 +91,9 @@
 	                                        <td class="align-center wd-50 font-11">${list.nick_nm}</td>
 	                                        <td class="align-center wd-50 font-11">${list.user_id}</td>
 	                                        <td class="align-center wd-50 font-11">${list.mobile}</td>
+	                                        <td class="align-center wd-50 font-11">
+	                                        	<input name="img_visible_date" type="date" value="${list.img_visible_date}" />
+	                                        </td>
 	                                        <td class="align-center wd-50 font-11">
 	                                        	<input name="expire_date" type="date" value="${list.expire_date}" />
 	                                        </td>
