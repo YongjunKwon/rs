@@ -34,10 +34,12 @@
                               <input type="hidden" id="category" name="category" value="${board.category}">
                               <div class="col-sm-6 pull-left search-group">
                                 <div class="form-group" id="example1_length">
-                                  <form:select path="area_cd" class="form-area" data-placeholder="지역" disabled="false" onchange="javascript:submit()">
+                                  <form:select path="area_cd" class="form-area" data-placeholder="지역" disabled="false" onchange="selectCtg(this.value)">
                                     <option value="">지역선택</option>
                                     <form:options items="${comboAreaCdList}" itemValue="cd" itemLabel="cd_nm" />
                                   </form:select>
+                                  	<select id="dtlCtg" class="form-area" data-placeholder="세부지역">
+								  	</select>
                                 </div>
                               </div>       
                               <!-- <div class="col-sm-4"></div> -->
@@ -135,6 +137,34 @@
         }
 
       });
+      
+      function selectCtg(val)
+      {
+        var params = {"area_cd": val};           	 
+        
+        $.ajax({
+          url: "/board/findDtlArea",
+          method: "post",
+          type: "json",
+          data: params,
+          success: function (data) {
+            if(data.result.length > 0){
+              $('#dtlCtg').find('option').remove();
+          
+              for(var i = 0; i < data.result.length; i++){
+                $('#dtlCtg').append("<option value='" + data.result[i].cd + "'>" + data.result[i].cd_nm + '</option>');
+              }
+            }else
+            {
+              $('#dtlCtg').find('option').remove();
+              $('#dtlCtg').append("<option value=''>선택</option>");
+            }
+          },
+          error: function (error) {
+            alert("error : " + eval(error));
+          }
+        });                   
+      }
 
       function goPage(pageNo) {
         $("#pagination").val(pageNo);
