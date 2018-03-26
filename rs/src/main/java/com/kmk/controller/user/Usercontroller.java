@@ -61,6 +61,7 @@ public class Usercontroller {
         else
             model.addObject("isLogin", false);
 
+        model.addObject("indexImg", userDetailService.getIndexImg());
         model.addObject("user", loginUser);
         return model;
     }

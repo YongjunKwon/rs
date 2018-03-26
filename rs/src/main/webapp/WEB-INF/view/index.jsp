@@ -31,7 +31,12 @@
               <!-- Main content -->
               <section class="content">
                 <div class="grid js-masonry" id="js-masonry">
-                  <img class="grid-item" src="https://i.imgur.com/laIuV0D.jpg">
+                  <c:forEach items="${indexImg}" var="list" varStatus="staus">
+                    <a href="/board/bizBoardDetail?seq=654&categorynm=${list.category}">
+                      <img class="grid-item" src="${list.img_url}"/>
+                    </a>
+                  </c:forEach>
+                  <!-- <img class="grid-item" src="https://i.imgur.com/laIuV0D.jpg">
                   <img class="grid-item" src="https://i.imgur.com/777dcVU.jpg">
                   <img class="grid-item" src="https://i.imgur.com/ZPPFND3.jpg">
                   <img class="grid-item" src="https://i.imgur.com/EpYbuG7.jpg">
@@ -39,7 +44,7 @@
                   <img class="grid-item" src="https://i.imgur.com/Qmz61wo.jpg">
                   <img class="grid-item" src="https://i.imgur.com/aPia86B.jpg">
                   <img class="grid-item" src="https://i.imgur.com/iQRKg2a.jpg">
-                  <img class="grid-item" src="https://i.imgur.com/XREWwIc.jpg">
+                  <img class="grid-item" src="https://i.imgur.com/XREWwIc.jpg"> -->
                 </div>
                 <!-- /.grid -->
                 <!-- /.container -->
@@ -57,7 +62,7 @@
       jQuery(function($) {
 
         var $container = $('#js-masonry');
-        
+
         $container.imagesLoaded(function() {
           $container.masonry({
             itemSelector: '.grid-item',

@@ -549,8 +549,17 @@ img{
     max-height: 50px;
 }
 
-.logo-lg, .logo{
-  background-color: white !important;
+.logo-lg{
+  background-color: white !important;  
+  color: 
+}
+
+.logo-mini > img {
+  margin-bottom: 15px;
+}
+
+.logo-lg > img{
+  margin-bottom: 5px;
 }
 
 /* .sidebar-toggle{
@@ -581,7 +590,12 @@ img{
   margin-top: 30px;
 }
 
-.btn-primary{
+.btn-primary, .btn-info{
+  background-color: rgb(57, 86, 163);
+  border-color: rgb(57, 86, 163);
+}
+
+.page-item.active > a{
   background-color: rgb(57, 86, 163);
   border-color: rgb(57, 86, 163);
 }

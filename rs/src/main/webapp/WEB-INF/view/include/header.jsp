@@ -38,7 +38,7 @@
 	<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 	<%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 	<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
+	
 	<script src="/AdminLTE-2.3.11/plugins/jQuery/jquery-2.2.3.min.js"></script>
 	
 	<!-- Infinite-Scroll -->

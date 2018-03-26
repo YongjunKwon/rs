@@ -108,7 +108,7 @@
                               <!-- //페이징 -->
 
                               <div class="pull-right" id="example1_info" role="status" aria-live="polite">
-                                <button class="btn bg-olive margin">
+                                <button class="btn btn-primary margin">
 									<a class="a-color" href="/board/bizBoardWrite?categorynm=${board.categorynm}">글쓰기</a>
 								</button>								
                               </div>

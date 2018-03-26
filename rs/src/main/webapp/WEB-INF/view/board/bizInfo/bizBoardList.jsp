@@ -99,7 +99,7 @@
                               <!-- //페이징 -->
                               <c:if test="${loginUser.roles[0] ne 'ROLE_USER'}">
                                 <div class="pull-right" id="example1_info" role="status" aria-live="polite">
-                                  <button id="btnWrite" class="btn bg-olive margin">글쓰기</button>
+                                  <button id="btnWrite" class="btn btn-primary margin">글쓰기</button>
                                   <!-- <a class="a-color" href="/board/bizBoardWrite?categorynm=${board.categorynm}">글쓰기</a> -->
                                 </div>
                               </c:if>

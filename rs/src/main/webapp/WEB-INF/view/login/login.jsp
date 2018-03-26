@@ -5,16 +5,16 @@
 
     <body class="hold-transition login-page">
       <div class="login-box">
-        <div class="login-logo">
+        <div class="register-logo">
           <a href="/">
-            <b>밤프리카</b>
-          </a>
+                <span class="logo-lg register-logo"><img src="/images/logo-lg.png"></span>
+              </a>
         </div>
         <!-- /.login-logo -->
         <div class="login-box-body" style="height: 260px;">
 
           <form action="/login" method="POST">
-            <p class="login-box-msg">로그인</p>
+            <p class="login-box-msg text-bold">로그인</p>
             <div class="form-group has-feedback">
               <input type="email" class="form-control" name="user_id" placeholder="Email">
               <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -35,7 +35,7 @@
               </div>
               <!-- /.col -->
               <div class="col-xs-4">
-                <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                <button type="submit" class="btn btn-primary btn-block btn-flat">로그인</button>
               </div>
               <!-- /.col -->
             </div>
@@ -59,7 +59,7 @@
     </body>
 
     <script type="text/javascript">
-      $(document).ready(function () {
+      $(document).ready(function() {
 
         console.log('error message:' + '${error}');
 
@@ -86,25 +86,23 @@
           $('input').iCheck('check'); // ID 저장하기를 체크 상태로 두기.
         }
 
-        $('input').on('ifChecked', function (e) {
+        $('input').on('ifChecked', function(e) {
           var userInputId = $("input[name='user_id']").val();
           setCookie("userInputId", userInputId, 7); // 7일 동안 쿠키 보관
         });
 
-        $('input').on('ifUnchecked', function (e) {
+        $('input').on('ifUnchecked', function(e) {
           deleteCookie("userInputId");
         });
 
         // ID 저장하기를 체크한 상태에서 ID를 입력하는 경우, 이럴 때도 쿠키 저장.
-        $("input[name='user_id']").keyup(function () { // ID 입력 칸에 ID를 입력할 때,
+        $("input[name='user_id']").keyup(function() { // ID 입력 칸에 ID를 입력할 때,
           if ($('#idSaveCheck').is(":checked")) {
             var userInputId = $("input[name='user_id']").val();
             setCookie("userInputId", userInputId, 7); // 7일 동안 쿠키 보관
           }
         });
       });
-
-     
     </script>
 
   </html>

@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import com.kmk.domain.Board;
 import com.kmk.domain.user.User;
 
 
@@ -116,5 +117,17 @@ public interface UserMapper {
 		,"	  )                           "
 	})                              
 	void setLoginUserInfo(@Param("user_id") String user_id, @Param("ip") String ip);
+
+
+	
+	@Select({
+//	  " SELECT u.IMG_VISIBLE_DATE, b.IMG_URL  "
+	  " SELECT b.IMG_URL, b.seq, b.area_cd, b.category "
+	  ," FROM BOARD b                                  "
+	  ," JOIN USER u                                   "
+	  ,"   ON u.USER_ID = b.USER_ID                    "
+	  ,"WHERE b.del_flag = 'N'"
+	})
+  List<Board> getIndexImg();  
 	
 }

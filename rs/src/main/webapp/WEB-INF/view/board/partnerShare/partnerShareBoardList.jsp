@@ -39,11 +39,11 @@
                                     <form:options items="${comboAreaCdList}" itemValue="cd" itemLabel="cd_nm" />
                                   </form:select>
                                 </div>
-                              </div>       
+                              </div>
                               <!-- <div class="col-sm-4"></div> -->
                               <div class="col-sm-6 pull-right">
-                                <div class="form-group pull-right">                                  
-                                  <button type="submit" id="btnSearch" name="btnSearch" class="btn btn-info btn-flat pull-right">검색</button>                                  
+                                <div class="form-group pull-right">
+                                  <button type="submit" id="btnSearch" name="btnSearch" class="btn btn-info btn-flat pull-right">검색</button>
                                   <input type="text" class="search-area pull-right" name="title" value="${board.title}" id="title" placeholder="검색내용" />
                                 </div>
                               </div>
@@ -95,12 +95,12 @@
                               <!-- //페이징 -->
                               <div class="text-center" id="page_area"></div>
                               <!-- //페이징 -->
-                              <c:if test="${loginUser.roles[0] ne 'ROLE_USER'}">
-                                <div class="pull-right" id="example1_info" role="status" aria-live="polite">
-                                  <button id="btnWrite" class="btn bg-olive margin">글쓰기</button>
-                                  <!-- <a class="a-color" href="/board/bizBoardWrite?categorynm=${board.categorynm}">글쓰기</a> -->
-                                </div>
-                              </c:if>
+
+                              <div class="pull-right" id="example1_info" role="status" aria-live="polite">
+                                <button id="btnWrite" class="btn btn-primary margin">글쓰기</button>
+                                <!-- <a class="a-color" href="/board/bizBoardWrite?categorynm=${board.categorynm}">글쓰기</a> -->
+                              </div>
+
                             </div>
                           </div>
                         </div>

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kmk.base.PaginationUtils;
+import com.kmk.domain.Board;
 import com.kmk.domain.common.CommCode;
 import com.kmk.domain.common.CommCodeSearch;
 import com.kmk.domain.user.LoginUser;
@@ -48,33 +49,35 @@ public class AdminController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@RequestMapping("/")
-	public String home(User user,Model model) {
-		
-		logger.info(" @@@@@@@@@@@@@ User >>>  " + user.getBiz_nm());
-		
-        CommCode commCode = new CommCode();
-        commCode.setCd_grp("AA");
-        commCode.setCd(null);
-        model.addAttribute("comboAreaCdList", commonService.findComboAreaCdList(commCode));
-        
-        List<User> list = new ArrayList<User>();
-        list = adminService.selectUserList(user);
-
-        PaginationUtils.bindTotalRecordCount(user.getPagination(), list, "tot_cnt");
-        logger.info(" @@@@@@@@@@@@@ User.getPagination(): getCurrentPageNo : {} ", user.getPagination().getCurrentPageNo());
-        logger.info(" @@@@@@@@@@@@@ User.getPagination(): getPageSize : {} ", user.getPagination().getPageSize());
-        logger.info(" @@@@@@@@@@@@@ User.getPagination(): getTotalRecordCount : {} ", user.getPagination().getTotalRecordCount());
-        
-        model.addAttribute("list", list);
-        model.addAttribute("user", user);
-		
+	public String home(User user,Model model) {		
 	    return "admin/home";
 	}
 	
+	 @RequestMapping("upToMember")
+	  public String upToMember(User user,Model model) {
+	    
+	    logger.info(" @@@@@@@@@@@@@ User >>>  " + user.getBiz_nm());
+	    
+	        CommCode commCode = new CommCode();
+	        commCode.setCd_grp("AA");
+	        commCode.setCd(null);
+	        model.addAttribute("comboAreaCdList", commonService.findComboAreaCdList(commCode));
+	        
+	        List<User> list = new ArrayList<User>();
+	        list = adminService.selectUserList(user);
+	        Board board = new Board();
+	        board.setCategorynm("AD0101");
+	        
+	        PaginationUtils.bindTotalRecordCount(user.getPagination(), list, "tot_cnt");
+	        
+	        model.addAttribute("list", list);
+	        model.addAttribute("user", user);
+	        model.addAttribute("board", board);
+	      return "admin/upToMember";
+	  }
+	
 	@RequestMapping("/saveData")
-    public void saveData(HttpServletRequest req, UserListWrapper userListWrapper, HttpSession session, HttpServletResponse response) throws IOException {
-        LoginUser loginUser = (LoginUser) session.getAttribute("loginUser");
-        //board.setBiz_nm(loginUser.getBiz_nm());     
+    public String saveData(HttpServletRequest req, UserListWrapper userListWrapper, HttpSession session, HttpServletResponse response) throws IOException {
         
         String[] chkValues = req.getParameterValues("hiddenChkval"); 
         String[] userIds = req.getParameterValues("user_id"); 
@@ -100,24 +103,6 @@ public class AdminController {
         	}
         	
         }
-        
-//        
-//		List<User> list = userListWrapper.getUserList();
-//		
-//		logger.info(" list.size() : {} ", list.size());
-//		
-//		if(null != list && list.size() > 0) {
-//			
-//			for (User user : list) {
-//				
-//				logger.info(" User user.getChkVal() : {} ", user.getChkVal());
-//				if("Y".equals( user.getChkVal())) {
-//					logger.info(" User user.getUser_id() : {} ", user.getUser_id());
-//					logger.info(" User user.getExpire_date() : {} ", user.getExpire_date());
-//				}
-//				//adminService.iBoard(board);
-//			}
-//		}
 
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
@@ -127,28 +112,7 @@ public class AdminController {
 
         out.println("<script>alert('정상적으로 등록 되었습니다.');location.href='" + return_url + "'; </script>");
         out.flush();
-
+        
+        return "admin/upToMember";
     }
-/*	@RequestMapping("biz/upToMember")
-	public String upToMember(User user, Model model) {
-		
-			
-		CommCode commCode = new CommCode();
-		commCode.setCd_grp("AA");
-		commCode.setCd(null); 
-		
-		//List<CamelCaseMap> recvList = vocmService.findRecvList(vocmWebSearch);
-		List<Board> samList = new ArrayList<Board>();
-		samList = boardService.selectBizUser(user);
-		PaginationUtils.bindTotalRecordCount(user.getPagination(), samList, "tot_cnt");
-		logger.info(" @@@@@@@@@@@@@ board.getPagination(): getCurrentPageNo : {} ", board.getPagination().getCurrentPageNo());
-		logger.info(" @@@@@@@@@@@@@ board.getPagination(): getPageSize : {} ", board.getPagination().getPageSize());
-		logger.info(" @@@@@@@@@@@@@ board.getPagination(): getTotalRecordCount : {} ", board.getPagination().getTotalRecordCount());
-		
-		model.addAttribute("comboAreaCdList", commonService.findComboAreaCdList(commCode));
-		model.addAttribute("list", samList);
-		model.addAttribute("user", user);
-		
-	    return "admin/upToMember";
-	}*/
 }

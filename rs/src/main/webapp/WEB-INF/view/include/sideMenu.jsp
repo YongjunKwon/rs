@@ -125,28 +125,28 @@
           </a>
           <ul class="treeview-menu">
             <li id="menu_op">
-              <a href="/board/bizBoardList?categorynm=op">
+              <a href="/board/bizBoardList?categorynm=CG0101">
                 <i class="fa fa-circle-o"></i>오피스텔</a>
             </li>
             <li>
               <li id="menu_gunma">
-                <a href="/board/bizBoardList?categorynm=gunma">
+                <a href="/board/bizBoardList?categorynm=CG0102">
                   <i class="fa fa-circle-o"></i>건마</a>
               </li>
               <li id="menu_anma">
-                <a href="/board/bizBoardList?categorynm=anma">
+                <a href="/board/bizBoardList?categorynm=CG0103">
                   <i class="fa fa-circle-o"></i>안마방</a>
               </li>
               <li id="menu_play">
-                <a href="/board/bizBoardList?categorynm=play">
+                <a href="/board/bizBoardList?categorynm=CG0104">
                   <i class="fa fa-circle-o"></i>유흥주점</a>
               </li>
               <li id="menu_tel">
-                <a href="/board/bizBoardList?categorynm=tel">
+                <a href="/board/bizBoardList?categorynm=CG0105">
                   <i class="fa fa-circle-o"></i>휴게텔</a>
               </li>
               <li id="menu_lib">
-                <a href="/board/bizBoardList?categorynm=lib">
+                <a href="/board/bizBoardList?categorynm=CG0106">
                   <i class="fa fa-circle-o"></i>립카페/핸플/키스</a>
               </li>
           </ul>
@@ -164,24 +164,24 @@
             </a>
             <ul class="treeview-menu">
               <li id="menu_oph">
-                <a href="/board/bizBoardList?categorynm=oph">
+                <a href="/board/bizBoardList?categorynm=CG0201">
                   <i class="fa fa-circle-o"></i>오피스텔 후기</a>
               </li>
               <li>
                 <li id="menu_gunmah">
-                  <a href="/board/bizBoardList?categorynm=gunmah">
+                  <a href="/board/bizBoardList?categorynm=CG0202">
                     <i class="fa fa-circle-o"></i>건마 후기</a>
                 </li>
                 <li id="menu_anmah">
-                  <a href="/board/bizBoardList?categorynm=anmah">
+                  <a href="/board/bizBoardList?categorynm=CG0203">
                     <i class="fa fa-circle-o"></i>안마방 후기</a>
                 </li>
                 <li id="menu_playh">
-                  <a href="/board/bizBoardList?categorynm=playh">
+                  <a href="/board/bizBoardList?categorynm=CG0204">
                     <i class="fa fa-circle-o"></i>유흥주점 후기</a>
                 </li>
                 <li id="menu_libh">
-                  <a href="/board/bizBoardList?categorynm=libh">
+                  <a href="/board/bizBoardList?categorynm=CG0205">
                     <i class="fa fa-circle-o"></i>텔/립/핸플/키스 후기</a>
                 </li>
             </ul>
@@ -191,7 +191,7 @@
             <!-- 업소언니정보 //시작-->
             <!-- 언니들 정보 올리는 게시판 -->
             <li id="side_bizWm" class="treeview">
-              <a href="/board/bizBoardList?categorynm=bizwm">
+              <a href="/board/bizBoardList?categorynm=CG03">
                 <i class="fa fa-share"></i>
                 <span>업소언니정보</span>
               </a>
@@ -200,31 +200,31 @@
 
             <!-- 파트너공유 //시작-->
             <li id="side_partner" class="treeview">
-              <a href="/board/bizBoardList?categorynm=partner">
+              <a href="/board/bizBoardList?categorynm=CG04">
                 <i class="fa fa-share"></i>
                 <span>파트너공유</span>
               </a>
             </li>
             <!-- 파트너정보 //끝-->
             <c:if test="${!empty loginUser and loginUser.roles[0] ne 'ROLE_USER'}">
-              <!-- 파트너공유 //시작-->
+              <!-- 업체문의게시판 //시작-->
               <li id="side_bizQna" class="treeview">
-                <a href="/board/bizBoardList?categorynm=bizqna">
+                <a href="/board/bizBoardList?categorynm=CG05">
                 <i class="fa fa-share"></i>
                 <span>업체문의게시판</span>
               </a>
               </li>
-              <!-- 파트너정보 //끝-->
+              <!-- 업체문의게시판 //끝-->
             </c:if>
             <c:if test="${!empty loginUser and loginUser.roles[0] eq 'ROLE_ADMIN'}">
-              <!-- 파트너공유 //시작-->
+              <!-- 관리자메뉴가기 //시작-->
               <li id="side_bizQna" class="treeview">
                 <a href="/admin/">
                 <i class="fa fa-share"></i>
                 <span>관리자메뉴가기</span>
               </a>
               </li>
-              <!-- 파트너정보 //끝-->
+              <!-- 관리자메뉴가기 //끝-->
             </c:if>
       </ul>
 
@@ -379,47 +379,47 @@
      * @version 1.0, 2018.2.5 소스 수정
      */
     $('.treeview').removeClass('active');
-    if ("${board.categorynm}" == "op") {
+    if ("${board.categorynm}" == "CG0101") {
       $('#menu_op').parents('li').addClass('active');
       $('#menu_op').addClass('active');
-    } else if ("${board.categorynm}" == "gunma") {
+    } else if ("${board.categorynm}" == "CG0102") {
       $('#menu_gunma').parents('li').addClass('active');
       $('#menu_gunma').addClass('active');
-    } else if ("${board.categorynm}" == "anma") {
+    } else if ("${board.categorynm}" == "CG0103") {
       $('#menu_anma').parents('li').addClass('active');
       $('#menu_anma').addClass('active');
-    } else if ("${board.categorynm}" == "play") {
+    } else if ("${board.categorynm}" == "CG0104") {
       $('#menu_play').parents('li').addClass('active');
       $('#menu_play').addClass('active');
-    } else if ("${board.categorynm}" == "tel") {
+    } else if ("${board.categorynm}" == "CG0105") {
       $('#menu_tel').parents('li').addClass('active');
       $('#menu_tel').addClass('active');
-    } else if ("${board.categorynm}" == "lib") {
+    } else if ("${board.categorynm}" == "CG0106") {
       $('#menu_lib').parents('li').addClass('active');
       $('#menu_lib').addClass('active');
-    } else if ("${board.categorynm}" == "oph") {
+    } else if ("${board.categorynm}" == "CG0201") {
       $('#menu_oph').parents('li').addClass('active');
       $('#menu_oph').addClass('active');
-    } else if ("${board.categorynm}" == "gunmah") {
+    } else if ("${board.categorynm}" == "CG0202") {
       $('#menu_gunmah').parents('li').addClass('active');
       $('#menu_gunmah').addClass('active');
-    } else if ("${board.categorynm}" == "anmah") {
+    } else if ("${board.categorynm}" == "CG0203") {
       $('#menu_anmah').parents('li').addClass('active');
       $('#menu_anmah').addClass('active');
-    } else if ("${board.categorynm}" == "playh") {
+    } else if ("${board.categorynm}" == "CG0204") {
       $('#menu_playh').parents('li').addClass('active');
       $('#menu_playh').addClass('active');
-    } else if ("${board.categorynm}" == "telh") {
+    } else if ("${board.categorynm}" == "CG0205") {
       $('#menu_telh').parents('li').addClass('active');
       $('#menu_telh').addClass('active');
-    } else if ("${board.categorynm}" == "libh") {
+    } else if ("${board.categorynm}" == "CG0206") {
       $('#menu_libh').parents('li').addClass('active');
       $('#menu_libh').addClass('active');
-    } else if ("${board.categorynm}" == "bizwm") {
+    } else if ("${board.categorynm}" == "CG03") {
       $('#side_bizWm').addClass('active');
-    } else if ("${board.categorynm}" == "partner") {
+    } else if ("${board.categorynm}" == "CG04") {
       $('#side_partner').addClass('active');
-    } else if ("${board.categorynm}" == "bizqna") {
+    } else if ("${board.categorynm}" == "CG05") {
       $('#side_bizQna').addClass('active');
     }
 
@@ -429,7 +429,7 @@
      * @author 
      * @version 1.0, 2017.12.16 소스 수정
      */
-    $('.user_picture').click(function (e) {
+    $('.user_picture').click(function(e) {
       $('#pictureModal').modal();
     });
 

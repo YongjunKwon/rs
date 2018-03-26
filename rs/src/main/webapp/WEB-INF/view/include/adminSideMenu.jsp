@@ -113,8 +113,8 @@
       <ul class="sidebar-menu">
         <li class="header"></li>
         <!-- Optionally, you can add icons to the links -->
-            <li class="treeview">
-              <a href="/admin/biz/upToMember">
+            <li class="treeview" id="menu_biz">
+              <a href="/admin/upToMember">
                 <i class="fa fa-share"></i>
                 <span>업체 관리</span>
               </a>
@@ -272,24 +272,9 @@
      * @version 1.0, 2018.2.5 소스 수정
      */
     $('.treeview').removeClass('active');
-    if ("${board.categorynm}" == "op") {
-      $('#menu_op').parents('li').addClass('active');
-      $('#menu_op').addClass('active');
-    } else if ("${board.categorynm}" == "gunma") {
-      $('#menu_gunma').parents('li').addClass('active');
-      $('#menu_gunma').addClass('active');
-    } else if ("${board.categorynm}" == "anma") {
-      $('#menu_anma').parents('li').addClass('active');
-      $('#menu_anma').addClass('active');
-    } else if ("${board.categorynm}" == "play") {
-      $('#menu_play').parents('li').addClass('active');
-      $('#menu_play').addClass('active');
-    } else if ("${board.categorynm}" == "tel") {
-      $('#menu_tel').parents('li').addClass('active');
-      $('#menu_tel').addClass('active');
-    } else if ("${board.categorynm}" == "lib") {
-      $('#menu_lib').parents('li').addClass('active');
-      $('#menu_lib').addClass('active');
+    if ("${board.categorynm}" == "AD0101") {
+      $('#menu_biz').parents('li').addClass('active');
+      $('#menu_biz').addClass('active');
     }
 
     /**
