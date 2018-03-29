@@ -180,8 +180,18 @@ public class BoardController {
         }
 
         CommCode commCode = new CommCode();
+        CommCode commCode2 = new CommCode();
         commCode.setCd_grp("ZZ");
         commCode.setCd(null);
+        
+        commCode2.setCd_grp("AA");
+        commCode2.setParent_cd(board.getArea_cd());
+        
+        log.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");        
+        log.debug("getArea_cd = " + board.getArea_cd());
+        log.debug("getDtl_area_cd = " + board.getDtl_area_cd());        
+        log.debug("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+        
 
         // List<CamelCaseMap> recvList = vocmService.findRecvList(vocmWebSearch);
         List<Board> list = new ArrayList<Board>();
@@ -193,8 +203,16 @@ public class BoardController {
         logger.info(" @@@@@@@@@@@@@ board.getPagination(): getPageSize : {} ", board.getPagination().getPageSize());
         logger.info(" @@@@@@@@@@@@@ board.getPagination(): getTotalRecordCount : {} ",
                 board.getPagination().getTotalRecordCount());
+        
+        log.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+        log.debug("commCode.getCd_grp = " + commCode.getCd_grp());
+        log.debug("commCode.getCd_grp = " + commCode.getCd_grp_nm());
+        log.debug("getArea_cd = " + board.getArea_cd());
+        log.debug("getDtl_area_cd = " + board.getDtl_area_cd());        
+        log.debug("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
 
         model.addAttribute("comboAreaCdList", commonService.findComboAreaCdList(commCode));
+        model.addAttribute("comboDtlAreaCdList", commonService.findComboAreaCdList(commCode2));
         model.addAttribute("list", list);
         model.addAttribute("board", board);
 

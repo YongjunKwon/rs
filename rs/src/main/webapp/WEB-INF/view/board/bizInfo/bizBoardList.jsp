@@ -31,15 +31,17 @@
                             <form:form modelAttribute="board" method="get" action="/board/bizBoardList?categorynm=${board.categorynm}">
                               <input type="hidden" id="pagination" name="pagination.currentPageNo" value="1">
                               <input type="hidden" id="categorynm" name="categorynm" value="${board.categorynm}">
-                              <input type="hidden" id="category" name="category" value="${board.category}">
+                              <input type="hidden" id="category" name="category" value="${board.category}">                              
                               <div class="col-sm-6 pull-left search-group">
                                 <div class="form-group" id="example1_length">
                                   <form:select path="area_cd" class="form-area" data-placeholder="지역" disabled="false" onchange="selectCtg(this.value)">
                                     <option value="">지역선택</option>
                                     <form:options items="${comboAreaCdList}" itemValue="cd" itemLabel="cd_nm" />
                                   </form:select>
-                                  	<select id="dtlCtg" class="form-area" data-placeholder="세부지역">
-								  	</select>
+                                  	<form:select path="dtl_area_cd" class="form-area" data-placeholder="세부지역" onchange="javascript:fn_dtlCtg(this.value);">
+                                  		<option value="">상세지역선택</option>
+                                  		<form:options items="${comboDtlAreaCdList}" itemValue="cd" itemLabel="cd_nm" />                                  		                                  		                           		
+								  	</form:select>
                                 </div>
                               </div>       
                               <!-- <div class="col-sm-4"></div> -->
@@ -93,7 +95,6 @@
                           </div>
                           <div class="row">
                             <div class="col-sm-12">
-
                               <!-- //페이징 -->
                               <div class="text-center" id="page_area"></div>
                               <!-- //페이징 -->
@@ -149,21 +150,29 @@
           data: params,
           success: function (data) {
             if(data.result.length > 0){
-              $('#dtlCtg').find('option').remove();
+              $('#dtl_area_cd').find('option').remove();
           
               for(var i = 0; i < data.result.length; i++){
-                $('#dtlCtg').append("<option value='" + data.result[i].cd + "'>" + data.result[i].cd_nm + '</option>');
+                $('#dtl_area_cd').append("<option value='" + data.result[i].cd + "'>" + data.result[i].cd_nm + '</option>');
               }
+              
             }else
             {
-              $('#dtlCtg').find('option').remove();
-              $('#dtlCtg').append("<option value=''>선택</option>");
+              $('#dtl_area_cd').find('option').remove();
+              $('#dtl_area_cd').append("<option value=''>상세지역선택</option>");
             }
+            
+            $("#board").submit();
           },
           error: function (error) {
             alert("error : " + eval(error));
           }
         });                   
+      }
+      
+      function fn_dtlCtg(val)
+      {   	  
+    	  $("#board").submit();
       }
 
       function goPage(pageNo) {

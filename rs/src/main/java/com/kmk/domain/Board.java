@@ -15,6 +15,7 @@ public class Board implements PaginationSearch {
     private int cnt;
     private String category;
     private String area_cd;
+    private String dtl_area_cd;
     private String biz_nm;
     private int recomm_cnt;
     private String del_flag;
