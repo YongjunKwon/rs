@@ -171,10 +171,7 @@
     <script type="text/javascript">
       var gv_auth = "";
       $(document).ready(function() {
-        $("#area_cd").val("${sampleBoard.area_cd}");
-        console.log("${contents.seq}");
-        console.log("${loginUser.roles[0]}");
-
+        
         gv_auth = "${loginUser.roles[0]}";
         var $seq = "${contents.seq}";
 
@@ -191,6 +188,8 @@
 
         // 댓글등록
         $("#btnReplyReg").on("click", function() {
+          if (checkReplyEmpty($(this))) return;
+          
           $("#commFrm").attr("action", "/board/bizBoardReplyReg");
           $("#commFrm").attr("method", "post");
           $("#commFrm").submit();
@@ -204,9 +203,9 @@
 
         //게시글 수정
         $("#btn_modify").on("click", function() {
-          window.location.href = "/board/bizBoardModify?user_id=${loginUser.user_id}&seq=${list.seq}&categorynm=${categorynm}";
+          window.location.href = "/board/bizBoardModify?user_id=${loginUser.user_id}&seq=${list.seq}&categorynm=${categorynm}&area_cd=${list.area_cd}&dtl_area_cd=${list.dtl_area_cd}";
         });
-        
+
       });
     </script>
 

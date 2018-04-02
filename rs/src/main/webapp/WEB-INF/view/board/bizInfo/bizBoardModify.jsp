@@ -27,13 +27,13 @@
                       <div class="box-header">
                         <div class="row">
                           <div class="col-sm-12">
-                            
+
                           </div>
                         </div>
                       </div>
                       <!-- /.box-header -->
-                      <div class="box-body">
-                        <form id="frm" name="frm" method="post" class="form-inline" action="/board/bizSaveBoardModify">
+                      <form:form modelAttribute="board" method="post" class="form-inline" action="/board/bizSaveBoardModify">
+                        <div class="box-body">
                           <input type="hidden" id="categorynm" name="categorynm" value="${board.categorynm}">
                           <input type="hidden" id="user_id" name="user_id" value="${loginUser.user_id}">
                           <input type="hidden" id="category" name="category" value="${board.category}">
@@ -42,12 +42,14 @@
                           <div class="row">
                             <div class="col-sm-1"></div>
                             <div class="form-group has-feedback area_select">
-                              <select class="form-control" id="area_cd" name="area_cd">
-																<option value="">지역 선택</option>
-																<c:forEach var="item" items="${comboAreaCdList}" varStatus="status">
-																	<option value="${item.cd}" <c:if test="${item.cd eq list.area_cd}">selected</c:if> >${item.cd_nm}</option>
-																</c:forEach>
-															</select>
+                              <form:select path="dtl_area_cd" class="form-area" data-placeholder="세부지역">
+                                <option value="">상세지역선택</option>
+                                <form:options items="${comboDtlAreaCdList}" itemValue="cd" itemLabel="cd_nm" />
+                              </form:select>
+                              <form:select path="area_cd" class="form-area" data-placeholder="지역" disabled="false" onchange="selectCtg(this.value)">
+                                <option value="">지역선택</option>
+                                <form:options items="${comboAreaCdList}" itemValue="cd" itemLabel="cd_nm" />
+                              </form:select>
                             </div>
                           </div>
                           <div class="row">
@@ -59,7 +61,7 @@
                           <div class="row">
                             <label class="col-sm-1 form_control_lebel">내용</label>
                             <div class="col-sm-11">
-                              <textarea class="form_control_textarea" id="content" name="content" >${list.content}</textarea>
+                              <textarea class="form_control_textarea" id="content" name="content">${list.content}</textarea>
                             </div>
                           </div>
                           <div class="row">
@@ -68,8 +70,8 @@
                               <input class="btn btn-primary pull-right" type="submit" value="저장">
                             </div>
                           </div>
-                        </form>
-                      </div>
+                        </div>
+                      </form:form>
                       <!-- /.box-body -->
                     </div>
                     <!-- /.box -->
@@ -85,7 +87,7 @@
     <script type="text/javascript">
       var oEditors = []; // 개발되어 있는 소스에 맞추느라, 전역변수로 사용하였지만, 지역변수로 사용해도 전혀 무관 함.
       $(document).ready(function() {
-        $("#frm").submit(function(e) {
+        $("#board").submit(function(e) {
 
           if (trim($('#area_cd').val()) == "" || trim($('#area_cd').val()).length < 1) {
             alert("지역은 필수 항목 입니다.");
@@ -161,6 +163,36 @@
 
         return true;
       }
+
+      function selectCtg(val) {
+        var params = {
+          "area_cd": val
+        };
+
+        $.ajax({
+          url: "/board/findDtlArea",
+          method: "post",
+          type: "json",
+          data: params,
+          success: function(data) {
+            if (data.result.length > 0) {
+              $('#dtl_area_cd').find('option').remove();
+
+              for (var i = 0; i < data.result.length; i++) {
+                $('#dtl_area_cd').append("<option value='" + data.result[i].cd + "'>" + data.result[i].cd_nm + '</option>');
+              }
+
+            } else {
+              $('#dtl_area_cd').find('option').remove();
+              $('#dtl_area_cd').append("<option value=''>상세지역선택</option>");
+            }
+          },
+          error: function(error) {
+            alert("error : " + eval(error));
+          }
+        });
+      }
+     // $("#area_cd").val("${board.area_cd}").prop("selected", true);
     </script>
 
   </html>

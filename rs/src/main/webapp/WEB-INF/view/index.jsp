@@ -32,9 +32,11 @@
               <section class="content">
                 <div class="grid js-masonry" id="js-masonry">
                   <c:forEach items="${indexImg}" var="list" varStatus="staus">
-                    <a href="/board/bizBoardDetail?seq=654&categorynm=${list.category}">
+                    <div class="marsonry-wrapper">
+                      <a href="/board/bizBoardDetail?seq=${list.seq}&categorynm=${list.category}">
                       <img class="grid-item" src="${list.img_url}"/>
                     </a>
+                    </div>
                   </c:forEach>
                   <!-- <img class="grid-item" src="https://i.imgur.com/laIuV0D.jpg">
                   <img class="grid-item" src="https://i.imgur.com/777dcVU.jpg">
@@ -66,7 +68,7 @@
         $container.imagesLoaded(function() {
           $container.masonry({
             itemSelector: '.grid-item',
-            columnWidth: 200,
+            columnWidth: 12,
             gutter: 5
           });
         });

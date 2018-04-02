@@ -27,32 +27,34 @@
                     <div class="box">
                       <div class="box-header">
                         <div class="col-sm-12">
-                          <div class="row">
-                            <form:form modelAttribute="board" method="get" action="/board/bizBoardList?categorynm=${board.categorynm}">
+                          <form:form modelAttribute="board" method="get" action="/board/bizBoardList?categorynm=${board.categorynm}">
+                            <div class="row">
                               <input type="hidden" id="pagination" name="pagination.currentPageNo" value="1">
                               <input type="hidden" id="categorynm" name="categorynm" value="${board.categorynm}">
-                              <input type="hidden" id="category" name="category" value="${board.category}">                              
-                              <div class="col-sm-6 pull-left search-group">
-                                <div class="form-group" id="example1_length">
-                                  <form:select path="area_cd" class="form-area" data-placeholder="지역" disabled="false" onchange="selectCtg(this.value)">
+                              <input type="hidden" id="category" name="category" value="${board.category}">
+                              <div class="col-sm-6 pull-right search-group">
+                                <div class="form-group pull-right" id="example1_length">                                  
+                                  <form:select path="dtl_area_cd" class="form-area pull-right" data-placeholder="세부지역" onchange="javascript:fn_dtlCtg(this.value);">
+                                    <option value="">상세지역선택</option>
+                                    <form:options items="${comboDtlAreaCdList}" itemValue="cd" itemLabel="cd_nm" />
+                                  </form:select>
+                                  <form:select path="area_cd" class="form-area pull-right" data-placeholder="지역" disabled="false" onchange="selectCtg(this.value)">
                                     <option value="">지역선택</option>
                                     <form:options items="${comboAreaCdList}" itemValue="cd" itemLabel="cd_nm" />
                                   </form:select>
-                                  	<form:select path="dtl_area_cd" class="form-area" data-placeholder="세부지역" onchange="javascript:fn_dtlCtg(this.value);">
-                                  		<option value="">상세지역선택</option>
-                                  		<form:options items="${comboDtlAreaCdList}" itemValue="cd" itemLabel="cd_nm" />                                  		                                  		                           		
-								  	</form:select>
                                 </div>
-                              </div>       
+                              </div>
+                            </div>
+                            <div class="row">
                               <!-- <div class="col-sm-4"></div> -->
                               <div class="col-sm-6 pull-right">
-                                <div class="form-group pull-right">                                  
-                                  <button type="submit" id="btnSearch" name="btnSearch" class="btn btn-info btn-flat pull-right">검색</button>                                  
+                                <div class="form-group pull-right">
+                                  <button type="submit" id="btnSearch" name="btnSearch" class="btn btn-info btn-flat pull-right">검색</button>
                                   <input type="text" class="search-area pull-right" name="title" value="${board.title}" id="title" placeholder="검색내용" />
                                 </div>
                               </div>
+                            </div>
                             </form:form>
-                          </div>
                         </div>
                       </div>
                       <!-- /.box-header -->
@@ -139,40 +141,44 @@
 
       });
       
-      function selectCtg(val)
-      {
-        var params = {"area_cd": val};           	 
-        
+      if($("#area_cd option:selected").val()==""){
+        $('#dtl_area_cd').find('option').remove();
+        $('#dtl_area_cd').append("<option value=''>상세지역선택</option>");
+      }
+
+      function selectCtg(val) {
+        var params = {
+          "area_cd": val
+        };
+
         $.ajax({
           url: "/board/findDtlArea",
           method: "post",
           type: "json",
           data: params,
-          success: function (data) {
-            if(data.result.length > 0){
+          success: function(data) {
+            if (data.result.length > 0) {
               $('#dtl_area_cd').find('option').remove();
-          
-              for(var i = 0; i < data.result.length; i++){
+
+              for (var i = 0; i < data.result.length; i++) {
                 $('#dtl_area_cd').append("<option value='" + data.result[i].cd + "'>" + data.result[i].cd_nm + '</option>');
               }
-              
-            }else
-            {
+
+            } else {
               $('#dtl_area_cd').find('option').remove();
               $('#dtl_area_cd').append("<option value=''>상세지역선택</option>");
             }
-            
+
             $("#board").submit();
           },
-          error: function (error) {
+          error: function(error) {
             alert("error : " + eval(error));
           }
-        });                   
+        });
       }
-      
-      function fn_dtlCtg(val)
-      {   	  
-    	  $("#board").submit();
+
+      function fn_dtlCtg(val) {
+        $("#board").submit();
       }
 
       function goPage(pageNo) {

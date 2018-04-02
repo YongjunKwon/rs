@@ -75,15 +75,29 @@ public interface BoardMapper {
     List<Board> selectBoard(Board board);
 
     // 게시판 상세조회
-    @Select({ "<script>" 
-            + " SELECT b.*,	" 
-            + "        u.nick_nm	 " 
-            + "	  FROM BOARD b" 
-            + "  INNER JOIN USER u"
-            + "     ON b.user_id = u.user_id" 
-            + "  WHERE 1=1 " 
-            + "    AND b.SEQ=#{seq} " 
-            + "</script>" })
+    @Select({ 
+              
+              "      SELECT  b.seq                       "
+             ,"             ,b.user_id                   "
+             ,"             ,b.title                     "
+             ,"             ,b.content                   "
+             ,"             ,b.cnt                       "
+             ,"             ,b.category                  "
+             ,"             ,b.area_cd AS dtl_area_cd    "
+             ,"             ,b.biz_nm                    "
+             ,"             ,b.recomm_cnt                "
+             ,"             ,b.del_flag                  "
+             ,"             ,b.img_url                   "
+             ,"             ,b.reg_dtime                 "
+             ,"             ,u.nick_nm                   "
+             ,"             ,cc.parent_cd AS area_cd     "
+             ,"       FROM BOARD b                       "
+             ,"      INNER JOIN USER u                   "
+             ,"         ON b.user_id = u.user_id         "
+             ,"      INNER JOIN COMM_CODE cc             "
+             ,"         ON b.area_cd = cc.cd             "
+             ,"      WHERE b.SEQ=#{seq}                  "             
+            })
     Board selectDetailBoard(int seq);
 
     // 리플조회
@@ -117,7 +131,7 @@ public interface BoardMapper {
     // 게시판등록
     @Insert("INSERT INTO BOARD "
             + "(TITLE, CONTENT, CNT, CATEGORY, AREA_CD, BIZ_NM, RECOMM_CNT, DEL_FLAG, IMG_URL, USER_ID, REG_DTIME)"
-            + " VALUES(#{title}, #{content}, #{cnt}, #{category}, #{area_cd}, #{biz_nm}, #{recomm_cnt}, 'N', #{img_url}, #{user_id}, NOW())")
+            + " VALUES(#{title}, #{content}, #{cnt}, #{category}, #{dtl_area_cd}, #{biz_nm}, #{recomm_cnt}, 'N', #{img_url}, #{user_id}, NOW())")
     void insertBoard(Board board);
 
     // 리플등록

@@ -408,11 +408,13 @@ i.font-11 {
 }
 
 .form-area {
+  float: right;
+  margin-right: 3px;
+  width: 150px;
   font-size: 14px;
   border-radius: 0;
   box-shadow: none;
-  display: block;
-  width: 120px;
+  display: block;  
   height: 34px;
   padding: 6px 12px;
   line-height: 1.42857143;
@@ -425,18 +427,18 @@ i.font-11 {
 }
 
 .search-area {
-  width: 100px;
+  width: 249px;
   position: relative;
-  z-index: 2;  
+  z-index: 2;
   height: 34px !important;
-  margin-bottom: 0;  
+  margin-bottom: 0;
   border: 1px solid #ccc;
   border-color: #d2d6de;
-
+  text-indent: 15px;
 }
 
-.search-group{
-  display: inline-flex;  
+#btnSearch {
+  margin-right: 3px
 }
 
 .btn-success_ {
@@ -486,15 +488,17 @@ i.font-11 {
   /* position: absolute; */
   overflow: hidden;
   border: 0px solid #ccc;
-  
 }
-img{
-  max-width: 100% !important; /* 이미지의 최대사이즈 */
-  width /***/: auto !important; /* IE8 */
+
+img {
+  max-width: 100% !important;
+  /* 이미지의 최대사이즈 */
+  width/***/
+  : auto !important;
+  /* IE8 */
   height: auto !important;
   vertical-align: bottom !important;
 }
-
 
 .rolling-banner img {
   /* position: absolute;
@@ -512,7 +516,7 @@ img{
   height: 50px;
 }
 
-#banner1 > img {
+#banner1>img {
   min-width: 100px;
   min-height: 50px !important;
   max-height: 50px !important;
@@ -543,41 +547,52 @@ img{
 }
 
 .img-thumb {
-    width: 100%; 
-    height: 100%;
-    max-width: 50px;
-    max-height: 50px;
+  width: 100%;
+  height: 100%;
+  max-width: 50px;
+  max-height: 50px;
 }
 
-.logo-lg{
+.logo-lg {
   background-color: white !important;  
-  color: 
 }
 
-.logo-mini > img {
+.logo-mini>img {
   margin-bottom: 15px;
 }
 
-.logo-lg > img{
+.logo-lg>img {
   margin-bottom: 5px;
+  max-height: 55px;
+}
+
+.logo {
+  background-color: white !important;
 }
 
 /* .sidebar-toggle{
     background-color: #333;
 }
 */
-.navbar {
-    display: flex;
-} 
 
-.grid-item{
+.navbar {
+  display: flex;
+}
+
+.grid-item {
   margin-bottom: 10px;
-  border-radius: 4px;
+  border-radius: 10px;
   border: 1px;
+  /* max-width: 60% !important;
+  max-width: 60% !important; */
+}
+
+.marsonry-wrapper {
+  max-width: 400px;
 }
 
 .register-logo {
-  margin: 0px;  
+  margin: 0px;
   /* margin-bottom: 1px; */
   /* border-radius: 4px; */
   border: 1px;
@@ -585,17 +600,18 @@ img{
   background-color: white;
 }
 
-.register-logo > a > span > img {
-  width: 70% !important;  
+.register-logo>a>span>img {
+  width: 70% !important;
   margin-top: 30px;
 }
 
-.btn-primary, .btn-info{
+.btn-primary,
+.btn-info {
   background-color: rgb(57, 86, 163);
   border-color: rgb(57, 86, 163);
 }
 
-.page-item.active > a{
+.page-item.active>a {
   background-color: rgb(57, 86, 163);
   border-color: rgb(57, 86, 163);
 }

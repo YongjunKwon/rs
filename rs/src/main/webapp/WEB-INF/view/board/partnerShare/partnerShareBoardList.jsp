@@ -27,19 +27,25 @@
                     <div class="box">
                       <div class="box-header">
                         <div class="col-sm-12">
-                          <div class="row">
-                            <form:form modelAttribute="board" method="get" action="/board/bizBoardList?categorynm=${board.categorynm}">
+                          <form:form modelAttribute="board" method="get" action="/board/bizBoardList?categorynm=${board.categorynm}">
+                            <div class="row">
                               <input type="hidden" id="pagination" name="pagination.currentPageNo" value="1">
                               <input type="hidden" id="categorynm" name="categorynm" value="${board.categorynm}">
                               <input type="hidden" id="category" name="category" value="${board.category}">
-                              <div class="col-sm-6 pull-left search-group">
-                                <div class="form-group" id="example1_length">
-                                  <form:select path="area_cd" class="form-area" data-placeholder="지역" disabled="false" onchange="javascript:submit()">
+                              <div class="col-sm-6 pull-right search-group">
+                                <div class="form-group pull-right" id="example1_length">
+                                  <form:select path="dtl_area_cd" class="form-area pull-right" data-placeholder="세부지역" onchange="javascript:fn_dtlCtg(this.value);">
+                                    <option value="">상세지역선택</option>
+                                    <form:options items="${comboDtlAreaCdList}" itemValue="cd" itemLabel="cd_nm" />
+                                  </form:select>
+                                  <form:select path="area_cd" class="form-area pull-right" data-placeholder="지역" disabled="false" onchange="selectCtg(this.value)">
                                     <option value="">지역선택</option>
                                     <form:options items="${comboAreaCdList}" itemValue="cd" itemLabel="cd_nm" />
                                   </form:select>
                                 </div>
                               </div>
+                            </div>
+                            <div class="row">
                               <!-- <div class="col-sm-4"></div> -->
                               <div class="col-sm-6 pull-right">
                                 <div class="form-group pull-right">
@@ -47,8 +53,8 @@
                                   <input type="text" class="search-area pull-right" name="title" value="${board.title}" id="title" placeholder="검색내용" />
                                 </div>
                               </div>
-                            </form:form>
-                          </div>
+                            </div>
+                          </form:form>
                         </div>
                       </div>
                       <!-- /.box-header -->
@@ -91,16 +97,12 @@
                           </div>
                           <div class="row">
                             <div class="col-sm-12">
-
                               <!-- //페이징 -->
                               <div class="text-center" id="page_area"></div>
                               <!-- //페이징 -->
-
                               <div class="pull-right" id="example1_info" role="status" aria-live="polite">
                                 <button id="btnWrite" class="btn btn-primary margin">글쓰기</button>
-                                <!-- <a class="a-color" href="/board/bizBoardWrite?categorynm=${board.categorynm}">글쓰기</a> -->
                               </div>
-
                             </div>
                           </div>
                         </div>
@@ -135,6 +137,46 @@
         }
 
       });
+
+      if ($("#area_cd option:selected").val() == "") {
+        $('#dtl_area_cd').find('option').remove();
+        $('#dtl_area_cd').append("<option value=''>상세지역선택</option>");
+      }
+
+      function selectCtg(val) {
+        var params = {
+          "area_cd": val
+        };
+
+        $.ajax({
+          url: "/board/findDtlArea",
+          method: "post",
+          type: "json",
+          data: params,
+          success: function(data) {
+            if (data.result.length > 0) {
+              $('#dtl_area_cd').find('option').remove();
+
+              for (var i = 0; i < data.result.length; i++) {
+                $('#dtl_area_cd').append("<option value='" + data.result[i].cd + "'>" + data.result[i].cd_nm + '</option>');
+              }
+
+            } else {
+              $('#dtl_area_cd').find('option').remove();
+              $('#dtl_area_cd').append("<option value=''>상세지역선택</option>");
+            }
+
+            $("#board").submit();
+          },
+          error: function(error) {
+            alert("error : " + eval(error));
+          }
+        });
+      }
+
+      function fn_dtlCtg(val) {
+        $("#board").submit();
+      }
 
       function goPage(pageNo) {
         $("#pagination").val(pageNo);

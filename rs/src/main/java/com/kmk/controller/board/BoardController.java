@@ -2,7 +2,6 @@ package com.kmk.controller.board;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -10,7 +9,6 @@ import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.annotations.Update;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +27,6 @@ import com.kmk.domain.Board;
 import com.kmk.domain.Reply;
 import com.kmk.domain.common.CommCode;
 import com.kmk.domain.common.CommCodeSearch;
-import com.kmk.domain.sample.SampleBoard;
 import com.kmk.domain.user.LoginUser;
 import com.kmk.service.BoardService;
 import com.kmk.service.common.CommonService;
@@ -187,30 +184,11 @@ public class BoardController {
         commCode2.setCd_grp("AA");
         commCode2.setParent_cd(board.getArea_cd());
         
-        log.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");        
-        log.debug("getArea_cd = " + board.getArea_cd());
-        log.debug("getDtl_area_cd = " + board.getDtl_area_cd());        
-        log.debug("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
-        
 
         // List<CamelCaseMap> recvList = vocmService.findRecvList(vocmWebSearch);
-        List<Board> list = new ArrayList<Board>();
-        list = boardService.selectBoard(board);
-
+        List<Board> list = boardService.selectBoard(board);
         PaginationUtils.bindTotalRecordCount(board.getPagination(), list, "tot_cnt");
-        logger.info(" @@@@@@@@@@@@@ board.getPagination(): getCurrentPageNo : {} ",
-                board.getPagination().getCurrentPageNo());
-        logger.info(" @@@@@@@@@@@@@ board.getPagination(): getPageSize : {} ", board.getPagination().getPageSize());
-        logger.info(" @@@@@@@@@@@@@ board.getPagination(): getTotalRecordCount : {} ",
-                board.getPagination().getTotalRecordCount());
         
-        log.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-        log.debug("commCode.getCd_grp = " + commCode.getCd_grp());
-        log.debug("commCode.getCd_grp = " + commCode.getCd_grp_nm());
-        log.debug("getArea_cd = " + board.getArea_cd());
-        log.debug("getDtl_area_cd = " + board.getDtl_area_cd());        
-        log.debug("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
-
         model.addAttribute("comboAreaCdList", commonService.findComboAreaCdList(commCode));
         model.addAttribute("comboDtlAreaCdList", commonService.findComboAreaCdList(commCode2));
         model.addAttribute("list", list);
@@ -402,11 +380,15 @@ public class BoardController {
             return "/";
         }
         
-        
         CommCode commCode = new CommCode();
+        CommCode commCode2 = new CommCode();
         commCode.setCd_grp("ZZ");
         commCode.setCd(null);
+        
+        commCode2.setCd_grp("AA");
+        commCode2.setParent_cd(board.getArea_cd());
         model.addAttribute("comboAreaCdList", commonService.findComboAreaCdList(commCode));
+        model.addAttribute("comboDtlAreaCdList", commonService.findComboAreaCdList(commCode2));
 
         String returnPage = "";
 
@@ -569,9 +551,14 @@ public class BoardController {
     public String bizBoardWrite(Board board, Model model) {
 
         CommCode commCode = new CommCode();
+        CommCode commCode2 = new CommCode();
         commCode.setCd_grp("ZZ");
         commCode.setCd(null);
+        
+        commCode2.setCd_grp("AA");
+        commCode2.setParent_cd(board.getArea_cd());
         model.addAttribute("comboAreaCdList", commonService.findComboAreaCdList(commCode));
+        model.addAttribute("comboDtlAreaCdList", commonService.findComboAreaCdList(commCode2));
 
         String returnPage = "";
 
@@ -677,7 +664,7 @@ public class BoardController {
             break;
 
         /*********************
-         * �뾽泥대Ц�쓽寃뚯떆�뙋
+         * 업체문의게시판
          */
         case "CG05":
             model.addAttribute("categorynm", "CG05");
@@ -688,7 +675,6 @@ public class BoardController {
 
         model.addAttribute("board", board);
         return returnPage;
-        // return "board/bizInfo/bizBoardWrite";
     }
 
     public  String[] convertHtmlimg(String contents) {
@@ -719,7 +705,7 @@ public class BoardController {
         if(imgUrl != null && imgUrl.length > 0) {
             board.setImg_url(imgUrl[0]);
             logger.debug("::: board.getImg_url() ::::" + board.getImg_url());
-        }
+        }        
         
         boardService.insertBoard(board);
 
@@ -746,8 +732,8 @@ public class BoardController {
             logger.debug("::: board.getImg_url() ::::" + board.getImg_url());
         }
 
-        	
-    	boardService.updateBoard(board);
+        board.setArea_cd(board.getDtl_area_cd());	
+    	  boardService.updateBoard(board);
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
         PrintWriter out = response.getWriter();
@@ -769,6 +755,7 @@ public class BoardController {
 	    commCode.setParent_cd(board.getArea_cd());
 	    
 	    mav.addObject("result", commonService.findComboAreaCdList(commCode)); 
+	    
 	    
 	    return mav;
 	}
