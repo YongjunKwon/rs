@@ -34,6 +34,8 @@ public class User implements PaginationSearch {
     private String biz_nm;
     private String category;
     private String area_cd;
+    private String area_nm;
+    private String dtl_area_cd;
     private String biz_reg_flag;
     @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date reg_dtime;

@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,7 +22,6 @@ import com.kmk.base.PaginationUtils;
 import com.kmk.domain.Board;
 import com.kmk.domain.common.CommCode;
 import com.kmk.domain.common.CommCodeSearch;
-import com.kmk.domain.user.LoginUser;
 import com.kmk.domain.user.User;
 import com.kmk.domain.user.UserListWrapper;
 import com.kmk.service.admin.AdminService;
@@ -58,17 +56,22 @@ public class AdminController {
 	    
 	    logger.info(" @@@@@@@@@@@@@ User >>>  " + user.getBiz_nm());
 	    
-	        CommCode commCode = new CommCode();
-	        commCode.setCd_grp("AA");
-	        commCode.setCd(null);
-	        model.addAttribute("comboAreaCdList", commonService.findComboAreaCdList(commCode));
-	        
-	        List<User> list = new ArrayList<User>();
-	        list = adminService.selectUserList(user);
+    	    CommCode commCode = new CommCode();
+          CommCode commCode2 = new CommCode();
+          commCode.setCd_grp("ZZ");
+          commCode.setCd(null);
+          
+          commCode2.setCd_grp("AA");
+          commCode2.setParent_cd(user.getArea_cd());
+          
+	        List<User> list = adminService.selectUserList(user);
 	        Board board = new Board();
 	        board.setCategorynm("AD0101");
 	        
 	        PaginationUtils.bindTotalRecordCount(user.getPagination(), list, "tot_cnt");
+	        
+	        model.addAttribute("comboAreaCdList", commonService.findComboAreaCdList(commCode));
+	        model.addAttribute("comboDtlAreaCdList", commonService.findComboAreaCdList(commCode2));
 	        
 	        model.addAttribute("list", list);
 	        model.addAttribute("user", user);

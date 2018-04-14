@@ -19,7 +19,6 @@ public class AdminService {
     AdminMapper adminMapper;
 
     public List<User> selectUserList(User user) {
-        // logger.info("query test: {}", testMapper.getList());
         return adminMapper.selectUserList(user);
     }
 

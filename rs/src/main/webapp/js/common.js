@@ -919,8 +919,7 @@ RollingBanner.prototype = {
   'startAutoPlay': function() {
     var _self = this;
 
-    // 타이머가 두 번이상 실행되지 않도록 조건 처리
-    console.log(this._timerID);
+    // 타이머가 두 번이상 실행되지 않도록 조건 처리    
     this._timerID = setInterval(function() {
       _self.nextBanner();
     }, 2000)

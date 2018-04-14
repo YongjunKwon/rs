@@ -12,6 +12,9 @@ public interface AdminMapper {
 
     // 업체리스트 조회
     @Select({ "<script>" 
+            + "     SELECT *                "
+            + "            , C.CD_NM AS AREA_NM "
+            + "       FROM (         "            
             + "     SELECT A.USER_ID         "
             + "          , A.PWD             "
        	    + "          , A.NICK_NM         "
@@ -29,6 +32,7 @@ public interface AdminMapper {
        	    + "          , A.BIZ_NM          "
        	    + "          , A.CATEGORY        "
        	    + "          , A.AREA_CD         "
+
        	    + "          , A.BIZ_REG_FLAG    "
        	    + "          , A.REG_DTIME       "
        	    + "          , DATE_FORMAT(A.EXPIRE_DATE, '%Y-%m-%d') AS EXPIRE_DATE "
@@ -39,16 +43,18 @@ public interface AdminMapper {
           	+ " 	 		, ( "
           	+ " 			 		SELECT COUNT(*)     "
           	+ " 					  FROM USER         "
-          	+ " 			 		 WHERE MEM_TYPE = 1 "
-          
+            + " 			 		 WHERE MEM_TYPE = 1 "
             + "                   <if test=\"category != null and category !='' \"> "
             + "                     AND CATEGORY = #{category}" 
-            + "                   </if>"
-            
-            + "       			   <if test=\"area_cd != null and area_cd !='' \"> "
-            + "        			   	 AND AREA_CD = #{area_cd} " 
-            + "       			   </if> "
-            
+            + "                   </if>"            
+            + "                   <if test=\"area_cd != null and area_cd !='' \"> "
+            + "                   <if test=\"dtl_area_cd != null and dtl_area_cd !='' \"> "
+            + "                     AND AREA_CD = #{dtl_area_cd} " 
+            + "                   </if> "
+            + "                   <if test=\"dtl_area_cd == null and dtl_area_cd =='' \"> "
+            + "                     AND AREA_CD = #{area_cd} " 
+            + "                   </if> "
+            + "                   </if> "            
             + "       			   <if test=\"biz_nm != null and biz_nm !='' \"> "
             + "        			   	AND BIZ_NM LIKE CONCAT('%',#{biz_nm},'%') " 
             + "       			   </if> "
@@ -62,9 +68,14 @@ public interface AdminMapper {
             + "        AND CATEGORY = #{category}" 
             + "      </if>"
             
-            + "       <if test=\"area_cd != null and area_cd !='' \"> "
-            + "       	 AND AREA_CD = #{area_cd} " 
+            + "     <if test=\"area_cd != null and area_cd !='' \"> "
+            + "       <if test=\"dtl_area_cd != null and dtl_area_cd !='' \"> "
+            + "         AND AREA_CD = #{dtl_area_cd} " 
             + "       </if> "
+            + "       <if test=\"dtl_area_cd == null and dtl_area_cd =='' \"> "
+            + "         AND AREA_CD = #{area_cd} " 
+            + "       </if> "
+            + "     </if> "
             
             + "       <if test=\"biz_nm != null and biz_nm !='' \"> "
             + "       	AND BIZ_NM LIKE CONCAT('%',#{biz_nm},'%') " 
@@ -72,7 +83,10 @@ public interface AdminMapper {
             + "   ) A "
             + "WHERE ROWNUM &lt;= #{pagination.lastRecordIndex} " 
             + "  AND ROWNUM &gt;  #{pagination.firstRecordIndex} "
-            + " ORDER BY A.EXPIRE_DATE ASC" 
+            +") Z"
+            + "             LEFT JOIN COMM_CODE C"
+            + "               ON Z.AREA_CD = C.CD"
+            + " ORDER BY Z.EXPIRE_DATE ASC" 
             //+ "ORDER BY ROWNUM ASC" 
             + "</script>" })
     List<User> selectUserList(User user);

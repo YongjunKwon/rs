@@ -12,8 +12,8 @@
             <div class="content-wrapper" style="min-height: 959.8px;">
               <!-- Content Header (Page header) -->
               <section class="content-header">
-                <h1>관리자
-                  <small>관리자님</small>
+                <h1>
+                  <small></small>
                 </h1>
                 <ol class="breadcrumb">
                   <li><a href="/"><i class="fa fa-dashboard"></i>Home</a></li>
@@ -28,22 +28,28 @@
                       <div class="box-header">
                         <div class="col-sm-12">
                           <div class="row">
-                            <form:form modelAttribute="user" method="get" action="/admin/">
+                            <form:form modelAttribute="user" method="get" action="/admin/upToMember">
                               <input type="hidden" id="pagination" name="pagination.currentPageNo" value="1">
-                              <div class="col-sm-6 pull-left search-group">
-                                <div class="form-group" id="example1_length">
-                                  <form:select path="area_cd" class="form-area" data-placeholder="지역" disabled="false" onchange="selectCtg(this.value)">
+                              <div class="col-sm-6 pull-right search-group">
+                                <div class="form-group pull-right" id="example1_length">
+                                  <form:select path="dtl_area_cd" class="form-area pull-right" data-placeholder="세부지역" onchange="javascript:fn_dtlCtg(this.value);">
+                                    <option value="">상세지역선택</option>
+                                    <form:options items="${comboDtlAreaCdList}" itemValue="cd" itemLabel="cd_nm" />
+                                  </form:select>
+                                  <form:select path="area_cd" class="form-area pull-right" data-placeholder="지역" disabled="false" onchange="javascript:selectCtg(this.value);">
                                     <option value="">지역선택</option>
                                     <form:options items="${comboAreaCdList}" itemValue="cd" itemLabel="cd_nm" />
                                   </form:select>
                                 </div>
                               </div>
-                              <div class="col-sm-6 pull-right">
-                                <div class="form-group pull-right">                                  
-                                  <button type="submit" id="btnSearch" name="btnSearch" class="btn btn-info btn-flat pull-right">검색</button>                                  
-                                  <input type="text" class="search-area pull-right" name="title" value="${board.title}" id="title" placeholder="검색내용" />
-                                </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-sm-6 pull-right">
+                              <div class="form-group pull-right">
+                                <button type="submit" id="btnSearch" name="btnSearch" class="btn btn-info btn-flat pull-right">검색</button>
+                                <input type="text" class="search-area pull-right" name="title" value="${board.title}" id="title" placeholder="검색내용" />
                               </div>
+                            </div>
                             </form:form>
                           </div>
                         </div>
@@ -78,7 +84,7 @@
                                             <input type="checkbox" name="chkval" id="chk_${status.index}" value="N" style="cursor: pointer;">
                                             <input type="hidden" name="hiddenChkval" value="N">
                                           </td>
-                                          <td class="align-center wd-50 font-11">${list.area_cd}</td>
+                                          <td class="align-center wd-50 font-11">${list.area_nm}</td>
                                           <td class="align-center wd-50 font-11">-</td>
                                           <td class="align-center wd-50 font-11">${list.category}</td>
                                           <td class="align-center wd-50 font-11">${list.biz_nm}</td>
@@ -158,17 +164,55 @@
         // event table check
         $("#frm :checkbox").click(function() {
           if ($(this).is(":checked")) {
-            console.log("checkded~~~~");
             $(this).next("input").val("Y");
             $(this).val("Y");
           } else {
-            console.log("un un un checkded~~~~");
             $(this).next("input").val("N");
             $(this).val("N");
           }
         });
 
       });
+
+      if ($("#area_cd option:selected").val() == "") {
+        $('#dtl_area_cd').find('option').remove();
+        $('#dtl_area_cd').append("<option value=''>상세지역선택</option>");
+      }
+
+      function selectCtg(val) {
+        var params = {
+          "area_cd": val
+        };
+
+        $.ajax({
+          url: "/board/findDtlArea",
+          method: "post",
+          type: "json",
+          data: params,
+          success: function(data) {
+            if (data.result.length > 0) {
+              $('#dtl_area_cd').find('option').remove();
+
+              for (var i = 0; i < data.result.length; i++) {
+                $('#dtl_area_cd').append("<option value='" + data.result[i].cd + "'>" + data.result[i].cd_nm + '</option>');
+              }
+
+            } else {
+              $('#dtl_area_cd').find('option').remove();
+              $('#dtl_area_cd').append("<option value=''>상세지역선택</option>");
+            }
+
+            $("#user").submit();
+          },
+          error: function(error) {
+            alert("error : " + eval(error));
+          }
+        });
+      }
+
+      function fn_dtlCtg(val) {
+        $("#user").submit();
+      }
     </script>
 
   </html>
